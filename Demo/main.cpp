@@ -565,384 +565,6 @@ bool isMouseOver(sf::Text& option, sf::RenderWindow& window)
 //    return 0;
 //}
 
-//int main()
-//{
-//	// Tạo cửa sổ kích thước 800x600 pixels
-//	sf::RenderWindow window(sf::VideoMode(1195, 672), "Drawing Line");
-//
-//	sf::RectangleShape thickLine(sf::Vector2f(1195, 3));
-//	thickLine.setFillColor(sf::Color::Red);
-//	thickLine.setPosition(0, 100);
-//
-//
-//	//////////////////////Order//////////////////
-//	sf::Texture texture;
-//	if (!texture.loadFromFile("order.jpg"))
-//		return EXIT_FAILURE;
-//
-//	// tạo sprite sử dụng texture đã tải
-//	sf::Sprite sprite(texture);
-//	sf::Vector2u windowsize = window.getSize();
-//	float scalex = 1195.0 / texture.getSize().x;
-//	float scaley = 572.0 / texture.getSize().y;
-//	sprite.setScale(scalex, scaley);
-//	sprite.setPosition(0, 100);
-//
-//	std::pair<sf::RectangleShape, bool> box[3][12][6];
-//	//vector< std::pair<sf::RectangleShape, bool>> box[12][6];
-//
-//	double x_0 = 157, y_0 = 277;
-//	double delta_x = 74.5, delta_y = 64;
-//
-//	for (int k = 0; k < 3; k++) {
-//		for (int i = 0; i < 12; i++) {
-//			for (int j = 0; j < 6; j++) {
-//				double x = x_0 + i * delta_x, y = y_0 + j * delta_y;
-//				box[k][i][j].second = false;
-//				box[k][i][j].first.setSize(sf::Vector2f(59, 52));
-//				box[k][i][j].first.setFillColor(sf::Color(238, 100, 87)); //100, 238, 87
-//				box[k][i][j].first.setOutlineThickness(2);
-//				box[k][i][j].first.setOutlineColor(sf::Color::Black);
-//				box[k][i][j].first.setPosition(x, y);
-//			}
-//		}
-//	}
-//
-//
-//	//////////////////////Order//////////////////
-//
-//	///////////////////////////////////
-//
-//	sf::Font font;
-//	if (!font.loadFromFile("ShortBaby-Mg2w.ttf"))
-//	{
-//		std::cout << "Failed to load font!" << std::endl;
-//		return -1;
-//	}
-//
-//	//bool selectButton[3]; memset(selectButton, false, 3);
-//	bool homePageButton = true;
-//	bool selectDropDownButton = false;
-//	bool selectAndUpdateButton = false; int indexButton = 0;
-//	bool createButtonActive = false;
-//
-//	sf::Text homePageText("HomePage", font, 24);
-//	homePageText.setFillColor(sf::Color::Black);
-//	homePageText.setPosition(500, 500);
-//
-//	sf::CircleShape button1(25);
-//	button1.setFillColor(sf::Color(139, 216, 189)); // Màu xám
-//	button1.setOutlineThickness(5);
-//	button1.setOutlineColor(sf::Color(150, 150, 150)); // Màu xám nhạt
-//	button1.setPosition(100, 25);
-//
-//	sf::Texture texture1;
-//	if (!texture1.loadFromFile("icon-home-removebg-preview.png"))
-//	{
-//		std::cout << "Failed to load icon." << std::endl;
-//		return -1;
-//	}
-//	sf::Sprite iconSprite1(texture1);
-//	iconSprite1.setScale(0.1f, 0.1f);
-//	iconSprite1.setPosition(94, 28);
-//	///////////////////////////////////
-//
-//	//////////////////dropdown/////////////////////////
-//
-//	sf::RectangleShape dropdownBox(sf::Vector2f(125, 50));
-//	dropdownBox.setFillColor(sf::Color::White);
-//	dropdownBox.setOutlineThickness(2);
-//	dropdownBox.setOutlineColor(sf::Color::Black);
-//	dropdownBox.setPosition(300, 25);
-//
-//	sf::Text dropdownText("Rap", font, 24);
-//	dropdownText.setFillColor(sf::Color::Black);
-//	dropdownText.setPosition(331, 35);
-//
-//	std::vector< std::pair<sf::Text, sf::RectangleShape> > options;
-//	sf::RectangleShape option1Box(sf::Vector2f(125, 50));
-//	option1Box.setFillColor(sf::Color::White);
-//	option1Box.setOutlineThickness(2);
-//	option1Box.setOutlineColor(sf::Color::Black);
-//	option1Box.setPosition(300, 75);
-//
-//	sf::Text option1("Rap 1", font, 24);
-//	option1.setPosition(330, 85);
-//	option1.setFillColor(sf::Color::Black);
-//	options.push_back({ {option1} , option1Box });
-//
-//	sf::RectangleShape option2Box(sf::Vector2f(125, 50));
-//	option2Box.setFillColor(sf::Color::White);
-//	option2Box.setOutlineThickness(2);
-//	option2Box.setOutlineColor(sf::Color::Black);
-//	option2Box.setPosition(300, 125);
-//
-//	sf::Text option2("Rap 2", font, 24);
-//	option2.setPosition(330, 135);
-//	option2.setFillColor(sf::Color::Black);
-//	options.push_back({ {option2} , option2Box });
-//
-//	sf::RectangleShape option3Box(sf::Vector2f(125, 50));
-//	option3Box.setFillColor(sf::Color::White);
-//	option3Box.setOutlineThickness(2);
-//	option3Box.setOutlineColor(sf::Color::Black);
-//	option3Box.setPosition(300, 175);
-//
-//	sf::Text option3("Rap 3", font, 24);
-//	option3.setPosition(330, 185);
-//	option3.setFillColor(sf::Color::Black);
-//	options.push_back({ {option3} , option3Box });
-//
-//	bool isDropdownActive = false;
-//
-//	sf::ConvexShape arrow(3);
-//	arrow.setPoint(0, sf::Vector2f(0, 0));
-//	arrow.setPoint(1, sf::Vector2f(15, 0));
-//	arrow.setPoint(2, sf::Vector2f(7.5, 7.5));
-//	arrow.setFillColor(sf::Color::Black);
-//	arrow.setPosition(400, 47);
-//	bool isArrowDownUp = true;
-//
-//	//////////////////dropdown/////////////////////////
-//
-//	/////////////////create////////////////////////////
-//
-//	sf::RectangleShape createButton(sf::Vector2f(125, 50));
-//	createButton.setFillColor(sf::Color::White);
-//	createButton.setOutlineThickness(2);
-//	createButton.setOutlineColor(sf::Color::Black);
-//	createButton.setPosition(600, 25);
-//
-//	sf::Text createButtonText("them moi", font, 24);
-//	createButtonText.setFillColor(sf::Color::Black);
-//	createButtonText.setPosition(614, 35);
-//
-//	/////////////////create////////////////////////////
-//
-//
-//	while (window.isOpen())
-//	{
-//		sf::Event event;
-//		while (window.pollEvent(event))
-//		{
-//			if (event.type == sf::Event::Closed)
-//			{
-//				window.close();
-//			}
-//			if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
-//			{
-//				// Kiểm tra xem người dùng đã ấn vào nút hay chưa
-//				if (button1.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y))
-//				{
-//					homePageButton = true;
-//					selectDropDownButton = false;
-//					selectAndUpdateButton = false;
-//					indexButton = 0;
-//				}
-//				if (isMouseOver(dropdownBox, window))
-//				{
-//					dropdownBox.setFillColor(sf::Color(111, 110, 111));
-//					isDropdownActive = !isDropdownActive;
-//				}
-//				else if (isDropdownActive)
-//				{
-//					for (int i = 0; i < 3; i++) {
-//						{
-//							//option.first.second = false;
-//							if (isMouseOver(options[i].second, window))
-//							{
-//								dropdownText.setString(options[i].first.getString());
-//								indexButton = i + 1;
-//								cout << i << indexButton << endl;
-//								dropdownBox.setFillColor(sf::Color::White);
-//								isDropdownActive = false;
-//								isArrowDownUp = true;
-//								homePageButton = false;  selectDropDownButton = true; selectAndUpdateButton = true;
-//								break;
-//							}
-//						}
-//					}
-//
-//					if (selectAndUpdateButton) {
-//						if (indexButton) {
-//							for (int i = 0; i < 12; i++) {
-//								for (int j = 0; j < 6; j++) {
-//									if (box[indexButton - 1][i][j].first.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y)) {
-//										if (box[indexButton - 1][i][j].second) {
-//											box[indexButton - 1][i][j].second = false;
-//											box[indexButton - 1][i][j].first.setFillColor(sf::Color(238, 100, 87)); //100, 238, 87
-//
-//										}
-//										else {
-//											box[indexButton - 1][i][j].second = true;
-//											box[indexButton - 1][i][j].first.setFillColor(sf::Color(100, 238, 87)); //100, 238, 87
-//										}
-//									}
-//								}
-//							}
-//						}
-//					}
-//				}
-//			}
-//
-//			window.clear(sf::Color::White);
-//
-//			//if (homePageAdmin) {
-//			window.draw(button1);
-//			window.draw(iconSprite1);
-//			//}
-//
-//			if (homePageButton) {
-//				window.draw(homePageText);
-//			}
-//
-//			if (selectDropDownButton) {
-//				window.draw(sprite);
-//			}
-//
-//			if (selectAndUpdateButton) {
-//				if (indexButton) {
-//					for (int i = 0; i < 12; i++) {
-//						for (int j = 0; j < 6; j++) {
-//							window.draw(box[indexButton-1][i][j].first);
-//						}
-//					}
-//				}
-//			}
-//
-//			window.draw(thickLine);
-//
-//			window.draw(dropdownBox);
-//			window.draw(dropdownText);
-//			if (isArrowDownUp) {
-//				arrow.setPoint(0, sf::Vector2f(0, 0));
-//				arrow.setPoint(1, sf::Vector2f(15, 0));
-//				arrow.setPoint(2, sf::Vector2f(7.5, 7.5));
-//				arrow.setFillColor(sf::Color::Black);
-//				window.draw(arrow);
-//			}
-//
-//			if (isDropdownActive)
-//			{
-//				isArrowDownUp = false;
-//				arrow.setPoint(0, sf::Vector2f(7.5, 0));
-//				arrow.setPoint(1, sf::Vector2f(0, 7.5));
-//				arrow.setPoint(2, sf::Vector2f(15, 7.5));
-//				arrow.setFillColor(sf::Color::Black);
-//				window.draw(arrow);
-//
-//				for (const std::pair<sf::Text, sf::RectangleShape> option : options)
-//				{
-//					window.draw(option.second);
-//					window.draw(option.first);
-//				}
-//			}
-//
-//			window.draw(createButton);
-//			window.draw(createButtonText);
-//
-//			window.display();
-//		}
-//
-//		return 0;
-//	}
-
-	//#include <SFML/Graphics.hpp>
-	//#include <iostream>
-	//#include <string>
-	//#include <vector>
-	//
-	//int main()
-	//{
-	//    // Tạo cửa sổ kích thước 800x600 pixels
-	//    sf::RenderWindow window(sf::VideoMode(1195, 572), "Order");
-	//
-	//    // Tạo các thành phần giao diện
-	//    sf::Font font;
-	//    if (!font.loadFromFile("ShortBaby-Mg2w.ttf"))
-	//    {
-	//        std::cout << "Failed to load font!" << std::endl;
-	//        return -1;
-	//    }
-	//
-	//	// tải ảnh từ file trên hệ thống
-	//	sf::Texture texture;
-	//	if (!texture.loadFromFile("order.jpg"))
-	//		return EXIT_FAILURE;
-	//
-	//	// tạo sprite sử dụng texture đã tải
-	//	sf::Sprite sprite(texture);
-	//	sf::Vector2u windowsize = window.getSize();
-	//	float scalex = static_cast<float>(windowsize.x) / texture.getSize().x;
-	//	float scaley = static_cast<float>(windowsize.y) / texture.getSize().y;
-	//	sprite.setScale(scalex, scaley);
-	//	sprite.setPosition(0, 0);
-	//
-	//	std::pair<sf::RectangleShape, bool> box[12][6];
-	//
-	//	double x_0 = 157, y_0 = 177;
-	//	double delta_x = 74.5, delta_y = 64;
-	//
-	//	for (int i = 0; i < 12; i++) {
-	//		for (int j = 0; j < 6; j++) {
-	//			double x = x_0 + i * delta_x, y = y_0 + j * delta_y;
-	//			box[i][j].second = false;
-	//			box[i][j].first.setSize(sf::Vector2f(59, 52));
-	//			box[i][j].first.setFillColor(sf::Color(238, 100, 87)); //100, 238, 87
-	//			box[i][j].first.setOutlineThickness(2);
-	//			box[i][j].first.setOutlineColor(sf::Color::Black);
-	//			box[i][j].first.setPosition(x, y);
-	//		}
-	//	}
-	//
-	//    while (window.isOpen())
-	//    {
-	//        sf::Event event;
-	//        while (window.pollEvent(event))
-	//        {
-	//            if (event.type == sf::Event::Closed)
-	//            {
-	//                window.close();
-	//			}else if (event.type == sf::Event::MouseButtonPressed) {
-	//				for (int i = 0; i < 12; i++) {
-	//					for (int j = 0; j < 6; j++) {
-	//						if (box[i][j].first.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y)) {
-	//							if (box[i][j].second) {
-	//								box[i][j].second = false;
-	//								box[i][j].first.setFillColor(sf::Color(238, 100, 87)); //100, 238, 87
-	//
-	//							}
-	//							else {
-	//								box[i][j].second = true;
-	//								box[i][j].first.setFillColor(sf::Color(100, 238, 87)); //100, 238, 87
-	//							}
-	//						}
-	//					}
-	//				}
-	//			}
-	//        }
-	//
-	//        window.clear();
-	//		window.draw(sprite);
-	//
-	//		//BOX
-	//		for (int i = 0; i < 12; i++) {
-	//			for (int j = 0; j < 6; j++) {
-	//				window.draw(box[i][j].first);
-	//			}
-	//		}
-	//		//BOX
-	//
-	//        window.display();
-	//    }
-	//
-	//    return 0;
-	//}
-
-
-
-
-
 int main()
 {
 	// Tạo cửa sổ kích thước 800x600 pixels
@@ -966,36 +588,23 @@ int main()
 	sprite.setScale(scalex, scaley);
 	sprite.setPosition(0, 100);
 
-	//std::pair<sf::RectangleShape, bool> box[3][12][6];
+	std::pair<sf::RectangleShape, bool> box[3][12][6];
 	//vector< std::pair<sf::RectangleShape, bool>> box[12][6];
 
 	double x_0 = 157, y_0 = 277;
 	double delta_x = 74.5, delta_y = 64;
 
-	//for (int k = 0; k < 3; k++) {
-	//	for (int i = 0; i < 12; i++) {
-	//		for (int j = 0; j < 6; j++) {
-	//			double x = x_0 + i * delta_x, y = y_0 + j * delta_y;
-	//			box[k][i][j].second = false;
-	//			box[k][i][j].first.setSize(sf::Vector2f(59, 52));
-	//			box[k][i][j].first.setFillColor(sf::Color(238, 100, 87)); //100, 238, 87
-	//			box[k][i][j].first.setOutlineThickness(2);
-	//			box[k][i][j].first.setOutlineColor(sf::Color::Black);
-	//			box[k][i][j].first.setPosition(x, y);
-	//		}
-	//	}
-	//}
-
-	std::pair<sf::RectangleShape, bool> box[12][6];
-	for (int i = 0; i < 12; i++) {
-		for (int j = 0; j < 6; j++) {
-			double x = x_0 + i * delta_x, y = y_0 + j * delta_y;
-			box[i][j].second = false;
-			box[i][j].first.setSize(sf::Vector2f(59, 52));
-			box[i][j].first.setFillColor(sf::Color(238, 100, 87)); //100, 238, 87
-			box[i][j].first.setOutlineThickness(2);
-			box[i][j].first.setOutlineColor(sf::Color::Black);
-			box[i][j].first.setPosition(x, y);
+	for (int k = 0; k < 3; k++) {
+		for (int i = 0; i < 12; i++) {
+			for (int j = 0; j < 6; j++) {
+				double x = x_0 + i * delta_x, y = y_0 + j * delta_y;
+				box[k][i][j].second = false;
+				box[k][i][j].first.setSize(sf::Vector2f(59, 52));
+				box[k][i][j].first.setFillColor(sf::Color(238, 100, 87)); //100, 238, 87
+				box[k][i][j].first.setOutlineThickness(2);
+				box[k][i][j].first.setOutlineColor(sf::Color::Black);
+				box[k][i][j].first.setPosition(x, y);
+			}
 		}
 	}
 
@@ -1014,7 +623,7 @@ int main()
 	//bool selectButton[3]; memset(selectButton, false, 3);
 	bool homePageButton = true;
 	bool selectDropDownButton = false;
-	bool selectAndUpdateButton = false;
+	bool selectAndUpdateButton = false; int indexButton = 0;
 	bool createButtonActive = false;
 
 	sf::Text homePageText("HomePage", font, 24);
@@ -1060,7 +669,7 @@ int main()
 	sf::Text option1("Rap 1", font, 24);
 	option1.setPosition(330, 85);
 	option1.setFillColor(sf::Color::Black);
-	options.push_back({ option1 , option1Box });
+	options.push_back({ {option1} , option1Box });
 
 	sf::RectangleShape option2Box(sf::Vector2f(125, 50));
 	option2Box.setFillColor(sf::Color::White);
@@ -1071,7 +680,7 @@ int main()
 	sf::Text option2("Rap 2", font, 24);
 	option2.setPosition(330, 135);
 	option2.setFillColor(sf::Color::Black);
-	options.push_back({ option2 , option2Box });
+	options.push_back({ {option2} , option2Box });
 
 	sf::RectangleShape option3Box(sf::Vector2f(125, 50));
 	option3Box.setFillColor(sf::Color::White);
@@ -1082,7 +691,7 @@ int main()
 	sf::Text option3("Rap 3", font, 24);
 	option3.setPosition(330, 185);
 	option3.setFillColor(sf::Color::Black);
-	options.push_back({ option3 , option3Box });
+	options.push_back({ {option3} , option3Box });
 
 	bool isDropdownActive = false;
 
@@ -1128,6 +737,7 @@ int main()
 					homePageButton = true;
 					selectDropDownButton = false;
 					selectAndUpdateButton = false;
+					indexButton = 0;
 				}
 				if (isMouseOver(dropdownBox, window))
 				{
@@ -1138,9 +748,12 @@ int main()
 				{
 					for (int i = 0; i < 3; i++) {
 						{
+							//option.first.second = false;
 							if (isMouseOver(options[i].second, window))
 							{
 								dropdownText.setString(options[i].first.getString());
+								indexButton = i + 1;
+								cout << i << indexButton << endl;
 								dropdownBox.setFillColor(sf::Color::White);
 								isDropdownActive = false;
 								isArrowDownUp = true;
@@ -1152,17 +765,19 @@ int main()
 
 				}
 				if (selectAndUpdateButton) {
-					for (int i = 0; i < 12; i++) {
-						for (int j = 0; j < 6; j++) {
-							if (box[i][j].first.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y)) {
-								if (box[i][j].second) {
-									box[i][j].second = false;
-									box[i][j].first.setFillColor(sf::Color(238, 100, 87)); //100, 238, 87
+					if (indexButton) {
+						for (int i = 0; i < 12; i++) {
+							for (int j = 0; j < 6; j++) {
+								if (box[indexButton - 1][i][j].first.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y)) {
+									if (box[indexButton - 1][i][j].second) {
+										box[indexButton - 1][i][j].second = false;
+										box[indexButton - 1][i][j].first.setFillColor(sf::Color(238, 100, 87)); //100, 238, 87
 
-								}
-								else {
-									box[i][j].second = true;
-									box[i][j].first.setFillColor(sf::Color(100, 238, 87)); //100, 238, 87
+									}
+									else {
+										box[indexButton - 1][i][j].second = true;
+										box[indexButton - 1][i][j].first.setFillColor(sf::Color(100, 238, 87)); //100, 238, 87
+									}
 								}
 							}
 						}
@@ -1187,9 +802,11 @@ int main()
 		}
 
 		if (selectAndUpdateButton) {
-			for (int i = 0; i < 12; i++) {
-				for (int j = 0; j < 6; j++) {
-					window.draw(box[i][j].first);
+			if (indexButton) {
+				for (int i = 0; i < 12; i++) {
+					for (int j = 0; j < 6; j++) {
+						window.draw(box[indexButton - 1][i][j].first);
+					}
 				}
 			}
 		}
@@ -1228,3 +845,383 @@ int main()
 		window.display();
 	}
 }
+//#include <SFML/Graphics.hpp>
+//#include <iostream>
+//#include <string>
+//#include <vector>
+//
+//int main()
+//{
+//    // Tạo cửa sổ kích thước 800x600 pixels
+//    sf::RenderWindow window(sf::VideoMode(1195, 572), "Order");
+//
+//    // Tạo các thành phần giao diện
+//    sf::Font font;
+//    if (!font.loadFromFile("ShortBaby-Mg2w.ttf"))
+//    {
+//        std::cout << "Failed to load font!" << std::endl;
+//        return -1;
+//    }
+//
+//	// tải ảnh từ file trên hệ thống
+//	sf::Texture texture;
+//	if (!texture.loadFromFile("order.jpg"))
+//		return EXIT_FAILURE;
+//
+//	// tạo sprite sử dụng texture đã tải
+//	sf::Sprite sprite(texture);
+//	sf::Vector2u windowsize = window.getSize();
+//	float scalex = static_cast<float>(windowsize.x) / texture.getSize().x;
+//	float scaley = static_cast<float>(windowsize.y) / texture.getSize().y;
+//	sprite.setScale(scalex, scaley);
+//	sprite.setPosition(0, 0);
+//
+//	std::pair<sf::RectangleShape, bool> box[12][6];
+//
+//	double x_0 = 157, y_0 = 177;
+//	double delta_x = 74.5, delta_y = 64;
+//
+//	for (int i = 0; i < 12; i++) {
+//		for (int j = 0; j < 6; j++) {
+//			double x = x_0 + i * delta_x, y = y_0 + j * delta_y;
+//			box[i][j].second = false;
+//			box[i][j].first.setSize(sf::Vector2f(59, 52));
+//			box[i][j].first.setFillColor(sf::Color(238, 100, 87)); //100, 238, 87
+//			box[i][j].first.setOutlineThickness(2);
+//			box[i][j].first.setOutlineColor(sf::Color::Black);
+//			box[i][j].first.setPosition(x, y);
+//		}
+//	}
+//
+//    while (window.isOpen())
+//    {
+//        sf::Event event;
+//        while (window.pollEvent(event))
+//        {
+//            if (event.type == sf::Event::Closed)
+//            {
+//                window.close();
+//			}else if (event.type == sf::Event::MouseButtonPressed) {
+//				for (int i = 0; i < 12; i++) {
+//					for (int j = 0; j < 6; j++) {
+//						if (box[i][j].first.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y)) {
+//							if (box[i][j].second) {
+//								box[i][j].second = false;
+//								box[i][j].first.setFillColor(sf::Color(238, 100, 87)); //100, 238, 87
+//
+//							}
+//							else {
+//								box[i][j].second = true;
+//								box[i][j].first.setFillColor(sf::Color(100, 238, 87)); //100, 238, 87
+//							}
+//						}
+//					}
+//				}
+//			}
+//        }
+//
+//        window.clear();
+//		window.draw(sprite);
+//
+//		//BOX
+//		for (int i = 0; i < 12; i++) {
+//			for (int j = 0; j < 6; j++) {
+//				window.draw(box[i][j].first);
+//			}
+//		}
+//		//BOX
+//
+//        window.display();
+//    }
+//
+//    return 0;
+//}
+
+
+
+
+
+//int main()
+//{
+//	// Tạo cửa sổ kích thước 800x600 pixels
+//	sf::RenderWindow window(sf::VideoMode(1195, 672), "Drawing Line");
+//
+//	sf::RectangleShape thickLine(sf::Vector2f(1195, 3));
+//	thickLine.setFillColor(sf::Color::Red);
+//	thickLine.setPosition(0, 100);
+//
+//
+//	//////////////////////Order//////////////////
+//	sf::Texture texture;
+//	if (!texture.loadFromFile("order.jpg"))
+//		return EXIT_FAILURE;
+//
+//	// tạo sprite sử dụng texture đã tải
+//	sf::Sprite sprite(texture);
+//	sf::Vector2u windowsize = window.getSize();
+//	float scalex = 1195.0 / texture.getSize().x;
+//	float scaley = 572.0 / texture.getSize().y;
+//	sprite.setScale(scalex, scaley);
+//	sprite.setPosition(0, 100);
+//
+//	//std::pair<sf::RectangleShape, bool> box[3][12][6];
+//	//vector< std::pair<sf::RectangleShape, bool>> box[12][6];
+//
+//	double x_0 = 157, y_0 = 277;
+//	double delta_x = 74.5, delta_y = 64;
+//
+//	//for (int k = 0; k < 3; k++) {
+//	//	for (int i = 0; i < 12; i++) {
+//	//		for (int j = 0; j < 6; j++) {
+//	//			double x = x_0 + i * delta_x, y = y_0 + j * delta_y;
+//	//			box[k][i][j].second = false;
+//	//			box[k][i][j].first.setSize(sf::Vector2f(59, 52));
+//	//			box[k][i][j].first.setFillColor(sf::Color(238, 100, 87)); //100, 238, 87
+//	//			box[k][i][j].first.setOutlineThickness(2);
+//	//			box[k][i][j].first.setOutlineColor(sf::Color::Black);
+//	//			box[k][i][j].first.setPosition(x, y);
+//	//		}
+//	//	}
+//	//}
+//
+//	std::pair<sf::RectangleShape, bool> box[12][6];
+//	for (int i = 0; i < 12; i++) {
+//		for (int j = 0; j < 6; j++) {
+//			double x = x_0 + i * delta_x, y = y_0 + j * delta_y;
+//			box[i][j].second = false;
+//			box[i][j].first.setSize(sf::Vector2f(59, 52));
+//			box[i][j].first.setFillColor(sf::Color(238, 100, 87)); //100, 238, 87
+//			box[i][j].first.setOutlineThickness(2);
+//			box[i][j].first.setOutlineColor(sf::Color::Black);
+//			box[i][j].first.setPosition(x, y);
+//		}
+//	}
+//
+//
+//	//////////////////////Order//////////////////
+//
+//	///////////////////////////////////
+//
+//	sf::Font font;
+//	if (!font.loadFromFile("ShortBaby-Mg2w.ttf"))
+//	{
+//		std::cout << "Failed to load font!" << std::endl;
+//		return -1;
+//	}
+//
+//	//bool selectButton[3]; memset(selectButton, false, 3);
+//	bool homePageButton = true;
+//	bool selectDropDownButton = false;
+//	bool selectAndUpdateButton = false;
+//	bool createButtonActive = false;
+//
+//	sf::Text homePageText("HomePage", font, 24);
+//	homePageText.setFillColor(sf::Color::Black);
+//	homePageText.setPosition(500, 500);
+//
+//	sf::CircleShape button1(25);
+//	button1.setFillColor(sf::Color(139, 216, 189)); // Màu xám
+//	button1.setOutlineThickness(5);
+//	button1.setOutlineColor(sf::Color(150, 150, 150)); // Màu xám nhạt
+//	button1.setPosition(100, 25);
+//
+//	sf::Texture texture1;
+//	if (!texture1.loadFromFile("icon-home-removebg-preview.png"))
+//	{
+//		std::cout << "Failed to load icon." << std::endl;
+//		return -1;
+//	}
+//	sf::Sprite iconSprite1(texture1);
+//	iconSprite1.setScale(0.1f, 0.1f);
+//	iconSprite1.setPosition(94, 28);
+//	///////////////////////////////////
+//
+//	//////////////////dropdown/////////////////////////
+//
+//	sf::RectangleShape dropdownBox(sf::Vector2f(125, 50));
+//	dropdownBox.setFillColor(sf::Color::White);
+//	dropdownBox.setOutlineThickness(2);
+//	dropdownBox.setOutlineColor(sf::Color::Black);
+//	dropdownBox.setPosition(300, 25);
+//
+//	sf::Text dropdownText("Rap", font, 24);
+//	dropdownText.setFillColor(sf::Color::Black);
+//	dropdownText.setPosition(331, 35);
+//
+//	std::vector< std::pair<sf::Text, sf::RectangleShape> > options;
+//	sf::RectangleShape option1Box(sf::Vector2f(125, 50));
+//	option1Box.setFillColor(sf::Color::White);
+//	option1Box.setOutlineThickness(2);
+//	option1Box.setOutlineColor(sf::Color::Black);
+//	option1Box.setPosition(300, 75);
+//
+//	sf::Text option1("Rap 1", font, 24);
+//	option1.setPosition(330, 85);
+//	option1.setFillColor(sf::Color::Black);
+//	options.push_back({ option1 , option1Box });
+//
+//	sf::RectangleShape option2Box(sf::Vector2f(125, 50));
+//	option2Box.setFillColor(sf::Color::White);
+//	option2Box.setOutlineThickness(2);
+//	option2Box.setOutlineColor(sf::Color::Black);
+//	option2Box.setPosition(300, 125);
+//
+//	sf::Text option2("Rap 2", font, 24);
+//	option2.setPosition(330, 135);
+//	option2.setFillColor(sf::Color::Black);
+//	options.push_back({ option2 , option2Box });
+//
+//	sf::RectangleShape option3Box(sf::Vector2f(125, 50));
+//	option3Box.setFillColor(sf::Color::White);
+//	option3Box.setOutlineThickness(2);
+//	option3Box.setOutlineColor(sf::Color::Black);
+//	option3Box.setPosition(300, 175);
+//
+//	sf::Text option3("Rap 3", font, 24);
+//	option3.setPosition(330, 185);
+//	option3.setFillColor(sf::Color::Black);
+//	options.push_back({ option3 , option3Box });
+//
+//	bool isDropdownActive = false;
+//
+//	sf::ConvexShape arrow(3);
+//	arrow.setPoint(0, sf::Vector2f(0, 0));
+//	arrow.setPoint(1, sf::Vector2f(15, 0));
+//	arrow.setPoint(2, sf::Vector2f(7.5, 7.5));
+//	arrow.setFillColor(sf::Color::Black);
+//	arrow.setPosition(400, 47);
+//	bool isArrowDownUp = true;
+//
+//	//////////////////dropdown/////////////////////////
+//
+//	/////////////////create////////////////////////////
+//
+//	sf::RectangleShape createButton(sf::Vector2f(125, 50));
+//	createButton.setFillColor(sf::Color::White);
+//	createButton.setOutlineThickness(2);
+//	createButton.setOutlineColor(sf::Color::Black);
+//	createButton.setPosition(600, 25);
+//
+//	sf::Text createButtonText("them moi", font, 24);
+//	createButtonText.setFillColor(sf::Color::Black);
+//	createButtonText.setPosition(614, 35);
+//
+//	/////////////////create////////////////////////////
+//
+//
+//	while (window.isOpen())
+//	{
+//		sf::Event event;
+//		while (window.pollEvent(event))
+//		{
+//			if (event.type == sf::Event::Closed)
+//			{
+//				window.close();
+//			}
+//			if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
+//			{
+//				// Kiểm tra xem người dùng đã ấn vào nút hay chưa
+//				if (button1.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y))
+//				{
+//					homePageButton = true;
+//					selectDropDownButton = false;
+//					selectAndUpdateButton = false;
+//				}
+//				if (isMouseOver(dropdownBox, window))
+//				{
+//					dropdownBox.setFillColor(sf::Color(111, 110, 111));
+//					isDropdownActive = !isDropdownActive;
+//				}
+//				else if (isDropdownActive)
+//				{
+//					for (int i = 0; i < 3; i++) {
+//						{
+//							if (isMouseOver(options[i].second, window))
+//							{
+//								dropdownText.setString(options[i].first.getString());
+//								dropdownBox.setFillColor(sf::Color::White);
+//								isDropdownActive = false;
+//								isArrowDownUp = true;
+//								homePageButton = false;  selectDropDownButton = true; selectAndUpdateButton = true;
+//								break;
+//							}
+//						}
+//					}
+//
+//				}
+//				if (selectAndUpdateButton) {
+//					for (int i = 0; i < 12; i++) {
+//						for (int j = 0; j < 6; j++) {
+//							if (box[i][j].first.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y)) {
+//								if (box[i][j].second) {
+//									box[i][j].second = false;
+//									box[i][j].first.setFillColor(sf::Color(238, 100, 87)); //100, 238, 87
+//
+//								}
+//								else {
+//									box[i][j].second = true;
+//									box[i][j].first.setFillColor(sf::Color(100, 238, 87)); //100, 238, 87
+//								}
+//							}
+//						}
+//					}
+//				}
+//			}
+//		}
+//		window.clear(sf::Color::White);
+//
+//		//if (homePageAdmin) {
+//		window.draw(button1);
+//		window.draw(iconSprite1);
+//		//}
+//
+//		if (homePageButton) {
+//			window.draw(homePageText);
+//		}
+//
+//		if (selectDropDownButton) {
+//			window.draw(sprite);
+//		}
+//
+//		if (selectAndUpdateButton) {
+//			for (int i = 0; i < 12; i++) {
+//				for (int j = 0; j < 6; j++) {
+//					window.draw(box[i][j].first);
+//				}
+//			}
+//		}
+//
+//		window.draw(thickLine);
+//
+//		window.draw(dropdownBox);
+//		window.draw(dropdownText);
+//		if (isArrowDownUp) {
+//			arrow.setPoint(0, sf::Vector2f(0, 0));
+//			arrow.setPoint(1, sf::Vector2f(15, 0));
+//			arrow.setPoint(2, sf::Vector2f(7.5, 7.5));
+//			arrow.setFillColor(sf::Color::Black);
+//			window.draw(arrow);
+//		}
+//
+//		if (isDropdownActive)
+//		{
+//			isArrowDownUp = false;
+//			arrow.setPoint(0, sf::Vector2f(7.5, 0));
+//			arrow.setPoint(1, sf::Vector2f(0, 7.5));
+//			arrow.setPoint(2, sf::Vector2f(15, 7.5));
+//			arrow.setFillColor(sf::Color::Black);
+//			window.draw(arrow);
+//
+//			for (const std::pair<sf::Text, sf::RectangleShape> option : options)
+//			{
+//				window.draw(option.second);
+//				window.draw(option.first);
+//			}
+//		}
+//
+//		window.draw(createButton);
+//		window.draw(createButtonText);
+//
+//		window.display();
+//	}
+//}
