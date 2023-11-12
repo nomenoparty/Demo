@@ -1294,6 +1294,7 @@ bool isMouseOver(sf::Text& option, sf::RenderWindow& window)
 //
 //	return 0;
 //}
+
 int main()
 {
 	// Tạo cửa sổ kích thước 800x600 pixels
@@ -1343,7 +1344,7 @@ int main()
 	///////////////////////////////////
 
 	sf::Font font;
-	if (!font.loadFromFile("ShortBaby-Mg2w.ttf"))
+	if (!font.loadFromFile("SVN-Times New Roman Bold.ttf"))
 	{
 		std::cout << "Failed to load font!" << std::endl;
 		return -1;
@@ -1384,9 +1385,9 @@ int main()
 	dropdownBox.setOutlineColor(sf::Color::Black);
 	dropdownBox.setPosition(300, 25);
 
-	sf::Text dropdownText("Rap", font, 24);
+	sf::Text dropdownText("Room", font, 24);
 	dropdownText.setFillColor(sf::Color::Black);
-	dropdownText.setPosition(331, 35);
+	dropdownText.setPosition(320, 35);
 
 	std::vector< std::pair<sf::Text, sf::RectangleShape> > options;
 	sf::RectangleShape option1Box(sf::Vector2f(125, 50));
@@ -1395,8 +1396,8 @@ int main()
 	option1Box.setOutlineColor(sf::Color::Black);
 	option1Box.setPosition(300, 75);
 
-	sf::Text option1("Rap 1", font, 24);
-	option1.setPosition(330, 85);
+	sf::Text option1("Room 1", font, 24);
+	option1.setPosition(323, 85);
 	option1.setFillColor(sf::Color::Black);
 	options.push_back({ {option1} , option1Box });
 
@@ -1406,8 +1407,8 @@ int main()
 	option2Box.setOutlineColor(sf::Color::Black);
 	option2Box.setPosition(300, 125);
 
-	sf::Text option2("Rap 2", font, 24);
-	option2.setPosition(330, 135);
+	sf::Text option2("Room 2", font, 24);
+	option2.setPosition(323, 135);
 	option2.setFillColor(sf::Color::Black);
 	options.push_back({ {option2} , option2Box });
 
@@ -1417,8 +1418,8 @@ int main()
 	option3Box.setOutlineColor(sf::Color::Black);
 	option3Box.setPosition(300, 175);
 
-	sf::Text option3("Rap 3", font, 24);
-	option3.setPosition(330, 185);
+	sf::Text option3("Room 3", font, 24);
+	option3.setPosition(323, 185);
 	option3.setFillColor(sf::Color::Black);
 	options.push_back({ {option3} , option3Box });
 
@@ -1429,7 +1430,7 @@ int main()
 	arrow.setPoint(1, sf::Vector2f(15, 0));
 	arrow.setPoint(2, sf::Vector2f(7.5, 7.5));
 	arrow.setFillColor(sf::Color::Black);
-	arrow.setPosition(400, 47);
+	arrow.setPosition(405, 47);
 	bool isArrowDownUp = true;
 
 	//////////////////dropdown/////////////////////////
@@ -1442,9 +1443,9 @@ int main()
 	createButton.setOutlineColor(sf::Color::Black);
 	createButton.setPosition(600, 25);
 
-	sf::Text createButtonText("them moi", font, 24);
+	sf::Text createButtonText("Create", font, 24);
 	createButtonText.setFillColor(sf::Color::Black);
-	createButtonText.setPosition(614, 35);
+	createButtonText.setPosition(630, 35);
 
 	/////////////////create////////////////////////////
 
