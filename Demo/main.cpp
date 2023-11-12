@@ -1247,12 +1247,10 @@ bool isMouseOver(sf::Text& option, sf::RenderWindow& window)
 //		{
 //			productBoxes[i].first.setPosition(productBoxes[i - 1].first.getPosition());
 //			float textX = productBoxes[i].first.getPosition().x + productBoxes[i].first.getSize().x / 2 - productBoxes[i].second.first.getLocalBounds().width / 2;
-//			//productBoxes[i].second.setPosition(productBoxes[i - 1].second.getPosition());
 //			productBoxes[i].second.first.setPosition(textX, 600);
 //		}
 //
 //		productBoxes[0].first.setPosition(newPos);
-//		//productBoxes[0].second.setPosition(newPos.x + 10, newPos.y + 10);
 //		productBoxes[0].second.first.setPosition(textX, 600);
 //
 //		// Xóa màn hình
@@ -1299,10 +1297,82 @@ int main()
 {
 	// Tạo cửa sổ kích thước 800x600 pixels
 	sf::RenderWindow window(sf::VideoMode(1195, 672), "Drawing Line");
+	
+
+	//////////////////////Font///////////////////////////
+	sf::Font font;
+	if (!font.loadFromFile("SVN-Times New Roman Bold.ttf"))
+	{
+		std::cout << "Failed to load font!" << std::endl;
+		return -1;
+	}
+	//////////////////////Font///////////////////////////
+
 
 	sf::RectangleShape thickLine(sf::Vector2f(1195, 3));
 	thickLine.setFillColor(sf::Color::Red);
 	thickLine.setPosition(0, 100);
+
+	//////////////////////HomePage//////////////////
+	
+	std::vector<pair<string, string>> films;
+
+	string title = "My nhan dao chich";
+	string linkImage = "mynhandaochich.jpg";
+	films.push_back({ title, linkImage });
+
+	title = "Am hon do thi";
+	linkImage = "amhondothi.jpg";
+	films.push_back({ title, linkImage });
+
+	title = "Nguoi vo cuoi cung";
+	linkImage = "nguoivocuoicung.jpg";
+	films.push_back({ title, linkImage });
+
+	title = "Nam dem kinh hoang";
+	linkImage = "5demkinhhoang.jpg";
+	films.push_back({ title, linkImage });
+
+	title = "Quy mon quan";
+	linkImage = "quymonquan.jpg";
+	films.push_back({ title, linkImage });
+
+	title = "Wolfoo";
+	linkImage = "wolfoo.jpg";
+	films.push_back({ title, linkImage });
+
+	title = "Dat rung phuong nam";
+	linkImage = "datrungphuongnam.jpg";
+	films.push_back({ title, linkImage });
+
+	title = "Biet doi Marvel";
+	linkImage = "marvel.jpg";
+	films.push_back({ title, linkImage });
+
+	title = "Hai ke doi tra";
+	linkImage = "haikedoitra.png";
+	films.push_back({ title, linkImage });
+
+	std::vector<pair<sf::RectangleShape, pair<sf::Text, string>>> productBoxes;
+
+	for (int i = 0; i < films.size(); i++)
+	{
+		sf::RectangleShape productBox(sf::Vector2f(300, 500));
+		productBox.setFillColor(sf::Color::White);
+		productBox.setOutlineThickness(2);
+		productBox.setOutlineColor(sf::Color::Black);
+		productBox.setPosition(20 + i * 350, 125);
+
+		sf::Text productText(films[i].first, font, 24);
+		productText.setFillColor(sf::Color::Black);
+		float textX = productBox.getPosition().x + productBox.getSize().x / 2 - productText.getLocalBounds().width / 2;
+		//productText.setPosition(30 + i * 350, 135);
+		productText.setPosition(textX, 600);
+
+		productBoxes.push_back({ productBox , {productText, films[i].second} });
+	}
+
+	//////////////////////HomePage//////////////////
 
 
 	//////////////////////Order//////////////////
@@ -1342,13 +1412,6 @@ int main()
 	//////////////////////Order//////////////////
 
 	///////////////////////////////////
-
-	sf::Font font;
-	if (!font.loadFromFile("SVN-Times New Roman Bold.ttf"))
-	{
-		std::cout << "Failed to load font!" << std::endl;
-		return -1;
-	}
 
 	//bool selectButton[3]; memset(selectButton, false, 3);
 	bool homePageButton = true;
@@ -1483,7 +1546,6 @@ int main()
 							{
 								dropdownText.setString(options[i].first.getString());
 								indexButton = i + 1;
-								cout << i << indexButton << endl;
 								dropdownBox.setFillColor(sf::Color::White);
 								isDropdownActive = false;
 								isArrowDownUp = true;
@@ -1524,7 +1586,42 @@ int main()
 		//}
 
 		if (homePageButton) {
-			window.draw(homePageText);
+			sf::Vector2f offset(0, 0);
+			sf::Vector2f newPos = productBoxes[productBoxes.size() - 1].first.getPosition() + offset;
+			float textX = productBoxes[productBoxes.size() - 1].first.getPosition().x + productBoxes[productBoxes.size() - 1].first.getSize().x / 2 - productBoxes[productBoxes.size() - 1].second.first.getLocalBounds().width / 2;
+
+			for (int i = productBoxes.size() - 1; i >= 1; i--)
+			{
+				productBoxes[i].first.setPosition(productBoxes[i - 1].first.getPosition());
+				float textX = productBoxes[i].first.getPosition().x + productBoxes[i].first.getSize().x / 2 - productBoxes[i].second.first.getLocalBounds().width / 2;
+				productBoxes[i].second.first.setPosition(textX, 600);
+			}
+
+			productBoxes[0].first.setPosition(newPos);
+			productBoxes[0].second.first.setPosition(textX, 600);
+
+
+			for (int i = 0; i < films.size(); i++)
+			{
+				sf::Texture texture;
+				if (!texture.loadFromFile(productBoxes[i].second.second)) {
+					return EXIT_FAILURE;
+				}
+				sf::Sprite sprite(texture);
+				sf::Vector2u windowsize = window.getSize();
+				float scalex = 290.0 / texture.getSize().x;
+				float scaley = 475.0 / texture.getSize().y;
+				sprite.setScale(scalex, scaley);
+				float x = productBoxes[i].first.getPosition().x + 5;
+				float y = productBoxes[i].first.getPosition().y + 5;
+				sprite.setPosition(x, y);
+
+				window.draw(productBoxes[i].first);
+				window.draw(sprite);
+				window.draw(productBoxes[i].second.first);
+			}
+
+			sf::sleep(sf::seconds(0.7));
 		}
 
 		if (selectDropDownButton) {
