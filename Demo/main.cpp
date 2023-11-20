@@ -1612,11 +1612,14 @@ int createFilmsWindow(vector<pair<sf::RectangleShape, pair<sf::Text, string>>>& 
 	return 0;
 }
 
+
+
 int main()
 {
-	// Tạo cửa sổ kích thước 800x600 pixels
 	sf::RenderWindow window(sf::VideoMode(1195, 672), "Drawing Line");
-	
+
+	sf::RenderWindow window1(sf::VideoMode(1050, 1000), "Create Window", sf::Style::None);
+	window1.setVisible(false);
 
 	//////////////////////Font///////////////////////////
 	sf::Font font;
@@ -1840,8 +1843,7 @@ int main()
 
 	/////////////////create////////////////////////////
 
-	sf::RenderWindow window1(sf::VideoMode(1050, 1000), "Create Window");
-	window1.setVisible(false);
+	int cnt = 0;
 
 	while (window.isOpen())
 	{
@@ -1908,7 +1910,6 @@ int main()
 				}
 				if (createButton.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y))
 				{
-					//createFilmsWindow(productBoxes, window);
 					window.setVisible(false);
 					window1.setVisible(true);
 					sf::Texture texture;
@@ -1995,15 +1996,17 @@ int main()
 					bool isInputDescActive = false;
 					bool isInputImageActive = false;
 
+					bool checkwindow1 = false;
+
 					while (window1.isOpen())
 					{
 						sf::Event event;
 						while (window1.pollEvent(event))
 						{
-							if (event.type == sf::Event::Closed)
-							{
-								window1.close();
-							}
+							//if (event.type == sf::Event::Closed)
+							//{
+							//	window1.close();
+							//}
 							if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
 							{
 								if (isMouseOver(buttonTitle, event))
@@ -2045,29 +2048,29 @@ int main()
 									string currentTextTitle = inputTextTitle.getString();
 									string currentTextDesc = textDesc;
 									string currentTextImage = inputTextImage.getString();
+									sf::Texture texTureTest;
 									if (currentTextTitle == "") {
 										lineTitle.setFillColor(sf::Color(126, 0, 33));
 									}
 									if (currentTextDesc == "") {
 										lineDesc.setFillColor(sf::Color(126, 0, 33));
 									}
-									if (currentTextImage == "") {
+									if (currentTextImage == "" || !texTureTest.loadFromFile(currentTextImage)) {
 										lineImage.setFillColor(sf::Color(126, 0, 33));
 									}
-									if (currentTextTitle != "" && currentTextDesc != "" && currentTextImage != "") {
-										cout << "phim size = " << films.size() << ' ';
-										for (int i = 0; i < films.size(); i++)
-										{
-											productBoxes[i].first.setPosition(20 + i * 350, 125);
+									if (currentTextTitle != "" && currentTextDesc != "" && currentTextImage != "" && texTureTest.loadFromFile(currentTextImage)) {
+										//for (int i = 0; i < films.size(); i++)
+										//{
+										//	productBoxes[i].first.setPosition(20 + i * 350, 125);
 
-											productBoxes[i].second.first.setString(films[i].title);
-											float textX = productBoxes[i].first.getPosition().x + productBoxes[i].first.getSize().x / 2 - productBoxes[i].second.first.getLocalBounds().width / 2;
-											productBoxes[i].second.first.setPosition(textX, 600);
-											productBoxes[i].second.second = films[i].image;
-										}
+										//	productBoxes[i].second.first.setString(films[i].title);
+										//	float textX = productBoxes[i].first.getPosition().x + productBoxes[i].first.getSize().x / 2 - productBoxes[i].second.first.getLocalBounds().width / 2;
+										//	productBoxes[i].second.first.setPosition(textX, 600);
+										//	productBoxes[i].second.second = films[i].image;
+										//}
 										films.push_back({ currentTextTitle, currentTextDesc, currentTextImage });
-										cout << "phim size = " << films.size() << ' ';
-										cout << "productBoxes size = " << productBoxes.size() << ' ';
+										//cout << "phim size = " << films.size() << ' ';
+										//cout << "productBoxes size = " << productBoxes.size() << ' ';
 										sf::RectangleShape productBox(sf::Vector2f(300, 500));
 										productBox.setFillColor(sf::Color::White);
 										productBox.setOutlineThickness(2);
@@ -2077,13 +2080,16 @@ int main()
 										sf::Text productText(currentTextTitle, font, 24);
 										productText.setFillColor(sf::Color::Black);
 										float textX = productBox.getPosition().x + productBox.getSize().x / 2 - productText.getLocalBounds().width / 2;
-										cout << "productBox.getPosition().x" << productBox.getPosition().x << endl;
-										cout << "productBox.getSize().x" << productBox.getSize().x << endl;
-										cout << "productText.getLocalBounds().width" << productText.getLocalBounds().width << endl;
+										//cout << "productBox.getPosition().x" << productBox.getPosition().x << endl;
+										//cout << "productBox.getSize().x" << productBox.getSize().x << endl;
+										//cout << "productText.getLocalBounds().width" << productText.getLocalBounds().width << endl;
 										productText.setPosition(textX, 600);
 
 										productBoxes.push_back({ productBox , {productText, currentTextImage} });
-										cout << "productBoxes size = " << productBoxes.size() << endl;
+										//cout << "productBoxes size = " << productBoxes.size() << endl;
+										window.setVisible(true);
+										window1.setVisible(false);
+										checkwindow1 = true; break;
 										//sf::Vector2f offset(0, 0);
 										//sf::Vector2f newPos = productBoxes[productBoxes.size() - 1].first.getPosition() + offset;
 										//float textX = productBoxes[productBoxes.size() - 1].first.getPosition().x + productBoxes[productBoxes.size() - 1].first.getSize().x / 2 - productBoxes[productBoxes.size() - 1].second.first.getLocalBounds().width / 2;
@@ -2211,6 +2217,8 @@ int main()
 							}
 						}
 
+						if (checkwindow1) break;
+
 						window1.clear();
 						window1.draw(sprite);
 						
@@ -2231,12 +2239,6 @@ int main()
 
 						window1.display();
 					}
-					//createFilmsWindow()
-					window.setVisible(true);
-					window1.setVisible(false);
-
-					cout << "phim size = " << films.size() << ' ';
-					cout << "productBoxes size = " << productBoxes.size() << ' ';
 				}
 			}
 
@@ -2251,15 +2253,17 @@ int main()
 		if (homePageButton) {
 			sf::Vector2f offset(0, 0);
 			sf::Vector2f newPos = productBoxes[productBoxes.size() - 1].first.getPosition() + offset;
-			cout << "phim size = " << films.size() << ' ';
-			cout << "productBoxes size = " << productBoxes.size() << ' ' << "homepage" << endl;
-			cout << "productBoxes[productBoxes.size() - 1].first.getPosition().x = " << productBoxes[productBoxes.size() - 1].first.getPosition().x << endl;
-			cout << "productBoxes[productBoxes.size() - 1].first.getSize().x = " << productBoxes[productBoxes.size() - 1].first.getSize().x << endl;
-			cout << "productBoxes[productBoxes.size() - 1].second.first.getString().toAnsiString()" << productBoxes[productBoxes.size() - 1].second.first.getString().toAnsiString() << endl;
-			cout << "productBoxes[productBoxes.size() - 1].second.first.getLocalBounds().width = " << productBoxes[productBoxes.size() - 1].second.first.getLocalBounds().width << endl;
-			float textX = productBoxes[productBoxes.size() - 1].first.getPosition().x + productBoxes[productBoxes.size() - 1].first.getSize().x / 2 - productBoxes[productBoxes.size() - 1].second.first.getLocalBounds().width / 2;
-			cout << "phim size = " << films.size() << ' ';
-			cout << "productBoxes size = " << productBoxes.size() << ' ' << "homepage2" << endl;
+			//cout << "productBoxes[productBoxes.size() - 1].first.getPosition().x = " << productBoxes[productBoxes.size() - 1].first.getPosition().x << endl;
+			//cout << "productBoxes[productBoxes.size() - 1].first.getSize().x = " << productBoxes[productBoxes.size() - 1].first.getSize().x << endl;
+			//cout << "productBoxes[productBoxes.size() - 1].second.first.getString().toAnsiString()" << productBoxes[productBoxes.size() - 1].second.first.getString().toAnsiString() << endl;
+			//cout << "productBoxes[productBoxes.size() - 1].second.first.getLocalBounds().width = " << productBoxes[productBoxes.size() - 1].second.first.getLocalBounds().width << endl;
+			//cout << "--------------------------------\n";
+			//cout << "productBoxes[0].first.getPosition().x = " << productBoxes[0].first.getPosition().x << endl;
+			//cout << "productBoxes[0].first.getSize().x = " << productBoxes[0].first.getSize().x << endl;
+			//cout << "productBoxes[0].second.first.getString().toAnsiString()" << productBoxes[0].second.first.getString().toAnsiString() << endl;
+			//cout << "productBoxes[0].second.first.getLocalBounds().width = " << productBoxes[0].second.first.getLocalBounds().width << endl;
+			//cout << "================================\n";
+			float textX = productBoxes[productBoxes.size() - 1].first.getPosition().x + productBoxes[productBoxes.size() - 1].first.getSize().x / 2 - productBoxes[0].second.first.getLocalBounds().width / 2;
 			for (int i = productBoxes.size() - 1; i >= 1; i--)
 			{	
 				productBoxes[i].first.setPosition(productBoxes[i - 1].first.getPosition());
@@ -2270,12 +2274,23 @@ int main()
 			productBoxes[0].first.setPosition(newPos);
 			productBoxes[0].second.first.setPosition(textX, 600);
 
+			//cout << textX << ' ' << productBoxes[0].second.first.getPosition().x << " " << productBoxes[productBoxes.size() - 1].second.first.getPosition().x << endl;
+			//cout << "productBoxes[productBoxes.size() - 1].first.getPosition().x = " << productBoxes[productBoxes.size() - 1].first.getPosition().x << endl;
+			//cout << "productBoxes[productBoxes.size() - 1].first.getSize().x = " << productBoxes[productBoxes.size() - 1].first.getSize().x << endl;
+			//cout << "productBoxes[productBoxes.size() - 1].second.first.getString().toAnsiString()" << productBoxes[productBoxes.size() - 1].second.first.getString().toAnsiString() << endl;
+			//cout << "productBoxes[productBoxes.size() - 1].second.first.getLocalBounds().width = " << productBoxes[productBoxes.size() - 1].second.first.getLocalBounds().width << endl;
+			//cout << "-------------------------------\n";
+			//cout << "productBoxes[0].first.getPosition().x = " << productBoxes[0].first.getPosition().x << endl;
+			//cout << "productBoxes[0].first.getSize().x = " << productBoxes[0].first.getSize().x << endl;
+			//cout << "productBoxes[0].second.first.getString().toAnsiString()" << productBoxes[0].second.first.getString().toAnsiString() << endl;
+			//cout << "productBoxes[0].second.first.getLocalBounds().width = " << productBoxes[0].second.first.getLocalBounds().width << endl;
+			//cout << "-----------------------------------\n";
 
 			for (int i = 0; i < films.size(); i++)
 			{
 				sf::Texture texture;
 				if (!texture.loadFromFile(productBoxes[i].second.second)) {
-					return EXIT_FAILURE;
+					texture.loadFromFile("404.jfif");
 				}
 				sf::Sprite sprite(texture);
 				sf::Vector2u windowsize = window.getSize();
