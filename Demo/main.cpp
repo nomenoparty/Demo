@@ -1295,971 +1295,6 @@ bool isMouseOver(sf::Text& option, sf::RenderWindow& window)
 //	return 0;
 //}
 
-//struct film {
-//	string title;
-//	string desc;
-//	string image;
-//};
-//
-//std::vector<film> films;
-//std::vector<pair<sf::RectangleShape, pair<sf::Text, string>>> productBoxes;
-////std::pair<sf::RectangleShape, bool> box[3][12][6];
-//
-//int createFilmsWindow(sf::RenderWindow& window, sf::RenderWindow& window1, sf::Font& font)
-//{
-//	window.setVisible(false);
-//	window1.setVisible(true);
-//	sf::Texture texture;
-//	if (!texture.loadFromFile("fotor-ai-20231112163130.jpg"))
-//		return EXIT_FAILURE;
-//
-//	// tạo sprite sử dụng texture đã tải
-//	sf::Sprite sprite(texture);
-//	sf::Vector2u windowsize = window1.getSize();
-//	float scalex = 1050.0 / texture.getSize().x;
-//	float scaley = 1000.0 / texture.getSize().y;
-//	sprite.setScale(scalex, scaley);
-//
-//	//sf::Font font;
-//	//if (!font.loadFromFile("SVN-Times New Roman Bold.ttf"))
-//	//{
-//	//	std::cout << "Failed to load font!" << std::endl;
-//	//	return -1;
-//	//}
-//
-//	sf::RectangleShape buttonTitle(sf::Vector2f(600, 45));
-//	buttonTitle.setFillColor(sf::Color(86, 0, 172, 70));
-//	buttonTitle.setPosition(200, 70);
-//
-//	sf::RectangleShape lineTitle(sf::Vector2f(5, 45));
-//	lineTitle.setFillColor(sf::Color(18, 104, 10));
-//	lineTitle.setPosition(200, 70);
-//
-//	sf::Text inputTextTitle;
-//	inputTextTitle.setFont(font);
-//	inputTextTitle.setCharacterSize(27);
-//	inputTextTitle.setFillColor(sf::Color(255, 255, 255));
-//	inputTextTitle.setPosition(210, 73);
-//
-//	sf::RectangleShape buttonDesc(sf::Vector2f(600, 500));
-//	buttonDesc.setFillColor(sf::Color(86, 0, 172, 70));
-//	buttonDesc.setPosition(200, 200);
-//
-//	sf::RectangleShape lineDesc(sf::Vector2f(5, 500));
-//	lineDesc.setFillColor(sf::Color(18, 104, 10));
-//	lineDesc.setPosition(200, 200);
-//
-//	sf::Text inputTextDesc;
-//	inputTextDesc.setFont(font);
-//	inputTextDesc.setCharacterSize(27);
-//	inputTextDesc.setFillColor(sf::Color(255, 255, 255));
-//	inputTextDesc.setPosition(210, 196);
-//
-//	sf::RectangleShape buttonImage(sf::Vector2f(600, 45));
-//	buttonImage.setFillColor(sf::Color(86, 0, 172, 70));
-//	buttonImage.setPosition(200, 785);
-//
-//	sf::RectangleShape lineImage(sf::Vector2f(5, 45));
-//	lineImage.setFillColor(sf::Color(18, 104, 10));
-//	lineImage.setPosition(200, 785);
-//
-//	sf::Text inputTextImage;
-//	inputTextImage.setFont(font);
-//	inputTextImage.setCharacterSize(27);
-//	inputTextImage.setFillColor(sf::Color(255, 255, 255));
-//	inputTextImage.setPosition(210, 788);
-//
-//	sf::Texture createTexture;
-//	if (!createTexture.loadFromFile("2023-11-13_171327.png"))
-//		return EXIT_FAILURE;
-//
-//	sf::Sprite createSprite(createTexture);
-//	float scalex1 = 300.0 / createTexture.getSize().x;
-//	float scaley1 = 75.0 / createTexture.getSize().y;
-//	createSprite.setScale(scalex1, scaley1);
-//	createSprite.setPosition(350, 870);
-//
-//	sf::Font fontCreate;
-//	if (!fontCreate.loadFromFile("SourceSansPro-Bold.ttf"))
-//	{
-//		std::cout << "Failed to load font!" << std::endl;
-//		return -1;
-//	}
-//
-//	sf::Text textCreate;
-//	textCreate.setFont(fontCreate);
-//	textCreate.setCharacterSize(37);
-//	textCreate.setFillColor(sf::Color(255, 255, 255));
-//	textCreate.setPosition(432, 883);
-//	textCreate.setString("CREATE");
-//
-//	string textDesc = "";
-//
-//	bool isInputTitleActive = false;
-//	bool isInputDescActive = false;
-//	bool isInputImageActive = false;
-//
-//	bool checkwindow1 = false;
-//
-//	while (window1.isOpen())
-//	{
-//		sf::Event event;
-//		while (window1.pollEvent(event))
-//		{
-//			//if (event.type == sf::Event::Closed)
-//			//{
-//			//	window1.close();
-//			//}
-//			if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
-//			{
-//				if (isMouseOver(buttonTitle, event))
-//				{
-//					lineTitle.setFillColor(sf::Color(128, 241, 118));
-//					lineDesc.setFillColor(sf::Color(18, 104, 10));
-//					lineImage.setFillColor(sf::Color(18, 104, 10));
-//					isInputTitleActive = true;
-//					isInputDescActive = false;
-//					isInputImageActive = false;
-//				}
-//				else if (isMouseOver(buttonDesc, event))
-//				{
-//					lineDesc.setFillColor(sf::Color(128, 241, 118));
-//					lineTitle.setFillColor(sf::Color(18, 104, 10));
-//					lineImage.setFillColor(sf::Color(18, 104, 10));
-//					isInputDescActive = true;
-//					isInputTitleActive = false;
-//					isInputImageActive = false;
-//				}
-//				else if (isMouseOver(buttonImage, event)) {
-//					lineImage.setFillColor(sf::Color(128, 241, 118));
-//					lineDesc.setFillColor(sf::Color(18, 104, 10));
-//					lineTitle.setFillColor(sf::Color(18, 104, 10));
-//					isInputDescActive = false;
-//					isInputTitleActive = false;
-//					isInputImageActive = true;
-//				}
-//				else {
-//					lineDesc.setFillColor(sf::Color(18, 104, 10));
-//					lineTitle.setFillColor(sf::Color(18, 104, 10));
-//					lineImage.setFillColor(sf::Color(18, 104, 10));
-//					isInputDescActive = false;
-//					isInputTitleActive = false;
-//					isInputImageActive = false;
-//				}
-//
-//				if (createSprite.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y)) {
-//					string currentTextTitle = inputTextTitle.getString();
-//					string currentTextDesc = textDesc;
-//					string currentTextImage = inputTextImage.getString();
-//					sf::Texture texTureTest;
-//					if (currentTextTitle == "") {
-//						lineTitle.setFillColor(sf::Color(126, 0, 33));
-//					}
-//					if (currentTextDesc == "") {
-//						lineDesc.setFillColor(sf::Color(126, 0, 33));
-//					}
-//					if (currentTextImage == "" || !texTureTest.loadFromFile(currentTextImage)) {
-//						lineImage.setFillColor(sf::Color(126, 0, 33));
-//					}
-//					if (currentTextTitle != "" && currentTextDesc != "" && currentTextImage != "" && texTureTest.loadFromFile(currentTextImage)) {
-//						//for (int i = 0; i < films.size(); i++)
-//						//{
-//						//	productBoxes[i].first.setPosition(20 + i * 350, 125);
-//
-//						//	productBoxes[i].second.first.setString(films[i].title);
-//						//	float textX = productBoxes[i].first.getPosition().x + productBoxes[i].first.getSize().x / 2 - productBoxes[i].second.first.getLocalBounds().width / 2;
-//						//	productBoxes[i].second.first.setPosition(textX, 600);
-//						//	productBoxes[i].second.second = films[i].image;
-//						//}
-//						films.push_back({ currentTextTitle, currentTextDesc, currentTextImage });
-//						//cout << "phim size = " << films.size() << ' ';
-//						//cout << "productBoxes size = " << productBoxes.size() << ' ';
-//						sf::RectangleShape productBox(sf::Vector2f(300, 500));
-//						productBox.setFillColor(sf::Color::White);
-//						productBox.setOutlineThickness(2);
-//						productBox.setOutlineColor(sf::Color::Black);
-//						productBox.setPosition(20 + (films.size() - 1) * 350, 125);
-//
-//						sf::Text productText(currentTextTitle, font, 24);
-//						productText.setFillColor(sf::Color::Black);
-//						float textX = productBox.getPosition().x + productBox.getSize().x / 2 - productText.getLocalBounds().width / 2;
-//						//cout << "productBox.getPosition().x" << productBox.getPosition().x << endl;
-//						//cout << "productBox.getSize().x" << productBox.getSize().x << endl;
-//						//cout << "productText.getLocalBounds().width" << productText.getLocalBounds().width << endl;
-//						productText.setPosition(textX, 600);
-//
-//						productBoxes.push_back({ productBox , {productText, currentTextImage} });
-//						//cout << "productBoxes size = " << productBoxes.size() << endl;
-//						window.setVisible(true);
-//						window1.setVisible(false);
-//						return 0;
-//						//checkwindow1 = true; break;
-//						//sf::Vector2f offset(0, 0);
-//						//sf::Vector2f newPos = productBoxes[productBoxes.size() - 1].first.getPosition() + offset;
-//						//float textX = productBoxes[productBoxes.size() - 1].first.getPosition().x + productBoxes[productBoxes.size() - 1].first.getSize().x / 2 - productBoxes[productBoxes.size() - 1].second.first.getLocalBounds().width / 2;
-//
-//						//for (int i = productBoxes.size() - 1; i >= 1; i--)
-//						//{
-//						//	productBoxes[i].first.setPosition(productBoxes[i - 1].first.getPosition());
-//						//	float textX = productBoxes[i].first.getPosition().x + productBoxes[i].first.getSize().x / 2 - productBoxes[i].second.first.getLocalBounds().width / 2;
-//						//	productBoxes[i].second.first.setPosition(textX, 600);
-//						//}
-//
-//						//productBoxes[0].first.setPosition(newPos);
-//						//productBoxes[0].second.first.setPosition(textX, 600);
-//					}
-//				}
-//			}
-//			else if (event.type == sf::Event::TextEntered)
-//			{
-//				if (isInputTitleActive)
-//				{
-//					if (event.text.unicode < 128)
-//					{
-//						if (event.text.unicode == '\b')
-//						{
-//							if (!inputTextTitle.getString().isEmpty()) {
-//								std::string currentText = inputTextTitle.getString();
-//								currentText.pop_back();
-//								inputTextTitle.setString(currentText);
-//							}
-//						}
-//						else if (event.text.unicode == '\r' || event.text.unicode == '\n')
-//						{
-//							inputTextTitle.setString(inputTextTitle.getString() + "\n");
-//						}
-//						else
-//						{
-//							inputTextTitle.setString(inputTextTitle.getString() + static_cast<char>(event.text.unicode));
-//						}
-//					}
-//				}
-//				else if (isInputDescActive)
-//				{
-//					if (event.text.unicode < 128)
-//					{
-//						if (event.text.unicode == '\b')
-//						{
-//							if (!inputTextDesc.getString().isEmpty()) {
-//								std::string currentText = inputTextDesc.getString();
-//								currentText.pop_back();
-//								textDesc.pop_back();
-//								inputTextDesc.setString(currentText);
-//							}
-//						}
-//						else if (event.text.unicode == '\r' || event.text.unicode == '\n')
-//						{
-//							inputTextDesc.setString(inputTextDesc.getString() + "\n");
-//							textDesc += "\n";
-//						}
-//						else
-//						{
-//							string lastString;
-//							stringstream ss(inputTextDesc.getString());
-//							while (getline(ss, lastString, '\n')) {
-//							}
-//
-//							sf::Text tempText;
-//							tempText.setFont(font);
-//							tempText.setCharacterSize(27);
-//							tempText.setString(lastString);
-//							float lineDescWidth = tempText.getLocalBounds().width;
-//							float buttonDescWidth = buttonDesc.getLocalBounds().width;
-//							if (lineDescWidth > buttonDescWidth - 20)
-//							{
-//								// Thêm ký tự xuống dòng
-//								inputTextDesc.setString(inputTextDesc.getString() + "\n");
-//							}
-//							inputTextDesc.setString(inputTextDesc.getString() + static_cast<char>(event.text.unicode));
-//							textDesc += static_cast<char>(event.text.unicode);
-//						}
-//
-//					}
-//				}
-//				else if (isInputImageActive)
-//				{
-//					if (event.text.unicode < 128)
-//					{
-//						if (event.text.unicode == '\b')
-//						{
-//							if (!inputTextImage.getString().isEmpty()) {
-//								std::string currentText = inputTextImage.getString();
-//								currentText.pop_back();
-//								inputTextImage.setString(currentText);
-//							}
-//						}
-//						else if (event.text.unicode == '\r' || event.text.unicode == '\n')
-//						{
-//							inputTextImage.setString(inputTextImage.getString() + "\n");
-//						}
-//						else
-//						{
-//							inputTextImage.setString(inputTextImage.getString() + static_cast<char>(event.text.unicode));
-//						}
-//					}
-//				}
-//			}
-//			if (event.type == sf::Event::MouseMoved)
-//			{
-//				sf::Vector2i mousePosition = sf::Mouse::getPosition(window1);
-//				if (createSprite.getGlobalBounds().contains(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y)))
-//				{
-//					if (!createTexture.loadFromFile("2023-11-13_173035.png"))
-//						return EXIT_FAILURE;
-//					float scalex1 = 300.0 / createTexture.getSize().x;
-//					float scaley1 = 75.0 / createTexture.getSize().y;
-//					createSprite.setScale(scalex1, scaley1);
-//				}
-//				else
-//				{
-//					if (!createTexture.loadFromFile("2023-11-13_171327.png"))
-//						return EXIT_FAILURE;
-//					float scalex1 = 300.0 / createTexture.getSize().x;
-//					float scaley1 = 75.0 / createTexture.getSize().y;
-//					createSprite.setScale(scalex1, scaley1);
-//				}
-//			}
-//		}
-//
-//		//if (checkwindow1) break;
-//
-//		window1.clear();
-//		window1.draw(sprite);
-//
-//		window1.draw(buttonTitle);
-//		window1.draw(inputTextTitle);
-//		window1.draw(lineTitle);
-//
-//		window1.draw(buttonDesc);
-//		window1.draw(inputTextDesc);
-//		window1.draw(lineDesc);
-//
-//		window1.draw(buttonImage);
-//		window1.draw(inputTextImage);
-//		window1.draw(lineImage);
-//
-//		window1.draw(createSprite);
-//		window1.draw(textCreate);
-//
-//		window1.display();
-//	}
-//}
-
-//int main()
-//{
-//	sf::RenderWindow window(sf::VideoMode(1195, 672), "Drawing Line");
-//
-//	sf::RenderWindow window1(sf::VideoMode(1050, 1000), "Create Window", sf::Style::None);
-//	window1.setVisible(false);
-//
-//	//////////////////////Font///////////////////////////
-//	sf::Font font;
-//	if (!font.loadFromFile("SVN-Times New Roman Bold.ttf"))
-//	{
-//		std::cout << "Failed to load font!" << std::endl;
-//		return -1;
-//	}
-//	//////////////////////Font///////////////////////////
-//
-//
-//	sf::RectangleShape thickLine(sf::Vector2f(1195, 3));
-//	thickLine.setFillColor(sf::Color::Red);
-//	thickLine.setPosition(0, 100);
-//
-//	//////////////////////HomePage//////////////////
-//
-//	//std::vector<pair<string, string>> films;
-//
-//	string title = "My nhan dao chich";
-//	string desc = "";
-//	string linkImage = "mynhandaochich.jpg";
-//	films.push_back({ title, desc, linkImage });
-//
-//	title = "Am hon do thi";
-//	desc = "";
-//	linkImage = "amhondothi.jpg";
-//	films.push_back({ title, desc, linkImage });
-//
-//	title = "Nguoi vo cuoi cung";
-//	desc = "";
-//	linkImage = "nguoivocuoicung.jpg";
-//	films.push_back({ title, desc, linkImage });
-//
-//	title = "Nam dem kinh hoang";
-//	desc = "";
-//	linkImage = "5demkinhhoang.jpg";
-//	films.push_back({ title, desc, linkImage });
-//
-//	title = "Quy mon quan";
-//	desc = "";
-//	linkImage = "quymonquan.jpg";
-//	films.push_back({ title, desc, linkImage });
-//
-//	title = "Wolfoo";
-//	desc = "";
-//	linkImage = "wolfoo.jpg";
-//	films.push_back({ title, desc, linkImage });
-//
-//	title = "Dat rung phuong nam";
-//	desc = "";
-//	linkImage = "datrungphuongnam.jpg";
-//	films.push_back({ title, desc, linkImage });
-//
-//	title = "Biet doi Marvel";
-//	desc = "";
-//	linkImage = "marvel.jpg";
-//	films.push_back({ title, desc, linkImage });
-//
-//	title = "Hai ke doi tra";
-//	desc = "";
-//	linkImage = "haikedoitra.png";
-//	films.push_back({ title, desc, linkImage });
-//
-//	//std::vector<pair<sf::RectangleShape, pair<sf::Text, string>>> productBoxes;
-//
-//	for (int i = 0; i < films.size(); i++)
-//	{
-//		sf::RectangleShape productBox(sf::Vector2f(300, 500));
-//		productBox.setFillColor(sf::Color::White);
-//		productBox.setOutlineThickness(2);
-//		productBox.setOutlineColor(sf::Color::Black);
-//		productBox.setPosition(20 + i * 350, 125);
-//
-//		sf::Text productText(films[i].title, font, 24);
-//		productText.setFillColor(sf::Color::Black);
-//		float textX = productBox.getPosition().x + productBox.getSize().x / 2 - productText.getLocalBounds().width / 2;
-//		//productText.setPosition(30 + i * 350, 135);
-//		productText.setPosition(textX, 600);
-//
-//		productBoxes.push_back({ productBox , {productText, films[i].image} });
-//	}
-//
-//	//////////////////////HomePage//////////////////
-//
-//
-//	//////////////////////Order//////////////////
-//	sf::Texture texture;
-//	if (!texture.loadFromFile("order.jpg"))
-//		return EXIT_FAILURE;
-//
-//	// tạo sprite sử dụng texture đã tải
-//	sf::Sprite sprite(texture);
-//	sf::Vector2u windowsize = window.getSize();
-//	float scalex = 1195.0 / texture.getSize().x;
-//	float scaley = 572.0 / texture.getSize().y;
-//	sprite.setScale(scalex, scaley);
-//	sprite.setPosition(0, 100);
-//
-//	std::pair<sf::RectangleShape, bool> box[3][12][6];
-//	//vector< std::pair<sf::RectangleShape, bool>> box[12][6];
-//
-//	double x_0 = 157, y_0 = 277;
-//	double delta_x = 74.5, delta_y = 64;
-//
-//	for (int k = 0; k < 3; k++) {
-//		for (int i = 0; i < 12; i++) {
-//			for (int j = 0; j < 6; j++) {
-//				double x = x_0 + i * delta_x, y = y_0 + j * delta_y;
-//				box[k][i][j].second = false;
-//				box[k][i][j].first.setSize(sf::Vector2f(59, 52));
-//				box[k][i][j].first.setFillColor(sf::Color(238, 100, 87)); //100, 238, 87
-//				box[k][i][j].first.setOutlineThickness(2);
-//				box[k][i][j].first.setOutlineColor(sf::Color::Black);
-//				box[k][i][j].first.setPosition(x, y);
-//			}
-//		}
-//	}
-//
-//
-//	//////////////////////Order//////////////////
-//
-//	///////////////////////////////////
-//
-//	//bool selectButton[3]; memset(selectButton, false, 3);
-//	bool homePageButton = true;
-//	bool selectDropDownButton = false;
-//	bool selectAndUpdateButton = false; int indexButton = 0;
-//	bool createButtonActive = false;
-//
-//	sf::Text homePageText("HomePage", font, 24);
-//	homePageText.setFillColor(sf::Color::Black);
-//	homePageText.setPosition(500, 500);
-//
-//	sf::CircleShape button1(25);
-//	button1.setFillColor(sf::Color(139, 216, 189)); // Màu xám
-//	button1.setOutlineThickness(5);
-//	button1.setOutlineColor(sf::Color(150, 150, 150)); // Màu xám nhạt
-//	button1.setPosition(100, 25);
-//
-//	sf::Texture texture1;
-//	if (!texture1.loadFromFile("icon-home-removebg-preview.png"))
-//	{
-//		std::cout << "Failed to load icon." << std::endl;
-//		return -1;
-//	}
-//	sf::Sprite iconSprite1(texture1);
-//	iconSprite1.setScale(0.1f, 0.1f);
-//	iconSprite1.setPosition(94, 28);
-//	///////////////////////////////////
-//
-//	//////////////////dropdown/////////////////////////
-//
-//	sf::RectangleShape dropdownBox(sf::Vector2f(125, 50));
-//	dropdownBox.setFillColor(sf::Color::White);
-//	dropdownBox.setOutlineThickness(2);
-//	dropdownBox.setOutlineColor(sf::Color::Black);
-//	dropdownBox.setPosition(300, 25);
-//
-//	sf::Text dropdownText("Room", font, 24);
-//	dropdownText.setFillColor(sf::Color::Black);
-//	dropdownText.setPosition(320, 35);
-//
-//	std::vector< std::pair<sf::Text, sf::RectangleShape> > options;
-//	sf::RectangleShape option1Box(sf::Vector2f(125, 50));
-//	option1Box.setFillColor(sf::Color::White);
-//	option1Box.setOutlineThickness(2);
-//	option1Box.setOutlineColor(sf::Color::Black);
-//	option1Box.setPosition(300, 75);
-//
-//	sf::Text option1("Room 1", font, 24);
-//	option1.setPosition(323, 85);
-//	option1.setFillColor(sf::Color::Black);
-//	options.push_back({ {option1} , option1Box });
-//
-//	sf::RectangleShape option2Box(sf::Vector2f(125, 50));
-//	option2Box.setFillColor(sf::Color::White);
-//	option2Box.setOutlineThickness(2);
-//	option2Box.setOutlineColor(sf::Color::Black);
-//	option2Box.setPosition(300, 125);
-//
-//	sf::Text option2("Room 2", font, 24);
-//	option2.setPosition(323, 135);
-//	option2.setFillColor(sf::Color::Black);
-//	options.push_back({ {option2} , option2Box });
-//
-//	sf::RectangleShape option3Box(sf::Vector2f(125, 50));
-//	option3Box.setFillColor(sf::Color::White);
-//	option3Box.setOutlineThickness(2);
-//	option3Box.setOutlineColor(sf::Color::Black);
-//	option3Box.setPosition(300, 175);
-//
-//	sf::Text option3("Room 3", font, 24);
-//	option3.setPosition(323, 185);
-//	option3.setFillColor(sf::Color::Black);
-//	options.push_back({ {option3} , option3Box });
-//
-//	bool isDropdownActive = false;
-//
-//	sf::ConvexShape arrow(3);
-//	arrow.setPoint(0, sf::Vector2f(0, 0));
-//	arrow.setPoint(1, sf::Vector2f(15, 0));
-//	arrow.setPoint(2, sf::Vector2f(7.5, 7.5));
-//	arrow.setFillColor(sf::Color::Black);
-//	arrow.setPosition(405, 47);
-//	bool isArrowDownUp = true;
-//
-//	//////////////////dropdown/////////////////////////
-//
-//	/////////////////create////////////////////////////
-//
-//	sf::RectangleShape createButton(sf::Vector2f(125, 50));
-//	createButton.setFillColor(sf::Color::White);
-//	createButton.setOutlineThickness(2);
-//	createButton.setOutlineColor(sf::Color::Black);
-//	createButton.setPosition(600, 25);
-//
-//	sf::Text createButtonText("Create", font, 24);
-//	createButtonText.setFillColor(sf::Color::Black);
-//	createButtonText.setPosition(630, 35);
-//
-//	/////////////////create////////////////////////////
-//
-//	int cnt = 0;
-//
-//	while (window.isOpen())
-//	{
-//		sf::Event event;
-//		while (window.pollEvent(event))
-//		{
-//			if (event.type == sf::Event::Closed)
-//			{
-//				window.close();
-//			}
-//			if (homePageButton) {
-//				if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
-//				{
-//					for (int i = 0; i < productBoxes.size(); i++)
-//					{
-//						if (productBoxes[i].first.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y)) {
-//							cout << productBoxes[i].second.first.getString().toAnsiString() << endl;
-//						}
-//					}
-//					if (isMouseOver(dropdownBox, window))
-//					{
-//						dropdownBox.setFillColor(sf::Color(111, 110, 111));
-//						isDropdownActive = !isDropdownActive;
-//					}
-//					else if (isDropdownActive)
-//					{
-//						for (int i = 0; i < 3; i++) {
-//							{
-//								//option.first.second = false;
-//								if (isMouseOver(options[i].second, window))
-//								{
-//									dropdownText.setString(options[i].first.getString());
-//									indexButton = i + 1;
-//									dropdownBox.setFillColor(sf::Color::White);
-//									isDropdownActive = false;
-//									isArrowDownUp = true;
-//									homePageButton = false;  selectDropDownButton = true; selectAndUpdateButton = true;
-//									break;
-//								}
-//							}
-//						}
-//
-//					}
-//					if (createButton.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y))
-//					{
-//						createFilmsWindow(window, window1, font);
-//					}
-//				}
-//			}
-//			else if (selectAndUpdateButton) {
-//				if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
-//				{
-//					if (button1.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y))
-//					{
-//						homePageButton = true;
-//						selectDropDownButton = false;
-//						dropdownText.setString("Room");
-//						selectAndUpdateButton = false;
-//						indexButton = 0;
-//					}
-//					if (isMouseOver(dropdownBox, window))
-//					{
-//						dropdownBox.setFillColor(sf::Color(111, 110, 111));
-//						isDropdownActive = !isDropdownActive;
-//					}
-//					else if (isDropdownActive)
-//					{
-//						for (int i = 0; i < 3; i++) {
-//							//option.first.second = false;
-//							if (isMouseOver(options[i].second, window))
-//							{
-//								dropdownText.setString(options[i].first.getString());
-//								indexButton = i + 1;
-//								dropdownBox.setFillColor(sf::Color::White);
-//								isDropdownActive = false;
-//								isArrowDownUp = true;
-//								homePageButton = false;  selectDropDownButton = true; selectAndUpdateButton = true;
-//								break;
-//							}
-//						}
-//					}
-//					if (selectAndUpdateButton) {
-//						if (indexButton) {
-//							for (int i = 0; i < 12; i++) {
-//								for (int j = 0; j < 6; j++) {
-//									if (box[indexButton - 1][i][j].first.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y)) {
-//										if (box[indexButton - 1][i][j].second) {
-//											box[indexButton - 1][i][j].second = false;
-//											box[indexButton - 1][i][j].first.setFillColor(sf::Color(238, 100, 87)); //100, 238, 87
-//
-//										}
-//										else {
-//											box[indexButton - 1][i][j].second = true;
-//											box[indexButton - 1][i][j].first.setFillColor(sf::Color(100, 238, 87)); //100, 238, 87
-//										}
-//									}
-//								}
-//							}
-//						}
-//					}
-//					if (createButton.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y))
-//					{
-//						createFilmsWindow(window, window1, font);
-//					}
-//				}
-//			}
-//		}
-//		window.clear(sf::Color::White);
-//
-//		//if (homePageAdmin) {
-//		window.draw(button1);
-//		window.draw(iconSprite1);
-//		//}
-//
-//		if (homePageButton) {
-//			cout << "homepage" << ' ';
-//			sf::Vector2f offset(0, 0);
-//			sf::Vector2f newPos = productBoxes[productBoxes.size() - 1].first.getPosition() + offset;
-//			//cout << "productBoxes[productBoxes.size() - 1].first.getPosition().x = " << productBoxes[productBoxes.size() - 1].first.getPosition().x << endl;
-//			//cout << "productBoxes[productBoxes.size() - 1].first.getSize().x = " << productBoxes[productBoxes.size() - 1].first.getSize().x << endl;
-//			//cout << "productBoxes[productBoxes.size() - 1].second.first.getString().toAnsiString()" << productBoxes[productBoxes.size() - 1].second.first.getString().toAnsiString() << endl;
-//			//cout << "productBoxes[productBoxes.size() - 1].second.first.getLocalBounds().width = " << productBoxes[productBoxes.size() - 1].second.first.getLocalBounds().width << endl;
-//			//cout << "--------------------------------\n";
-//			//cout << "productBoxes[0].first.getPosition().x = " << productBoxes[0].first.getPosition().x << endl;
-//			//cout << "productBoxes[0].first.getSize().x = " << productBoxes[0].first.getSize().x << endl;
-//			//cout << "productBoxes[0].second.first.getString().toAnsiString()" << productBoxes[0].second.first.getString().toAnsiString() << endl;
-//			//cout << "productBoxes[0].second.first.getLocalBounds().width = " << productBoxes[0].second.first.getLocalBounds().width << endl;
-//			//cout << "================================\n";
-//			float textX = productBoxes[productBoxes.size() - 1].first.getPosition().x + productBoxes[productBoxes.size() - 1].first.getSize().x / 2 - productBoxes[0].second.first.getLocalBounds().width / 2;
-//			for (int i = productBoxes.size() - 1; i >= 1; i--)
-//			{
-//				productBoxes[i].first.setPosition(productBoxes[i - 1].first.getPosition());
-//				float text_X = productBoxes[i].first.getPosition().x + productBoxes[i].first.getSize().x / 2 - productBoxes[i].second.first.getLocalBounds().width / 2;
-//				productBoxes[i].second.first.setPosition(text_X, 600);
-//			}
-//
-//			productBoxes[0].first.setPosition(newPos);
-//			productBoxes[0].second.first.setPosition(textX, 600);
-//
-//			//cout << textX << ' ' << productBoxes[0].second.first.getPosition().x << " " << productBoxes[productBoxes.size() - 1].second.first.getPosition().x << endl;
-//			//cout << "productBoxes[productBoxes.size() - 1].first.getPosition().x = " << productBoxes[productBoxes.size() - 1].first.getPosition().x << endl;
-//			//cout << "productBoxes[productBoxes.size() - 1].first.getSize().x = " << productBoxes[productBoxes.size() - 1].first.getSize().x << endl;
-//			//cout << "productBoxes[productBoxes.size() - 1].second.first.getString().toAnsiString()" << productBoxes[productBoxes.size() - 1].second.first.getString().toAnsiString() << endl;
-//			//cout << "productBoxes[productBoxes.size() - 1].second.first.getLocalBounds().width = " << productBoxes[productBoxes.size() - 1].second.first.getLocalBounds().width << endl;
-//			//cout << "-------------------------------\n";
-//			//cout << "productBoxes[0].first.getPosition().x = " << productBoxes[0].first.getPosition().x << endl;
-//			//cout << "productBoxes[0].first.getSize().x = " << productBoxes[0].first.getSize().x << endl;
-//			//cout << "productBoxes[0].second.first.getString().toAnsiString()" << productBoxes[0].second.first.getString().toAnsiString() << endl;
-//			//cout << "productBoxes[0].second.first.getLocalBounds().width = " << productBoxes[0].second.first.getLocalBounds().width << endl;
-//			//cout << "-----------------------------------\n";
-//
-//			for (int i = 0; i < films.size(); i++)
-//			{
-//				sf::Texture texture;
-//				if (!texture.loadFromFile(productBoxes[i].second.second)) {
-//					texture.loadFromFile("404.jfif");
-//				}
-//				sf::Sprite sprite(texture);
-//				sf::Vector2u windowsize = window.getSize();
-//				float scalex = 290.0 / texture.getSize().x;
-//				float scaley = 475.0 / texture.getSize().y;
-//				sprite.setScale(scalex, scaley);
-//				float x = productBoxes[i].first.getPosition().x + 5;
-//				float y = productBoxes[i].first.getPosition().y + 5;
-//				sprite.setPosition(x, y);
-//
-//				window.draw(productBoxes[i].first);
-//				window.draw(sprite);
-//				window.draw(productBoxes[i].second.first);
-//			}
-//
-//			sf::sleep(sf::seconds(0.5));
-//		}
-//
-//		if (selectDropDownButton) {
-//			window.draw(sprite);
-//		}
-//
-//		if (selectAndUpdateButton) {
-//			if (indexButton) {
-//				for (int i = 0; i < 12; i++) {
-//					for (int j = 0; j < 6; j++) {
-//						window.draw(box[indexButton - 1][i][j].first);
-//					}
-//				}
-//			}
-//		}
-//
-//		window.draw(thickLine);
-//
-//		window.draw(dropdownBox);
-//		window.draw(dropdownText);
-//		if (isArrowDownUp) {
-//			arrow.setPoint(0, sf::Vector2f(0, 0));
-//			arrow.setPoint(1, sf::Vector2f(15, 0));
-//			arrow.setPoint(2, sf::Vector2f(7.5, 7.5));
-//			arrow.setFillColor(sf::Color::Black);
-//			window.draw(arrow);
-//		}
-//
-//		if (isDropdownActive)
-//		{
-//			isArrowDownUp = false;
-//			arrow.setPoint(0, sf::Vector2f(7.5, 0));
-//			arrow.setPoint(1, sf::Vector2f(0, 7.5));
-//			arrow.setPoint(2, sf::Vector2f(15, 7.5));
-//			arrow.setFillColor(sf::Color::Black);
-//			window.draw(arrow);
-//
-//			for (const std::pair<sf::Text, sf::RectangleShape> option : options)
-//			{
-//				window.draw(option.second);
-//				window.draw(option.first);
-//			}
-//		}
-//
-//		window.draw(createButton);
-//		window.draw(createButtonText);
-//
-//		window.display();
-//		//sf::sleep(sf::seconds(1.5));
-//	}
-//}
-
-
-//void updateFilmPosition(float& position)
-//{
-//	float speed = 100.0f; // Tốc độ di chuyển của bộ phim
-//
-//	while (true)
-//	{
-//		// Cập nhật vị trí của bộ phim
-//		position += speed * 0.016f; // 0.016f là thời gian giữa các khung hình (khoảng 60 khung hình/giây)
-//
-//		// Kiểm tra nếu vị trí vượt qua một giới hạn, đặt lại vị trí về 0
-//		if (position > 1195)
-//			position = 0;
-//
-//		// Tạm dừng luồng trong 16ms (tương đương với 60 khung hình/giây)
-//		std::this_thread::sleep_for(std::chrono::milliseconds(16));
-//	}
-//}
-
-//void updateFilmTextPosition(float& position)
-//{
-//	float speed = 100.0f; // Tốc độ di chuyển của bộ phim
-//
-//	while (true)
-//	{
-//		// Cập nhật vị trí của bộ phim
-//		position += speed * 0.016f; // 0.016f là thời gian giữa các khung hình (khoảng 60 khung hình/giây)
-//
-//		// Kiểm tra nếu vị trí vượt qua một giới hạn, đặt lại vị trí về 0
-//		if (position > 800)
-//			position = 0;
-//
-//		// Tạm dừng luồng trong 16ms (tương đương với 60 khung hình/giây)
-//		std::this_thread::sleep_for(std::chrono::milliseconds(16));
-//	}
-//}
-
-//int main()
-//{
-//	sf::RenderWindow window(sf::VideoMode(800, 600), "SFML Window");
-//
-//	sf::Font font;
-//	if (!font.loadFromFile("SVN-Times New Roman Bold.ttf"))
-//	{
-//		std::cout << "Failed to load font!" << std::endl;
-//		return -1;
-//	}
-//
-//	// Khởi tạo các bộ phim
-//	sf::RectangleShape film1(sf::Vector2f(200, 150));
-//	film1.setFillColor(sf::Color::Red);
-//
-//	sf::RectangleShape film2(sf::Vector2f(200, 150));
-//	film2.setFillColor(sf::Color::Green);
-//
-//	sf::RectangleShape film3(sf::Vector2f(200, 150));
-//	film3.setFillColor(sf::Color::Blue);
-//
-//	sf::Text productText1("toi la tao", font, 24);
-//	productText1.setFillColor(sf::Color::White);
-//
-//	sf::Text productText2("toi la mayh", font, 24);
-//	productText2.setFillColor(sf::Color::White);
-//
-//	sf::Text productText3("tao la tao", font, 24);
-//	productText3.setFillColor(sf::Color::White);
-//
-//	sf::Texture texture;
-//	if (!texture.loadFromFile("marvel.jpg")) {
-//		return EXIT_FAILURE;
-//	}
-//	sf::Sprite sprite1(texture);
-//	float scalex = 200.0 / texture.getSize().x;
-//	float scaley = 130.0 / texture.getSize().y;
-//	sprite1.setScale(scalex, scaley);
-//
-//	if (!texture.loadFromFile("404.jfif")) {
-//		return EXIT_FAILURE;
-//	}
-//	sf::Sprite sprite2(texture);
-//	 scalex = 200.0 / texture.getSize().x;
-//	 scaley = 130.0 / texture.getSize().y;
-//	sprite2.setScale(scalex, scaley);
-//
-//	if (!texture.loadFromFile("wolfoo.jpg")) {
-//		return EXIT_FAILURE;
-//	}
-//	sf::Sprite sprite3(texture);
-//	 scalex = 200.0 / texture.getSize().x;
-//	 scaley = 130.0 / texture.getSize().y;
-//	sprite3.setScale(scalex, scaley);
-//
-//	// Khởi tạo các biến cho vị trí của các bộ phim
-//	float position1 = 0.0f;
-//	float position2 = 200.0f;
-//	float position3 = 400.0f;
-//
-//	float filmTextPosition[3] = { 0.0f, 200.0f, 400.0f };
-//
-//	// Khởi tạo các luồng cho từng bộ phim
-//	std::thread thread1(updateFilmPosition, std::ref(position1));
-//	std::thread thread2(updateFilmPosition, std::ref(position2));
-//	std::thread thread3(updateFilmPosition, std::ref(position3));
-//
-//	std::thread threadText1(updateFilmTextPosition, std::ref(filmTextPosition[0]));
-//	std::thread threadText2(updateFilmTextPosition, std::ref(filmTextPosition[1]));
-//	std::thread threadText3(updateFilmTextPosition, std::ref(filmTextPosition[2]));
-//
-//	while (window.isOpen())
-//	{
-//		sf::Event event;
-//		while (window.pollEvent(event))
-//		{
-//			if (event.type == sf::Event::Closed)
-//			{
-//				window.close();
-//
-//				// Tách các luồng ra khỏi luồng chính
-//				thread1.detach();
-//				thread2.detach();
-//				thread3.detach();
-//
-//				threadText1.detach();
-//				threadText2.detach();
-//				threadText3.detach();
-//			}
-//		}
-//
-//		window.clear();
-//
-//		// Vẽ các bộ phim
-//		film1.setPosition(position1, 0);
-//		window.draw(film1);
-//		sprite1.setPosition(position1, 0);
-//		window.draw(sprite1);
-//
-//		film2.setPosition(position2, 0);
-//		window.draw(film2);
-//		sprite2.setPosition(position2, 0);
-//		window.draw(sprite2);
-//
-//		film3.setPosition(position3, 0);
-//		window.draw(film3);
-//		sprite3.setPosition(position3, 0);
-//		window.draw(sprite3);
-//
-//		productText1.setPosition(filmTextPosition[0], 0);
-//		window.draw(productText1);
-//
-//		productText2.setPosition(filmTextPosition[1], 0);
-//		window.draw(productText2);
-//
-//		productText3.setPosition(filmTextPosition[2], 0);
-//		window.draw(productText3);
-//
-//		window.display();
-//	}
-//
-//	return 0;
-//}
-
 struct film {
 	string title;
 	string desc;
@@ -2268,6 +1303,347 @@ struct film {
 
 std::vector<film> films;
 std::vector<pair<sf::RectangleShape, pair<sf::Text, string>>> productBoxes;
+//std::pair<sf::RectangleShape, bool> box[3][12][6];
+
+int createFilmsWindow(sf::RenderWindow& window, sf::RenderWindow& window1, sf::Font& font)
+{
+	window.setVisible(false);
+	window1.setVisible(true);
+	sf::Texture texture;
+	if (!texture.loadFromFile("fotor-ai-20231112163130.jpg"))
+		return EXIT_FAILURE;
+
+	// tạo sprite sử dụng texture đã tải
+	sf::Sprite sprite(texture);
+	sf::Vector2u windowsize = window1.getSize();
+	float scalex = 1050.0 / texture.getSize().x;
+	float scaley = 1000.0 / texture.getSize().y;
+	sprite.setScale(scalex, scaley);
+
+	//sf::Font font;
+	//if (!font.loadFromFile("SVN-Times New Roman Bold.ttf"))
+	//{
+	//	std::cout << "Failed to load font!" << std::endl;
+	//	return -1;
+	//}
+
+	sf::RectangleShape buttonTitle(sf::Vector2f(600, 45));
+	buttonTitle.setFillColor(sf::Color(86, 0, 172, 70));
+	buttonTitle.setPosition(200, 70);
+
+	sf::RectangleShape lineTitle(sf::Vector2f(5, 45));
+	lineTitle.setFillColor(sf::Color(18, 104, 10));
+	lineTitle.setPosition(200, 70);
+
+	sf::Text inputTextTitle;
+	inputTextTitle.setFont(font);
+	inputTextTitle.setCharacterSize(27);
+	inputTextTitle.setFillColor(sf::Color(255, 255, 255));
+	inputTextTitle.setPosition(210, 73);
+
+	sf::RectangleShape buttonDesc(sf::Vector2f(600, 500));
+	buttonDesc.setFillColor(sf::Color(86, 0, 172, 70));
+	buttonDesc.setPosition(200, 200);
+
+	sf::RectangleShape lineDesc(sf::Vector2f(5, 500));
+	lineDesc.setFillColor(sf::Color(18, 104, 10));
+	lineDesc.setPosition(200, 200);
+
+	sf::Text inputTextDesc;
+	inputTextDesc.setFont(font);
+	inputTextDesc.setCharacterSize(27);
+	inputTextDesc.setFillColor(sf::Color(255, 255, 255));
+	inputTextDesc.setPosition(210, 196);
+
+	sf::RectangleShape buttonImage(sf::Vector2f(600, 45));
+	buttonImage.setFillColor(sf::Color(86, 0, 172, 70));
+	buttonImage.setPosition(200, 785);
+
+	sf::RectangleShape lineImage(sf::Vector2f(5, 45));
+	lineImage.setFillColor(sf::Color(18, 104, 10));
+	lineImage.setPosition(200, 785);
+
+	sf::Text inputTextImage;
+	inputTextImage.setFont(font);
+	inputTextImage.setCharacterSize(27);
+	inputTextImage.setFillColor(sf::Color(255, 255, 255));
+	inputTextImage.setPosition(210, 788);
+
+	sf::Texture createTexture;
+	if (!createTexture.loadFromFile("2023-11-13_171327.png"))
+		return EXIT_FAILURE;
+
+	sf::Sprite createSprite(createTexture);
+	float scalex1 = 300.0 / createTexture.getSize().x;
+	float scaley1 = 75.0 / createTexture.getSize().y;
+	createSprite.setScale(scalex1, scaley1);
+	createSprite.setPosition(350, 870);
+
+	sf::Font fontCreate;
+	if (!fontCreate.loadFromFile("SourceSansPro-Bold.ttf"))
+	{
+		std::cout << "Failed to load font!" << std::endl;
+		return -1;
+	}
+
+	sf::Text textCreate;
+	textCreate.setFont(fontCreate);
+	textCreate.setCharacterSize(37);
+	textCreate.setFillColor(sf::Color(255, 255, 255));
+	textCreate.setPosition(432, 883);
+	textCreate.setString("CREATE");
+
+	string textDesc = "";
+
+	bool isInputTitleActive = false;
+	bool isInputDescActive = false;
+	bool isInputImageActive = false;
+
+	bool checkwindow1 = false;
+
+	while (window1.isOpen())
+	{
+		sf::Event event;
+		while (window1.pollEvent(event))
+		{
+			//if (event.type == sf::Event::Closed)
+			//{
+			//	window1.close();
+			//}
+			if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
+			{
+				if (isMouseOver(buttonTitle, event))
+				{
+					lineTitle.setFillColor(sf::Color(128, 241, 118));
+					lineDesc.setFillColor(sf::Color(18, 104, 10));
+					lineImage.setFillColor(sf::Color(18, 104, 10));
+					isInputTitleActive = true;
+					isInputDescActive = false;
+					isInputImageActive = false;
+				}
+				else if (isMouseOver(buttonDesc, event))
+				{
+					lineDesc.setFillColor(sf::Color(128, 241, 118));
+					lineTitle.setFillColor(sf::Color(18, 104, 10));
+					lineImage.setFillColor(sf::Color(18, 104, 10));
+					isInputDescActive = true;
+					isInputTitleActive = false;
+					isInputImageActive = false;
+				}
+				else if (isMouseOver(buttonImage, event)) {
+					lineImage.setFillColor(sf::Color(128, 241, 118));
+					lineDesc.setFillColor(sf::Color(18, 104, 10));
+					lineTitle.setFillColor(sf::Color(18, 104, 10));
+					isInputDescActive = false;
+					isInputTitleActive = false;
+					isInputImageActive = true;
+				}
+				else {
+					lineDesc.setFillColor(sf::Color(18, 104, 10));
+					lineTitle.setFillColor(sf::Color(18, 104, 10));
+					lineImage.setFillColor(sf::Color(18, 104, 10));
+					isInputDescActive = false;
+					isInputTitleActive = false;
+					isInputImageActive = false;
+				}
+
+				if (createSprite.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y)) {
+					string currentTextTitle = inputTextTitle.getString();
+					string currentTextDesc = textDesc;
+					string currentTextImage = inputTextImage.getString();
+					sf::Texture texTureTest;
+					if (currentTextTitle == "") {
+						lineTitle.setFillColor(sf::Color(126, 0, 33));
+					}
+					if (currentTextDesc == "") {
+						lineDesc.setFillColor(sf::Color(126, 0, 33));
+					}
+					if (currentTextImage == "" || !texTureTest.loadFromFile(currentTextImage)) {
+						lineImage.setFillColor(sf::Color(126, 0, 33));
+					}
+					if (currentTextTitle != "" && currentTextDesc != "" && currentTextImage != "" && texTureTest.loadFromFile(currentTextImage)) {
+						//for (int i = 0; i < films.size(); i++)
+						//{
+						//	productBoxes[i].first.setPosition(20 + i * 350, 125);
+
+						//	productBoxes[i].second.first.setString(films[i].title);
+						//	float textX = productBoxes[i].first.getPosition().x + productBoxes[i].first.getSize().x / 2 - productBoxes[i].second.first.getLocalBounds().width / 2;
+						//	productBoxes[i].second.first.setPosition(textX, 600);
+						//	productBoxes[i].second.second = films[i].image;
+						//}
+						films.push_back({ currentTextTitle, currentTextDesc, currentTextImage });
+						//cout << "phim size = " << films.size() << ' ';
+						//cout << "productBoxes size = " << productBoxes.size() << ' ';
+						sf::RectangleShape productBox(sf::Vector2f(300, 500));
+						productBox.setFillColor(sf::Color::White);
+						productBox.setOutlineThickness(2);
+						productBox.setOutlineColor(sf::Color::Black);
+						productBox.setPosition(20 + (films.size() - 1) * 350, 125);
+
+						sf::Text productText(currentTextTitle, font, 24);
+						productText.setFillColor(sf::Color::Black);
+						float textX = productBox.getPosition().x + productBox.getSize().x / 2 - productText.getLocalBounds().width / 2;
+						//cout << "productBox.getPosition().x" << productBox.getPosition().x << endl;
+						//cout << "productBox.getSize().x" << productBox.getSize().x << endl;
+						//cout << "productText.getLocalBounds().width" << productText.getLocalBounds().width << endl;
+						productText.setPosition(textX, 600);
+
+						productBoxes.push_back({ productBox , {productText, currentTextImage} });
+						//cout << "productBoxes size = " << productBoxes.size() << endl;
+						window.setVisible(true);
+						window1.setVisible(false);
+						return 0;
+						//checkwindow1 = true; break;
+						//sf::Vector2f offset(0, 0);
+						//sf::Vector2f newPos = productBoxes[productBoxes.size() - 1].first.getPosition() + offset;
+						//float textX = productBoxes[productBoxes.size() - 1].first.getPosition().x + productBoxes[productBoxes.size() - 1].first.getSize().x / 2 - productBoxes[productBoxes.size() - 1].second.first.getLocalBounds().width / 2;
+
+						//for (int i = productBoxes.size() - 1; i >= 1; i--)
+						//{
+						//	productBoxes[i].first.setPosition(productBoxes[i - 1].first.getPosition());
+						//	float textX = productBoxes[i].first.getPosition().x + productBoxes[i].first.getSize().x / 2 - productBoxes[i].second.first.getLocalBounds().width / 2;
+						//	productBoxes[i].second.first.setPosition(textX, 600);
+						//}
+
+						//productBoxes[0].first.setPosition(newPos);
+						//productBoxes[0].second.first.setPosition(textX, 600);
+					}
+				}
+			}
+			else if (event.type == sf::Event::TextEntered)
+			{
+				if (isInputTitleActive)
+				{
+					if (event.text.unicode < 128)
+					{
+						if (event.text.unicode == '\b')
+						{
+							if (!inputTextTitle.getString().isEmpty()) {
+								std::string currentText = inputTextTitle.getString();
+								currentText.pop_back();
+								inputTextTitle.setString(currentText);
+							}
+						}
+						else if (event.text.unicode == '\r' || event.text.unicode == '\n')
+						{
+							inputTextTitle.setString(inputTextTitle.getString() + "\n");
+						}
+						else
+						{
+							inputTextTitle.setString(inputTextTitle.getString() + static_cast<char>(event.text.unicode));
+						}
+					}
+				}
+				else if (isInputDescActive)
+				{
+					if (event.text.unicode < 128)
+					{
+						if (event.text.unicode == '\b')
+						{
+							if (!inputTextDesc.getString().isEmpty()) {
+								std::string currentText = inputTextDesc.getString();
+								currentText.pop_back();
+								textDesc.pop_back();
+								inputTextDesc.setString(currentText);
+							}
+						}
+						else if (event.text.unicode == '\r' || event.text.unicode == '\n')
+						{
+							inputTextDesc.setString(inputTextDesc.getString() + "\n");
+							textDesc += "\n";
+						}
+						else
+						{
+							string lastString;
+							stringstream ss(inputTextDesc.getString());
+							while (getline(ss, lastString, '\n')) {
+							}
+
+							sf::Text tempText;
+							tempText.setFont(font);
+							tempText.setCharacterSize(27);
+							tempText.setString(lastString);
+							float lineDescWidth = tempText.getLocalBounds().width;
+							float buttonDescWidth = buttonDesc.getLocalBounds().width;
+							if (lineDescWidth > buttonDescWidth - 20)
+							{
+								// Thêm ký tự xuống dòng
+								inputTextDesc.setString(inputTextDesc.getString() + "\n");
+							}
+							inputTextDesc.setString(inputTextDesc.getString() + static_cast<char>(event.text.unicode));
+							textDesc += static_cast<char>(event.text.unicode);
+						}
+
+					}
+				}
+				else if (isInputImageActive)
+				{
+					if (event.text.unicode < 128)
+					{
+						if (event.text.unicode == '\b')
+						{
+							if (!inputTextImage.getString().isEmpty()) {
+								std::string currentText = inputTextImage.getString();
+								currentText.pop_back();
+								inputTextImage.setString(currentText);
+							}
+						}
+						else if (event.text.unicode == '\r' || event.text.unicode == '\n')
+						{
+							inputTextImage.setString(inputTextImage.getString() + "\n");
+						}
+						else
+						{
+							inputTextImage.setString(inputTextImage.getString() + static_cast<char>(event.text.unicode));
+						}
+					}
+				}
+			}
+			if (event.type == sf::Event::MouseMoved)
+			{
+				sf::Vector2i mousePosition = sf::Mouse::getPosition(window1);
+				if (createSprite.getGlobalBounds().contains(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y)))
+				{
+					if (!createTexture.loadFromFile("2023-11-13_173035.png"))
+						return EXIT_FAILURE;
+					float scalex1 = 300.0 / createTexture.getSize().x;
+					float scaley1 = 75.0 / createTexture.getSize().y;
+					createSprite.setScale(scalex1, scaley1);
+				}
+				else
+				{
+					if (!createTexture.loadFromFile("2023-11-13_171327.png"))
+						return EXIT_FAILURE;
+					float scalex1 = 300.0 / createTexture.getSize().x;
+					float scaley1 = 75.0 / createTexture.getSize().y;
+					createSprite.setScale(scalex1, scaley1);
+				}
+			}
+		}
+
+		//if (checkwindow1) break;
+
+		window1.clear();
+		window1.draw(sprite);
+
+		window1.draw(buttonTitle);
+		window1.draw(inputTextTitle);
+		window1.draw(lineTitle);
+
+		window1.draw(buttonDesc);
+		window1.draw(inputTextDesc);
+		window1.draw(lineDesc);
+
+		window1.draw(buttonImage);
+		window1.draw(inputTextImage);
+		window1.draw(lineImage);
+
+		window1.draw(createSprite);
+		window1.draw(textCreate);
+
+		window1.display();
+	}
+}
 
 void updateFilmPosition(float& position, int& first, int& last)
 {
@@ -2293,18 +1669,28 @@ void updateFilmPosition(float& position, int& first, int& last)
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(1195, 672), "Drawing");
+	sf::RenderWindow window(sf::VideoMode(1195, 672), "Drawing Line");
 
+	sf::RenderWindow window1(sf::VideoMode(1050, 1000), "Create Window", sf::Style::None);
+	window1.setVisible(false);
+
+	//////////////////////Font///////////////////////////
 	sf::Font font;
 	if (!font.loadFromFile("SVN-Times New Roman Bold.ttf"))
 	{
 		std::cout << "Failed to load font!" << std::endl;
 		return -1;
 	}
+	//////////////////////Font///////////////////////////
+
 
 	sf::RectangleShape thickLine(sf::Vector2f(1195, 3));
 	thickLine.setFillColor(sf::Color::Red);
 	thickLine.setPosition(0, 100);
+
+	//////////////////////HomePage//////////////////
+
+	//std::vector<pair<string, string>> films;
 
 	string title = "My nhan dao chich";
 	string desc = "";
@@ -2351,33 +1737,187 @@ int main()
 	linkImage = "haikedoitra.png";
 	films.push_back({ title, desc, linkImage });
 
+	//std::vector<pair<sf::RectangleShape, pair<sf::Text, string>>> productBoxes;
+
+	//for (int i = 0; i < films.size(); i++)
+	//{
+	//	sf::RectangleShape productBox(sf::Vector2f(300, 500));
+	//	productBox.setFillColor(sf::Color::White);
+	//	productBox.setOutlineThickness(2);
+	//	productBox.setOutlineColor(sf::Color::Black);
+	//	productBox.setPosition(20 + i * 350, 125);
+
+	//	sf::Text productText(films[i].title, font, 24);
+	//	productText.setFillColor(sf::Color::Black);
+	//	float textX = productBox.getPosition().x + productBox.getSize().x / 2 - productText.getLocalBounds().width / 2;
+	//	//productText.setPosition(30 + i * 350, 135);
+	//	productText.setPosition(textX, 600);
+
+	//	productBoxes.push_back({ productBox , {productText, films[i].image} });
+	//}
+
 	for (int i = 0; i < films.size(); i++)
 	{
 		sf::RectangleShape productBox(sf::Vector2f(300, 500));
 		productBox.setFillColor(sf::Color::White);
 		productBox.setOutlineThickness(2);
 		productBox.setOutlineColor(sf::Color::Black);
-		//productBox.setPosition(20 + i * 350, 125);
-		int pos = 20 + i * 350;
-		//position.push_back(pos);
 
 		sf::Text productText(films[i].title, font, 24);
 		productText.setFillColor(sf::Color::Black);
-		//float textX = productBox.getPosition().x + productBox.getSize().x / 2 - productText.getLocalBounds().width / 2;
-		//productText.setPosition(textX, 600);
 
 		productBoxes.push_back({ productBox , {productText, films[i].image} });
-
-		//cout << films[i].image << endl;
-
-		//std::thread tempThread(updateFilmPosition, std::ref(position[i]));
-		//cout << "thread" << endl;
-		//threads.push_back(std::move(tempThread));
 	}
+
+	//////////////////////HomePage//////////////////
+
+
+	//////////////////////Order//////////////////
+	sf::Texture texture;
+	if (!texture.loadFromFile("order.jpg"))
+		return EXIT_FAILURE;
+
+	// tạo sprite sử dụng texture đã tải
+	sf::Sprite sprite(texture);
+	sf::Vector2u windowsize = window.getSize();
+	float scalex = 1195.0 / texture.getSize().x;
+	float scaley = 572.0 / texture.getSize().y;
+	sprite.setScale(scalex, scaley);
+	sprite.setPosition(0, 100);
+
+	std::pair<sf::RectangleShape, bool> box[3][12][6];
+	//vector< std::pair<sf::RectangleShape, bool>> box[12][6];
+
+	double x_0 = 157, y_0 = 277;
+	double delta_x = 74.5, delta_y = 64;
+
+	for (int k = 0; k < 3; k++) {
+		for (int i = 0; i < 12; i++) {
+			for (int j = 0; j < 6; j++) {
+				double x = x_0 + i * delta_x, y = y_0 + j * delta_y;
+				box[k][i][j].second = false;
+				box[k][i][j].first.setSize(sf::Vector2f(59, 52));
+				box[k][i][j].first.setFillColor(sf::Color(238, 100, 87)); //100, 238, 87
+				box[k][i][j].first.setOutlineThickness(2);
+				box[k][i][j].first.setOutlineColor(sf::Color::Black);
+				box[k][i][j].first.setPosition(x, y);
+			}
+		}
+	}
+
+
+	//////////////////////Order//////////////////
+
+	///////////////////////////////////
+
+	//bool selectButton[3]; memset(selectButton, false, 3);
+	bool homePageButton = true;
+	bool selectDropDownButton = false;
+	bool selectAndUpdateButton = false; int indexButton = 0;
+	bool createButtonActive = false;
+
+	sf::Text homePageText("HomePage", font, 24);
+	homePageText.setFillColor(sf::Color::Black);
+	homePageText.setPosition(500, 500);
+
+	sf::CircleShape button1(25);
+	button1.setFillColor(sf::Color(139, 216, 189)); // Màu xám
+	button1.setOutlineThickness(5);
+	button1.setOutlineColor(sf::Color(150, 150, 150)); // Màu xám nhạt
+	button1.setPosition(100, 25);
+
+	sf::Texture texture1;
+	if (!texture1.loadFromFile("icon-home-removebg-preview.png"))
+	{
+		std::cout << "Failed to load icon." << std::endl;
+		return -1;
+	}
+	sf::Sprite iconSprite1(texture1);
+	iconSprite1.setScale(0.1f, 0.1f);
+	iconSprite1.setPosition(94, 28);
+	///////////////////////////////////
+
+	//////////////////dropdown/////////////////////////
+
+	sf::RectangleShape dropdownBox(sf::Vector2f(125, 50));
+	dropdownBox.setFillColor(sf::Color::White);
+	dropdownBox.setOutlineThickness(2);
+	dropdownBox.setOutlineColor(sf::Color::Black);
+	dropdownBox.setPosition(300, 25);
+
+	sf::Text dropdownText("Room", font, 24);
+	dropdownText.setFillColor(sf::Color::Black);
+	dropdownText.setPosition(320, 35);
+
+	std::vector< std::pair<sf::Text, sf::RectangleShape> > options;
+	sf::RectangleShape option1Box(sf::Vector2f(125, 50));
+	option1Box.setFillColor(sf::Color::White);
+	option1Box.setOutlineThickness(2);
+	option1Box.setOutlineColor(sf::Color::Black);
+	option1Box.setPosition(300, 75);
+
+	sf::Text option1("Room 1", font, 24);
+	option1.setPosition(323, 85);
+	option1.setFillColor(sf::Color::Black);
+	options.push_back({ {option1} , option1Box });
+
+	sf::RectangleShape option2Box(sf::Vector2f(125, 50));
+	option2Box.setFillColor(sf::Color::White);
+	option2Box.setOutlineThickness(2);
+	option2Box.setOutlineColor(sf::Color::Black);
+	option2Box.setPosition(300, 125);
+
+	sf::Text option2("Room 2", font, 24);
+	option2.setPosition(323, 135);
+	option2.setFillColor(sf::Color::Black);
+	options.push_back({ {option2} , option2Box });
+
+	sf::RectangleShape option3Box(sf::Vector2f(125, 50));
+	option3Box.setFillColor(sf::Color::White);
+	option3Box.setOutlineThickness(2);
+	option3Box.setOutlineColor(sf::Color::Black);
+	option3Box.setPosition(300, 175);
+
+	sf::Text option3("Room 3", font, 24);
+	option3.setPosition(323, 185);
+	option3.setFillColor(sf::Color::Black);
+	options.push_back({ {option3} , option3Box });
+
+	bool isDropdownActive = false;
+
+	sf::ConvexShape arrow(3);
+	arrow.setPoint(0, sf::Vector2f(0, 0));
+	arrow.setPoint(1, sf::Vector2f(15, 0));
+	arrow.setPoint(2, sf::Vector2f(7.5, 7.5));
+	arrow.setFillColor(sf::Color::Black);
+	arrow.setPosition(405, 47);
+	bool isArrowDownUp = true;
+
+	//////////////////dropdown/////////////////////////
+
+	/////////////////create////////////////////////////
+
+	sf::RectangleShape createButton(sf::Vector2f(125, 50));
+	createButton.setFillColor(sf::Color::White);
+	createButton.setOutlineThickness(2);
+	createButton.setOutlineColor(sf::Color::Black);
+	createButton.setPosition(600, 25);
+
+	sf::Text createButtonText("Create", font, 24);
+	createButtonText.setFillColor(sf::Color::Black);
+	createButtonText.setPosition(630, 35);
+
+	/////////////////create////////////////////////////
+
+	//std::thread thread;
+	//float position = 50.0f;
+	//int first = 0, last = films.size() - 1;
 
 	float position = 50.0f;
 	int first = 0, last = films.size() - 1;
 	std::thread thread(updateFilmPosition, std::ref(position), std::ref(first), std::ref(last));
+
+	int cnt = 0;
 
 	while (window.isOpen())
 	{
@@ -2387,87 +1927,284 @@ int main()
 			if (event.type == sf::Event::Closed)
 			{
 				window.close();
-
 				thread.detach();
 			}
-			if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
-			{
-				for (int i = 0; i < productBoxes.size(); i++)
+			if (homePageButton) {
+				//position = 50.0f;
+				//first = 0, last = films.size() - 1;
+				//std::thread tempThread(updateFilmPosition, std::ref(position), std::ref(first), std::ref(last));
+				//thread.swap(tempThread);
+
+				if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
 				{
-					if (productBoxes[i].first.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y)) {
-						cout << films[i].title << endl;
-						cout << films[i].desc << endl;
-						cout << films[i].image << endl;
+					for (int i = 0; i < productBoxes.size(); i++)
+					{
+						if (productBoxes[i].first.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y)) {
+							cout << productBoxes[i].second.first.getString().toAnsiString() << endl;
+						}
+					}
+					if (isMouseOver(dropdownBox, window))
+					{
+						dropdownBox.setFillColor(sf::Color(111, 110, 111));
+						isDropdownActive = !isDropdownActive;
+					}
+					else if (isDropdownActive)
+					{
+						for (int i = 0; i < 3; i++) {
+							{
+								//option.first.second = false;
+								if (isMouseOver(options[i].second, window))
+								{
+									dropdownText.setString(options[i].first.getString());
+									indexButton = i + 1;
+									dropdownBox.setFillColor(sf::Color::White);
+									isDropdownActive = false;
+									isArrowDownUp = true;
+									homePageButton = false;  selectDropDownButton = true; selectAndUpdateButton = true;
+									break;
+								}
+							}
+						}
+
+					}
+					if (createButton.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y))
+					{
+						createFilmsWindow(window, window1, font);
+					}
+				}
+			}
+			else if (selectAndUpdateButton) {
+				//thread.detach();
+
+				if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
+				{
+					if (button1.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y))
+					{
+						homePageButton = true;
+						selectDropDownButton = false;
+						dropdownText.setString("Room");
+						selectAndUpdateButton = false;
+						indexButton = 0;
+					}
+					if (isMouseOver(dropdownBox, window))
+					{
+						dropdownBox.setFillColor(sf::Color(111, 110, 111));
+						isDropdownActive = !isDropdownActive;
+					}
+					else if (isDropdownActive)
+					{
+						for (int i = 0; i < 3; i++) {
+							//option.first.second = false;
+							if (isMouseOver(options[i].second, window))
+							{
+								dropdownText.setString(options[i].first.getString());
+								indexButton = i + 1;
+								dropdownBox.setFillColor(sf::Color::White);
+								isDropdownActive = false;
+								isArrowDownUp = true;
+								homePageButton = false;  selectDropDownButton = true; selectAndUpdateButton = true;
+								break;
+							}
+						}
+					}
+					if (selectAndUpdateButton) {
+						if (indexButton) {
+							for (int i = 0; i < 12; i++) {
+								for (int j = 0; j < 6; j++) {
+									if (box[indexButton - 1][i][j].first.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y)) {
+										if (box[indexButton - 1][i][j].second) {
+											box[indexButton - 1][i][j].second = false;
+											box[indexButton - 1][i][j].first.setFillColor(sf::Color(238, 100, 87)); //100, 238, 87
+
+										}
+										else {
+											box[indexButton - 1][i][j].second = true;
+											box[indexButton - 1][i][j].first.setFillColor(sf::Color(100, 238, 87)); //100, 238, 87
+										}
+									}
+								}
+							}
+						}
+					}
+					if (createButton.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y))
+					{
+						createFilmsWindow(window, window1, font);
+					}
+				}
+			}
+		}
+		window.clear(sf::Color::White);
+
+		//if (homePageAdmin) {
+		window.draw(button1);
+		window.draw(iconSprite1);
+		//}
+
+		if (homePageButton) {
+			productBoxes[first].first.setPosition(position, 125);
+			float text_X = position + productBoxes[first].first.getSize().x / 2 - productBoxes[first].second.first.getLocalBounds().width / 2;
+			productBoxes[first].second.first.setPosition(text_X, 600);
+			sf::Texture texture;
+			if (!texture.loadFromFile(productBoxes[first].second.second)) {
+				texture.loadFromFile("404.jfif");
+			}
+			sf::Sprite sprite(texture);
+			float scalex = 290.0 / texture.getSize().x;
+			float scaley = 475.0 / texture.getSize().y;
+			sprite.setScale(scalex, scaley);
+			float x = position + 5;
+			float y = productBoxes[first].first.getPosition().y + 5;
+			sprite.setPosition(x, y);
+			window.draw(productBoxes[first].first);
+			window.draw(sprite);
+			window.draw(productBoxes[first].second.first);
+
+			int cnt = 0; // co the error
+			for (int i = first + 1; i < films.size(); i++) {
+				float pos = position + ++cnt * 350;
+				productBoxes[i].first.setPosition(pos, 125);
+				float text_X = pos + productBoxes[i].first.getSize().x / 2 - productBoxes[i].second.first.getLocalBounds().width / 2;
+				productBoxes[i].second.first.setPosition(text_X, 600);
+				sf::Texture texture;
+				if (!texture.loadFromFile(productBoxes[i].second.second)) {
+					texture.loadFromFile("404.jfif");
+				}
+				sf::Sprite sprite(texture);
+				float scalex = 290.0 / texture.getSize().x;
+				float scaley = 475.0 / texture.getSize().y;
+				sprite.setScale(scalex, scaley);
+				float x = pos + 5;
+				float y = productBoxes[i].first.getPosition().y + 5;
+				sprite.setPosition(x, y);
+				window.draw(productBoxes[i].first);
+				window.draw(sprite);
+				window.draw(productBoxes[i].second.first);
+			}
+
+			for (int i = 0; i < first; i++) {
+				float pos = position + ++cnt * 350;
+				productBoxes[i].first.setPosition(pos, 125);
+				float text_X = pos + productBoxes[i].first.getSize().x / 2 - productBoxes[i].second.first.getLocalBounds().width / 2;
+				productBoxes[i].second.first.setPosition(text_X, 600);
+				sf::Texture texture;
+				if (!texture.loadFromFile(productBoxes[i].second.second)) {
+					texture.loadFromFile("404.jfif");
+				}
+				sf::Sprite sprite(texture);
+				float scalex = 290.0 / texture.getSize().x;
+				float scaley = 475.0 / texture.getSize().y;
+				sprite.setScale(scalex, scaley);
+				float x = pos + 5;
+				float y = productBoxes[i].first.getPosition().y + 5;
+				sprite.setPosition(x, y);
+				window.draw(productBoxes[i].first);
+				window.draw(sprite);
+				window.draw(productBoxes[i].second.first);
+			}
+			//sf::Vector2f offset(0, 0);
+			//sf::Vector2f newPos = productBoxes[productBoxes.size() - 1].first.getPosition() + offset;
+			////cout << "productBoxes[productBoxes.size() - 1].first.getPosition().x = " << productBoxes[productBoxes.size() - 1].first.getPosition().x << endl;
+			////cout << "productBoxes[productBoxes.size() - 1].first.getSize().x = " << productBoxes[productBoxes.size() - 1].first.getSize().x << endl;
+			////cout << "productBoxes[productBoxes.size() - 1].second.first.getString().toAnsiString()" << productBoxes[productBoxes.size() - 1].second.first.getString().toAnsiString() << endl;
+			////cout << "productBoxes[productBoxes.size() - 1].second.first.getLocalBounds().width = " << productBoxes[productBoxes.size() - 1].second.first.getLocalBounds().width << endl;
+			////cout << "--------------------------------\n";
+			////cout << "productBoxes[0].first.getPosition().x = " << productBoxes[0].first.getPosition().x << endl;
+			////cout << "productBoxes[0].first.getSize().x = " << productBoxes[0].first.getSize().x << endl;
+			////cout << "productBoxes[0].second.first.getString().toAnsiString()" << productBoxes[0].second.first.getString().toAnsiString() << endl;
+			////cout << "productBoxes[0].second.first.getLocalBounds().width = " << productBoxes[0].second.first.getLocalBounds().width << endl;
+			////cout << "================================\n";
+			//float textX = productBoxes[productBoxes.size() - 1].first.getPosition().x + productBoxes[productBoxes.size() - 1].first.getSize().x / 2 - productBoxes[0].second.first.getLocalBounds().width / 2;
+			//for (int i = productBoxes.size() - 1; i >= 1; i--)
+			//{
+			//	productBoxes[i].first.setPosition(productBoxes[i - 1].first.getPosition());
+			//	float text_X = productBoxes[i].first.getPosition().x + productBoxes[i].first.getSize().x / 2 - productBoxes[i].second.first.getLocalBounds().width / 2;
+			//	productBoxes[i].second.first.setPosition(text_X, 600);
+			//}
+
+			//productBoxes[0].first.setPosition(newPos);
+			//productBoxes[0].second.first.setPosition(textX, 600);
+
+			////cout << textX << ' ' << productBoxes[0].second.first.getPosition().x << " " << productBoxes[productBoxes.size() - 1].second.first.getPosition().x << endl;
+			////cout << "productBoxes[productBoxes.size() - 1].first.getPosition().x = " << productBoxes[productBoxes.size() - 1].first.getPosition().x << endl;
+			////cout << "productBoxes[productBoxes.size() - 1].first.getSize().x = " << productBoxes[productBoxes.size() - 1].first.getSize().x << endl;
+			////cout << "productBoxes[productBoxes.size() - 1].second.first.getString().toAnsiString()" << productBoxes[productBoxes.size() - 1].second.first.getString().toAnsiString() << endl;
+			////cout << "productBoxes[productBoxes.size() - 1].second.first.getLocalBounds().width = " << productBoxes[productBoxes.size() - 1].second.first.getLocalBounds().width << endl;
+			////cout << "-------------------------------\n";
+			////cout << "productBoxes[0].first.getPosition().x = " << productBoxes[0].first.getPosition().x << endl;
+			////cout << "productBoxes[0].first.getSize().x = " << productBoxes[0].first.getSize().x << endl;
+			////cout << "productBoxes[0].second.first.getString().toAnsiString()" << productBoxes[0].second.first.getString().toAnsiString() << endl;
+			////cout << "productBoxes[0].second.first.getLocalBounds().width = " << productBoxes[0].second.first.getLocalBounds().width << endl;
+			////cout << "-----------------------------------\n";
+
+			//for (int i = 0; i < films.size(); i++)
+			//{
+			//	sf::Texture texture;
+			//	if (!texture.loadFromFile(productBoxes[i].second.second)) {
+			//		texture.loadFromFile("404.jfif");
+			//	}
+			//	sf::Sprite sprite(texture);
+			//	sf::Vector2u windowsize = window.getSize();
+			//	float scalex = 290.0 / texture.getSize().x;
+			//	float scaley = 475.0 / texture.getSize().y;
+			//	sprite.setScale(scalex, scaley);
+			//	float x = productBoxes[i].first.getPosition().x + 5;
+			//	float y = productBoxes[i].first.getPosition().y + 5;
+			//	sprite.setPosition(x, y);
+
+			//	window.draw(productBoxes[i].first);
+			//	window.draw(sprite);
+			//	window.draw(productBoxes[i].second.first);
+			//}
+
+			//sf::sleep(sf::seconds(0.5));
+		}
+
+		if (selectDropDownButton) {
+			window.draw(sprite);
+		}
+
+		if (selectAndUpdateButton) {
+			if (indexButton) {
+				for (int i = 0; i < 12; i++) {
+					for (int j = 0; j < 6; j++) {
+						window.draw(box[indexButton - 1][i][j].first);
 					}
 				}
 			}
 		}
 
-		window.clear();
+		window.draw(thickLine);
 
-		productBoxes[first].first.setPosition(position, 125);
-		float text_X = position + productBoxes[first].first.getSize().x / 2 - productBoxes[first].second.first.getLocalBounds().width / 2;
-		productBoxes[first].second.first.setPosition(text_X, 600);
-		sf::Texture texture;
-		if (!texture.loadFromFile(productBoxes[first].second.second)) {
-			texture.loadFromFile("404.jfif");
+		window.draw(dropdownBox);
+		window.draw(dropdownText);
+		if (isArrowDownUp) {
+			arrow.setPoint(0, sf::Vector2f(0, 0));
+			arrow.setPoint(1, sf::Vector2f(15, 0));
+			arrow.setPoint(2, sf::Vector2f(7.5, 7.5));
+			arrow.setFillColor(sf::Color::Black);
+			window.draw(arrow);
 		}
-		sf::Sprite sprite(texture);
-		float scalex = 290.0 / texture.getSize().x;
-		float scaley = 475.0 / texture.getSize().y;
-		sprite.setScale(scalex, scaley);
-		float x = position + 5;
-		float y = productBoxes[first].first.getPosition().y + 5;
-		sprite.setPosition(x, y);
-		window.draw(productBoxes[first].first);
-		window.draw(sprite);
-		window.draw(productBoxes[first].second.first);
 
-		int cnt = 0; // co the error
-		for (int i = first + 1; i < films.size(); i++) {
-			float pos = position + ++cnt * 350;
-			productBoxes[i].first.setPosition(pos, 125);
-			float text_X = pos + productBoxes[i].first.getSize().x / 2 - productBoxes[i].second.first.getLocalBounds().width / 2;
-			productBoxes[i].second.first.setPosition(text_X, 600);
-			sf::Texture texture;
-			if (!texture.loadFromFile(productBoxes[i].second.second)) {
-				texture.loadFromFile("404.jfif");
+		if (isDropdownActive)
+		{
+			isArrowDownUp = false;
+			arrow.setPoint(0, sf::Vector2f(7.5, 0));
+			arrow.setPoint(1, sf::Vector2f(0, 7.5));
+			arrow.setPoint(2, sf::Vector2f(15, 7.5));
+			arrow.setFillColor(sf::Color::Black);
+			window.draw(arrow);
+
+			for (const std::pair<sf::Text, sf::RectangleShape> option : options)
+			{
+				window.draw(option.second);
+				window.draw(option.first);
 			}
-			sf::Sprite sprite(texture);
-			float scalex = 290.0 / texture.getSize().x;
-			float scaley = 475.0 / texture.getSize().y;
-			sprite.setScale(scalex, scaley);
-			float x = pos + 5;
-			float y = productBoxes[i].first.getPosition().y + 5;
-			sprite.setPosition(x, y);
-			window.draw(productBoxes[i].first);
-			window.draw(sprite);
-			window.draw(productBoxes[i].second.first);
 		}
 
-		for (int i = 0; i < first; i++) {
-			float pos = position + ++cnt * 350;
-			productBoxes[i].first.setPosition(pos, 125);
-			float text_X = pos + productBoxes[i].first.getSize().x / 2 - productBoxes[i].second.first.getLocalBounds().width / 2;
-			productBoxes[i].second.first.setPosition(text_X, 600);
-			sf::Texture texture;
-			if (!texture.loadFromFile(productBoxes[i].second.second)) {
-				texture.loadFromFile("404.jfif");
-			}
-			sf::Sprite sprite(texture);
-			float scalex = 290.0 / texture.getSize().x;
-			float scaley = 475.0 / texture.getSize().y;
-			sprite.setScale(scalex, scaley);
-			float x = pos + 5;
-			float y = productBoxes[i].first.getPosition().y + 5;
-			sprite.setPosition(x, y);
-			window.draw(productBoxes[i].first);
-			window.draw(sprite);
-			window.draw(productBoxes[i].second.first);
-		}
+		window.draw(createButton);
+		window.draw(createButtonText);
 
 		window.display();
+		//sf::sleep(sf::seconds(1.5));
 	}
-
-	return 0;
 }
