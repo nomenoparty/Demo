@@ -1320,13 +1320,6 @@ int createFilmsWindow(sf::RenderWindow& window, sf::RenderWindow& window1, sf::F
 	float scaley = 1000.0 / texture.getSize().y;
 	sprite.setScale(scalex, scaley);
 
-	//sf::Font font;
-	//if (!font.loadFromFile("SVN-Times New Roman Bold.ttf"))
-	//{
-	//	std::cout << "Failed to load font!" << std::endl;
-	//	return -1;
-	//}
-
 	sf::RectangleShape buttonTitle(sf::Vector2f(600, 45));
 	buttonTitle.setFillColor(sf::Color(86, 0, 172, 70));
 	buttonTitle.setPosition(200, 70);
@@ -1645,6 +1638,314 @@ int createFilmsWindow(sf::RenderWindow& window, sf::RenderWindow& window1, sf::F
 	}
 }
 
+int updateFilmsWindow(sf::RenderWindow& window, sf::RenderWindow& window1, sf::Font& font, int index)
+{
+	window.setVisible(false);
+	window1.setVisible(true);
+	sf::Texture texture;
+	if (!texture.loadFromFile("fotor-ai-20231112163130.jpg"))
+		return EXIT_FAILURE;
+
+	// tạo sprite sử dụng texture đã tải
+	sf::Sprite sprite(texture);
+	sf::Vector2u windowsize = window1.getSize();
+	float scalex = 1050.0 / texture.getSize().x;
+	float scaley = 1000.0 / texture.getSize().y;
+	sprite.setScale(scalex, scaley);
+
+	sf::RectangleShape buttonTitle(sf::Vector2f(600, 45));
+	buttonTitle.setFillColor(sf::Color(86, 0, 172, 70));
+	buttonTitle.setPosition(200, 70);
+
+	sf::RectangleShape lineTitle(sf::Vector2f(5, 45));
+	lineTitle.setFillColor(sf::Color(18, 104, 10));
+	lineTitle.setPosition(200, 70);
+
+	sf::Text inputTextTitle(films[index].title, font, 24);
+	inputTextTitle.setCharacterSize(27);
+	inputTextTitle.setFillColor(sf::Color(255, 255, 255));
+	inputTextTitle.setPosition(210, 73);
+
+	sf::RectangleShape buttonDesc(sf::Vector2f(600, 500));
+	buttonDesc.setFillColor(sf::Color(86, 0, 172, 70));
+	buttonDesc.setPosition(200, 200);
+
+	sf::RectangleShape lineDesc(sf::Vector2f(5, 500));
+	lineDesc.setFillColor(sf::Color(18, 104, 10));
+	lineDesc.setPosition(200, 200);
+
+	sf::Text inputTextDesc(films[index].desc, font, 24);
+	inputTextDesc.setCharacterSize(27);
+	inputTextDesc.setFillColor(sf::Color(255, 255, 255));
+	inputTextDesc.setPosition(210, 196);
+
+	sf::RectangleShape buttonImage(sf::Vector2f(600, 45));
+	buttonImage.setFillColor(sf::Color(86, 0, 172, 70));
+	buttonImage.setPosition(200, 785);
+
+	sf::RectangleShape lineImage(sf::Vector2f(5, 45));
+	lineImage.setFillColor(sf::Color(18, 104, 10));
+	lineImage.setPosition(200, 785);
+
+	sf::Text inputTextImage(films[index].image, font, 24);
+	inputTextImage.setCharacterSize(27);
+	inputTextImage.setFillColor(sf::Color(255, 255, 255));
+	inputTextImage.setPosition(210, 788);
+
+	sf::Texture createTexture;
+	if (!createTexture.loadFromFile("2023-11-13_171327.png"))
+		return EXIT_FAILURE;
+
+	sf::Sprite createSprite(createTexture);
+	float scalex1 = 300.0 / createTexture.getSize().x;
+	float scaley1 = 75.0 / createTexture.getSize().y;
+	createSprite.setScale(scalex1, scaley1);
+	createSprite.setPosition(350, 870);
+
+	sf::Font fontCreate;
+	if (!fontCreate.loadFromFile("SourceSansPro-Bold.ttf"))
+	{
+		std::cout << "Failed to load font!" << std::endl;
+		return -1;
+	}
+
+	sf::Text textCreate;
+	textCreate.setFont(fontCreate);
+	textCreate.setCharacterSize(37);
+	textCreate.setFillColor(sf::Color(255, 255, 255));
+	textCreate.setPosition(432, 883);
+	textCreate.setString("UPDATE");
+
+	string textDesc = films[index].desc;
+
+	bool isInputTitleActive = false;
+	bool isInputDescActive = false;
+	bool isInputImageActive = false;
+
+	bool checkwindow1 = false;
+
+	while (window1.isOpen())
+	{
+		sf::Event event;
+		while (window1.pollEvent(event))
+		{
+			//if (event.type == sf::Event::Closed)
+			//{
+			//	window1.close();
+			//}
+			if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
+			{
+				if (isMouseOver(buttonTitle, event))
+				{
+					lineTitle.setFillColor(sf::Color(128, 241, 118));
+					lineDesc.setFillColor(sf::Color(18, 104, 10));
+					lineImage.setFillColor(sf::Color(18, 104, 10));
+					isInputTitleActive = true;
+					isInputDescActive = false;
+					isInputImageActive = false;
+				}
+				else if (isMouseOver(buttonDesc, event))
+				{
+					lineDesc.setFillColor(sf::Color(128, 241, 118));
+					lineTitle.setFillColor(sf::Color(18, 104, 10));
+					lineImage.setFillColor(sf::Color(18, 104, 10));
+					isInputDescActive = true;
+					isInputTitleActive = false;
+					isInputImageActive = false;
+				}
+				else if (isMouseOver(buttonImage, event)) {
+					lineImage.setFillColor(sf::Color(128, 241, 118));
+					lineDesc.setFillColor(sf::Color(18, 104, 10));
+					lineTitle.setFillColor(sf::Color(18, 104, 10));
+					isInputDescActive = false;
+					isInputTitleActive = false;
+					isInputImageActive = true;
+				}
+				else {
+					lineDesc.setFillColor(sf::Color(18, 104, 10));
+					lineTitle.setFillColor(sf::Color(18, 104, 10));
+					lineImage.setFillColor(sf::Color(18, 104, 10));
+					isInputDescActive = false;
+					isInputTitleActive = false;
+					isInputImageActive = false;
+				}
+
+				if (createSprite.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y)) {
+					string currentTextTitle = inputTextTitle.getString();
+					string currentTextDesc = textDesc;
+					string currentTextImage = inputTextImage.getString();
+					sf::Texture texTureTest;
+					if (currentTextTitle == "") {
+						lineTitle.setFillColor(sf::Color(126, 0, 33));
+					}
+					if (currentTextDesc == "") {
+						lineDesc.setFillColor(sf::Color(126, 0, 33));
+					}
+					if (currentTextImage == "" || !texTureTest.loadFromFile(currentTextImage)) {
+						lineImage.setFillColor(sf::Color(126, 0, 33));
+					}
+					if (currentTextTitle != "" && currentTextDesc != "" && currentTextImage != "" && texTureTest.loadFromFile(currentTextImage)) {
+						//films.push_back({ currentTextTitle, currentTextDesc, currentTextImage });
+
+						films[index].title = currentTextTitle;
+						films[index].desc = currentTextDesc;
+						films[index].image = currentTextImage;
+
+						//sf::RectangleShape productBox(sf::Vector2f(300, 500));
+						//productBox.setFillColor(sf::Color::White);
+						//productBox.setOutlineThickness(2);
+						//productBox.setOutlineColor(sf::Color::Black);
+						//productBox.setPosition(20 + (films.size() - 1) * 350, 125);
+
+						//sf::Text productText(currentTextTitle, font, 24);
+						//productText.setFillColor(sf::Color::Black);
+						//float textX = productBox.getPosition().x + productBox.getSize().x / 2 - productText.getLocalBounds().width / 2;
+						//productText.setPosition(textX, 600);
+
+						//productBoxes.push_back({ productBox , {productText, currentTextImage} });
+
+						productBoxes[index].second.first.setString(currentTextTitle);
+						productBoxes[index].second.second = currentTextImage;
+
+						window.setVisible(true);
+						window1.setVisible(false);
+						return 0;
+					}
+				}
+			}
+			else if (event.type == sf::Event::TextEntered)
+			{
+				if (isInputTitleActive)
+				{
+					if (event.text.unicode < 128)
+					{
+						if (event.text.unicode == '\b')
+						{
+							if (!inputTextTitle.getString().isEmpty()) {
+								std::string currentText = inputTextTitle.getString();
+								currentText.pop_back();
+								inputTextTitle.setString(currentText);
+							}
+						}
+						else if (event.text.unicode == '\r' || event.text.unicode == '\n')
+						{
+							inputTextTitle.setString(inputTextTitle.getString() + "\n");
+						}
+						else
+						{
+							inputTextTitle.setString(inputTextTitle.getString() + static_cast<char>(event.text.unicode));
+						}
+					}
+				}
+				else if (isInputDescActive)
+				{
+					if (event.text.unicode < 128)
+					{
+						if (event.text.unicode == '\b')
+						{
+							if (!inputTextDesc.getString().isEmpty()) {
+								std::string currentText = inputTextDesc.getString();
+								currentText.pop_back();
+								textDesc.pop_back();
+								inputTextDesc.setString(currentText);
+							}
+						}
+						else if (event.text.unicode == '\r' || event.text.unicode == '\n')
+						{
+							inputTextDesc.setString(inputTextDesc.getString() + "\n");
+							textDesc += "\n";
+						}
+						else
+						{
+							string lastString;
+							stringstream ss(inputTextDesc.getString());
+							while (getline(ss, lastString, '\n')) {
+							}
+
+							sf::Text tempText;
+							tempText.setFont(font);
+							tempText.setCharacterSize(27);
+							tempText.setString(lastString);
+							float lineDescWidth = tempText.getLocalBounds().width;
+							float buttonDescWidth = buttonDesc.getLocalBounds().width;
+							if (lineDescWidth > buttonDescWidth - 20)
+							{
+								// Thêm ký tự xuống dòng
+								inputTextDesc.setString(inputTextDesc.getString() + "\n");
+							}
+							inputTextDesc.setString(inputTextDesc.getString() + static_cast<char>(event.text.unicode));
+							textDesc += static_cast<char>(event.text.unicode);
+						}
+
+					}
+				}
+				else if (isInputImageActive)
+				{
+					if (event.text.unicode < 128)
+					{
+						if (event.text.unicode == '\b')
+						{
+							if (!inputTextImage.getString().isEmpty()) {
+								std::string currentText = inputTextImage.getString();
+								currentText.pop_back();
+								inputTextImage.setString(currentText);
+							}
+						}
+						else if (event.text.unicode == '\r' || event.text.unicode == '\n')
+						{
+							inputTextImage.setString(inputTextImage.getString() + "\n");
+						}
+						else
+						{
+							inputTextImage.setString(inputTextImage.getString() + static_cast<char>(event.text.unicode));
+						}
+					}
+				}
+			}
+			if (event.type == sf::Event::MouseMoved)
+			{
+				sf::Vector2i mousePosition = sf::Mouse::getPosition(window1);
+				if (createSprite.getGlobalBounds().contains(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y)))
+				{
+					if (!createTexture.loadFromFile("2023-11-13_173035.png"))
+						return EXIT_FAILURE;
+					float scalex1 = 300.0 / createTexture.getSize().x;
+					float scaley1 = 75.0 / createTexture.getSize().y;
+					createSprite.setScale(scalex1, scaley1);
+				}
+				else
+				{
+					if (!createTexture.loadFromFile("2023-11-13_171327.png"))
+						return EXIT_FAILURE;
+					float scalex1 = 300.0 / createTexture.getSize().x;
+					float scaley1 = 75.0 / createTexture.getSize().y;
+					createSprite.setScale(scalex1, scaley1);
+				}
+			}
+		}
+
+		window1.clear();
+		window1.draw(sprite);
+
+		window1.draw(buttonTitle);
+		window1.draw(inputTextTitle);
+		window1.draw(lineTitle);
+
+		window1.draw(buttonDesc);
+		window1.draw(inputTextDesc);
+		window1.draw(lineDesc);
+
+		window1.draw(buttonImage);
+		window1.draw(inputTextImage);
+		window1.draw(lineImage);
+
+		window1.draw(createSprite);
+		window1.draw(textCreate);
+
+		window1.display();
+	}
+}
+
 void updateFilmPosition(float& position, int& first, int& last)
 {
 	float speed = 100.0f; // Tốc độ di chuyển của bộ phim
@@ -1673,6 +1974,9 @@ int main()
 
 	sf::RenderWindow window1(sf::VideoMode(1050, 1000), "Create Window", sf::Style::None);
 	window1.setVisible(false);
+
+	sf::RenderWindow window2(sf::VideoMode(1050, 1000), "Update Window", sf::Style::None);
+	window2.setVisible(false);
 
 	//////////////////////Font///////////////////////////
 	sf::Font font;
@@ -1738,23 +2042,6 @@ int main()
 	films.push_back({ title, desc, linkImage });
 
 	//std::vector<pair<sf::RectangleShape, pair<sf::Text, string>>> productBoxes;
-
-	//for (int i = 0; i < films.size(); i++)
-	//{
-	//	sf::RectangleShape productBox(sf::Vector2f(300, 500));
-	//	productBox.setFillColor(sf::Color::White);
-	//	productBox.setOutlineThickness(2);
-	//	productBox.setOutlineColor(sf::Color::Black);
-	//	productBox.setPosition(20 + i * 350, 125);
-
-	//	sf::Text productText(films[i].title, font, 24);
-	//	productText.setFillColor(sf::Color::Black);
-	//	float textX = productBox.getPosition().x + productBox.getSize().x / 2 - productText.getLocalBounds().width / 2;
-	//	//productText.setPosition(30 + i * 350, 135);
-	//	productText.setPosition(textX, 600);
-
-	//	productBoxes.push_back({ productBox , {productText, films[i].image} });
-	//}
 
 	for (int i = 0; i < films.size(); i++)
 	{
@@ -1909,10 +2196,6 @@ int main()
 
 	/////////////////create////////////////////////////
 
-	//std::thread thread;
-	//float position = 50.0f;
-	//int first = 0, last = films.size() - 1;
-
 	float position = 50.0f;
 	int first = 0, last = films.size() - 1;
 	std::thread thread(updateFilmPosition, std::ref(position), std::ref(first), std::ref(last));
@@ -1940,7 +2223,8 @@ int main()
 					for (int i = 0; i < productBoxes.size(); i++)
 					{
 						if (productBoxes[i].first.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y)) {
-							cout << productBoxes[i].second.first.getString().toAnsiString() << endl;
+							//cout << films[i].title << " " << films[i].desc << " " << films[i].image << endl;
+							updateFilmsWindow(window, window2, font, i);
 						}
 					}
 					if (isMouseOver(dropdownBox, window))
@@ -1974,8 +2258,6 @@ int main()
 				}
 			}
 			else if (selectAndUpdateButton) {
-				//thread.detach();
-
 				if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
 				{
 					if (button1.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y))
@@ -2101,62 +2383,6 @@ int main()
 				window.draw(sprite);
 				window.draw(productBoxes[i].second.first);
 			}
-			//sf::Vector2f offset(0, 0);
-			//sf::Vector2f newPos = productBoxes[productBoxes.size() - 1].first.getPosition() + offset;
-			////cout << "productBoxes[productBoxes.size() - 1].first.getPosition().x = " << productBoxes[productBoxes.size() - 1].first.getPosition().x << endl;
-			////cout << "productBoxes[productBoxes.size() - 1].first.getSize().x = " << productBoxes[productBoxes.size() - 1].first.getSize().x << endl;
-			////cout << "productBoxes[productBoxes.size() - 1].second.first.getString().toAnsiString()" << productBoxes[productBoxes.size() - 1].second.first.getString().toAnsiString() << endl;
-			////cout << "productBoxes[productBoxes.size() - 1].second.first.getLocalBounds().width = " << productBoxes[productBoxes.size() - 1].second.first.getLocalBounds().width << endl;
-			////cout << "--------------------------------\n";
-			////cout << "productBoxes[0].first.getPosition().x = " << productBoxes[0].first.getPosition().x << endl;
-			////cout << "productBoxes[0].first.getSize().x = " << productBoxes[0].first.getSize().x << endl;
-			////cout << "productBoxes[0].second.first.getString().toAnsiString()" << productBoxes[0].second.first.getString().toAnsiString() << endl;
-			////cout << "productBoxes[0].second.first.getLocalBounds().width = " << productBoxes[0].second.first.getLocalBounds().width << endl;
-			////cout << "================================\n";
-			//float textX = productBoxes[productBoxes.size() - 1].first.getPosition().x + productBoxes[productBoxes.size() - 1].first.getSize().x / 2 - productBoxes[0].second.first.getLocalBounds().width / 2;
-			//for (int i = productBoxes.size() - 1; i >= 1; i--)
-			//{
-			//	productBoxes[i].first.setPosition(productBoxes[i - 1].first.getPosition());
-			//	float text_X = productBoxes[i].first.getPosition().x + productBoxes[i].first.getSize().x / 2 - productBoxes[i].second.first.getLocalBounds().width / 2;
-			//	productBoxes[i].second.first.setPosition(text_X, 600);
-			//}
-
-			//productBoxes[0].first.setPosition(newPos);
-			//productBoxes[0].second.first.setPosition(textX, 600);
-
-			////cout << textX << ' ' << productBoxes[0].second.first.getPosition().x << " " << productBoxes[productBoxes.size() - 1].second.first.getPosition().x << endl;
-			////cout << "productBoxes[productBoxes.size() - 1].first.getPosition().x = " << productBoxes[productBoxes.size() - 1].first.getPosition().x << endl;
-			////cout << "productBoxes[productBoxes.size() - 1].first.getSize().x = " << productBoxes[productBoxes.size() - 1].first.getSize().x << endl;
-			////cout << "productBoxes[productBoxes.size() - 1].second.first.getString().toAnsiString()" << productBoxes[productBoxes.size() - 1].second.first.getString().toAnsiString() << endl;
-			////cout << "productBoxes[productBoxes.size() - 1].second.first.getLocalBounds().width = " << productBoxes[productBoxes.size() - 1].second.first.getLocalBounds().width << endl;
-			////cout << "-------------------------------\n";
-			////cout << "productBoxes[0].first.getPosition().x = " << productBoxes[0].first.getPosition().x << endl;
-			////cout << "productBoxes[0].first.getSize().x = " << productBoxes[0].first.getSize().x << endl;
-			////cout << "productBoxes[0].second.first.getString().toAnsiString()" << productBoxes[0].second.first.getString().toAnsiString() << endl;
-			////cout << "productBoxes[0].second.first.getLocalBounds().width = " << productBoxes[0].second.first.getLocalBounds().width << endl;
-			////cout << "-----------------------------------\n";
-
-			//for (int i = 0; i < films.size(); i++)
-			//{
-			//	sf::Texture texture;
-			//	if (!texture.loadFromFile(productBoxes[i].second.second)) {
-			//		texture.loadFromFile("404.jfif");
-			//	}
-			//	sf::Sprite sprite(texture);
-			//	sf::Vector2u windowsize = window.getSize();
-			//	float scalex = 290.0 / texture.getSize().x;
-			//	float scaley = 475.0 / texture.getSize().y;
-			//	sprite.setScale(scalex, scaley);
-			//	float x = productBoxes[i].first.getPosition().x + 5;
-			//	float y = productBoxes[i].first.getPosition().y + 5;
-			//	sprite.setPosition(x, y);
-
-			//	window.draw(productBoxes[i].first);
-			//	window.draw(sprite);
-			//	window.draw(productBoxes[i].second.first);
-			//}
-
-			//sf::sleep(sf::seconds(0.5));
 		}
 
 		if (selectDropDownButton) {
@@ -2205,6 +2431,5 @@ int main()
 		window.draw(createButtonText);
 
 		window.display();
-		//sf::sleep(sf::seconds(1.5));
 	}
 }
