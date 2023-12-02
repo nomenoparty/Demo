@@ -3107,63 +3107,6 @@ int main()
 						}
 					}
 				}
-				if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
-				{
-					for (int i = 0; i < productBoxes.size(); i++)
-					{
-						if (productBoxes[i].first.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y)) {
-							//cout << films[i].title << " " << films[i].desc << " " << films[i].image << endl;
-							updateFilmsWindow(window, window2, font, i, filmListPosition1);
-						}
-					}
-					//if (isMouseOver(dropdownBox, window))
-					//{
-					//	dropdownBox.setFillColor(sf::Color(111, 110, 111));
-					//	isDropdownActive = !isDropdownActive;
-					//}
-					//else if (isDropdownActive)
-					//{
-					//	for (int i = 0; i < 3; i++) {
-					//		{
-					//			//option.first.second = false;
-					//			if (isMouseOver(options[i].second, window))
-					//			{
-					//				dropdownText.setString(options[i].first.getString());
-					//				indexButton = i + 1;
-					//				dropdownBox.setFillColor(sf::Color::White);
-					//				isDropdownActive = false;
-					//				//isArrowDownUp = true;
-					//				homePageButton = false;  selectDropDownButton = true; selectAndUpdateButton = true;
-					//				break;
-					//			}
-					//		}
-					//	}
-
-					//}
-					if (isDropdownActive)
-					{
-						for (int i = 0; i < 3; i++) {
-							{
-								//option.first.second = false;
-								if (isMouseOver(options[i].second, window))
-								{
-									dropdownText.setString(options[i].first.getString());
-									indexButton = i + 1;
-									dropdownText.setFillColor(sf::Color::White);
-									isDropdownActive = false;
-									//isArrowDownUp = true;
-									homePageButton = false;  selectDropDownButton = true; selectAndUpdateButton = true;
-									break;
-								}
-							}
-						}
-
-					}
-					if (createButton.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y))
-					{
-						createFilmsWindow(window, window1, font, filmListPosition1);
-					}
-				}
 				if (event.type == sf::Event::MouseMoved)
 				{
 					sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
@@ -3241,6 +3184,65 @@ int main()
 					}
 					else {
 						exitButtonText.setFillColor(sf::Color::White);
+					}
+				}
+				if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
+				{
+					//if (isMouseOver(dropdownBox, window))
+					//{
+					//	dropdownBox.setFillColor(sf::Color(111, 110, 111));
+					//	isDropdownActive = !isDropdownActive;
+					//}
+					//else if (isDropdownActive)
+					//{
+					//	for (int i = 0; i < 3; i++) {
+					//		{
+					//			//option.first.second = false;
+					//			if (isMouseOver(options[i].second, window))
+					//			{
+					//				dropdownText.setString(options[i].first.getString());
+					//				indexButton = i + 1;
+					//				dropdownBox.setFillColor(sf::Color::White);
+					//				isDropdownActive = false;
+					//				//isArrowDownUp = true;
+					//				homePageButton = false;  selectDropDownButton = true; selectAndUpdateButton = true;
+					//				break;
+					//			}
+					//		}
+					//	}
+
+					//}
+					if (isDropdownActive)
+					{
+						for (int i = 0; i < 3; i++) {
+							{
+								//option.first.second = false;
+								if (isMouseOver(options[i].second, window))
+								{
+									dropdownText.setString(options[i].first.getString());
+									indexButton = i + 1;
+									dropdownText.setFillColor(sf::Color::White);
+									isDropdownActive = false;
+									//isArrowDownUp = true;
+									homePageButton = false;  selectDropDownButton = true; selectAndUpdateButton = true;
+									break;
+								}
+							}
+						}
+
+					}
+					else if (createButton.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y))
+					{
+						createFilmsWindow(window, window1, font, filmListPosition1);
+					}
+					else {
+						for (int i = 0; i < productBoxes.size(); i++)
+						{
+							if (productBoxes[i].first.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y)) {
+								//cout << films[i].title << " " << films[i].desc << " " << films[i].image << endl;
+								updateFilmsWindow(window, window2, font, i, filmListPosition1);
+							}
+						}
 					}
 				}
 			}
