@@ -3567,6 +3567,8 @@ int main()
 	return 0;
 }
 
+///////////////////// Phần code giúp movie mượt hơn (Line 3572 - 4384)
+
 //int main()
 //{
 //	// Khởi tạo cửa sổ window với kích thước 800x600
