@@ -48,7 +48,7 @@ struct film {
 std::vector<film> films;
 std::vector<pair<sf::RectangleShape, pair<sf::Text, string>>> productBoxes;
 //std::vector<pair<sf::RectangleShape, pair<sf::Text, sf::Sprite>>> productBoxes;
-//std::pair<sf::RectangleShape, bool> box[3][12][6];
+std::pair<sf::RectangleShape, bool> box[3][12][6];
 
 int createFilmsWindow(sf::RenderWindow& window, sf::RenderWindow& window1, sf::Font& font, float filmListPosition1)
 {
@@ -850,50 +850,7 @@ int adminWindow()
 
 	//std::vector<pair<string, string>> films;
 
-	string title = "My nhan dao chich";
-	string desc = "";
-	string linkImage = "mynhandaochich.jpg";
-	films.push_back({ title, desc, linkImage });
 
-	title = "Am hon do thi";
-	desc = "";
-	linkImage = "amhondothi.jpg";
-	films.push_back({ title, desc, linkImage });
-
-	title = "Nguoi vo cuoi cung";
-	desc = "";
-	linkImage = "nguoivocuoicung.jpg";
-	films.push_back({ title, desc, linkImage });
-
-	title = "Nam dem kinh hoang";
-	desc = "";
-	linkImage = "5demkinhhoang.jpg";
-	films.push_back({ title, desc, linkImage });
-
-	title = "Quy mon quan";
-	desc = "";
-	linkImage = "quymonquan.jpg";
-	films.push_back({ title, desc, linkImage });
-
-	title = "Wolfoo";
-	desc = "";
-	linkImage = "wolfoo.jpg";
-	films.push_back({ title, desc, linkImage });
-
-	title = "Dat rung phuong nam";
-	desc = "";
-	linkImage = "marvel.jpg";
-	films.push_back({ title, desc, linkImage });
-
-	title = "Biet doi Marvel";
-	desc = "";
-	linkImage = "marvel.jpg";
-	films.push_back({ title, desc, linkImage });
-
-	title = "Hai ke doi tra";
-	desc = "";
-	linkImage = "haikedoitra.png";
-	films.push_back({ title, desc, linkImage });
 
 	//std::vector<pair<sf::RectangleShape, pair<sf::Text, string>>> productBoxes;
 
@@ -914,20 +871,11 @@ int adminWindow()
 
 	for (int i = 0; i < films.size(); i++)
 	{
-		sf::RectangleShape productBox(sf::Vector2f(327.5f, 470.f));
-		productBox.setPosition(20.f + 377.5 * (int)(i % 4), filmListPosition1 + (int)(i / 4) * 500);
-		productBox.setFillColor(sf::Color::White);
-		productBox.setOutlineThickness(2);
-		productBox.setOutlineColor(sf::Color::Black);
+		productBoxes[i].first.setPosition(20.f + 377.5 * (int)(i % 4), filmListPosition1 + (int)(i / 4) * 500);
 
-		sf::Text productText(films[i].title, font, 24);
-		productText.setFillColor(sf::Color::Black);
-
-		float text_X = 20.f + 377.5 * (int)(i % 4) + productBox.getSize().x / 2 - productText.getLocalBounds().width / 2;
-		float text_Y = filmListPosition1 + (int)(i / 4) * 500 + productBox.getSize().y - 25;
-		productText.setPosition(text_X, text_Y);
-
-		productBoxes.push_back({ productBox , {productText, films[i].image} });
+		float text_X = 20.f + 377.5 * (int)(i % 4) + productBoxes[i].first.getSize().x / 2 - productBoxes[i].second.first.getLocalBounds().width / 2;
+		float text_Y = filmListPosition1 + (int)(i / 4) * 500 + productBoxes[i].first.getSize().y - 25;
+		productBoxes[i].second.first.setPosition(text_X, text_Y);
 	}
 
 	//for (int i = 0;i < films.size(); i++) {
@@ -997,25 +945,8 @@ int adminWindow()
 	spriteOrder.setScale(scale_x, scale_y);
 	spriteOrder.setPosition(0, 100);
 
-	std::pair<sf::RectangleShape, bool> box[3][12][6];
+	//std::pair<sf::RectangleShape, bool> box[3][12][6];
 	//vector< std::pair<sf::RectangleShape, bool>> box[12][6];
-
-	double x_0 = 196, y_0 = 345;
-	double delta_x = 93.5, delta_y = 88.5;
-
-	for (int k = 0; k < 3; k++) {
-		for (int i = 0; i < 12; i++) {
-			for (int j = 0; j < 6; j++) {
-				double x = x_0 + i * delta_x, y = y_0 + j * delta_y;
-				box[k][i][j].second = false;
-				box[k][i][j].first.setSize(sf::Vector2f(76, 74.5));
-				box[k][i][j].first.setFillColor(sf::Color(238, 100, 87)); //100, 238, 87
-				box[k][i][j].first.setOutlineThickness(2);
-				box[k][i][j].first.setOutlineColor(sf::Color::Black);
-				box[k][i][j].first.setPosition(x, y);
-			}
-		}
-	}
 
 
 	//////////////////////Order//////////////////
@@ -1267,9 +1198,6 @@ int adminWindow()
 				if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
 				{
 					if (exitButton.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y)) {
-						cout << "Y";
-						//mainWindow.setVisible(true);
-						//mainWindow.setActive(true);
 						window.close();
 						return 0;
 					}
@@ -1334,6 +1262,10 @@ int adminWindow()
 			else if (selectAndUpdateButton) {
 				if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
 				{
+					if (exitButton.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y)) {
+						window.close();
+						return 0;
+					}
 					if (movieButton.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y))
 					{
 						homePageButton = true;
@@ -1853,6 +1785,116 @@ int main()
 	//sf::RenderWindow windowAdmin(sf::VideoMode(1500, 900), "Admin");
 	//windowAdmin.setActive(false);
 	//windowAdmin.setVisible(false);
+
+	sf::Font font;
+	if (!font.loadFromFile("Roboto-Bold.ttf"))
+	{
+		std::cout << "Failed to load font!" << std::endl;
+		return -1;
+	}
+
+	///////////////////////////
+
+		//std::vector<pair<string, string>> films;
+
+	string title = "My nhan dao chich";
+	string desc = "";
+	string linkImage = "mynhandaochich.jpg";
+	films.push_back({ title, desc, linkImage });
+
+	title = "Am hon do thi";
+	desc = "";
+	linkImage = "amhondothi.jpg";
+	films.push_back({ title, desc, linkImage });
+
+	title = "Nguoi vo cuoi cung";
+	desc = "";
+	linkImage = "nguoivocuoicung.jpg";
+	films.push_back({ title, desc, linkImage });
+
+	title = "Nam dem kinh hoang";
+	desc = "";
+	linkImage = "5demkinhhoang.jpg";
+	films.push_back({ title, desc, linkImage });
+
+	title = "Quy mon quan";
+	desc = "";
+	linkImage = "quymonquan.jpg";
+	films.push_back({ title, desc, linkImage });
+
+	title = "Wolfoo";
+	desc = "";
+	linkImage = "wolfoo.jpg";
+	films.push_back({ title, desc, linkImage });
+
+	title = "Dat rung phuong nam";
+	desc = "";
+	linkImage = "marvel.jpg";
+	films.push_back({ title, desc, linkImage });
+
+	title = "Biet doi Marvel";
+	desc = "";
+	linkImage = "marvel.jpg";
+	films.push_back({ title, desc, linkImage });
+
+	title = "Hai ke doi tra";
+	desc = "";
+	linkImage = "haikedoitra.png";
+	films.push_back({ title, desc, linkImage });
+
+	//std::vector<pair<sf::RectangleShape, pair<sf::Text, string>>> productBoxes;
+
+	//for (int i = 0; i < films.size(); i++)
+	//{
+	//	sf::RectangleShape productBox(sf::Vector2f(300, 500));
+	//	productBox.setFillColor(sf::Color::White);
+	//	productBox.setOutlineThickness(2);
+	//	productBox.setOutlineColor(sf::Color::Black);
+
+	//	sf::Text productText(films[i].title, font, 24);
+	//	productText.setFillColor(sf::Color::Black);
+
+	//	productBoxes.push_back({ productBox , {productText, films[i].image} });
+	//}
+
+	float filmListPosition1 = 120.f;
+
+	for (int i = 0; i < films.size(); i++)
+	{
+		sf::RectangleShape productBox(sf::Vector2f(327.5f, 470.f));
+		productBox.setPosition(20.f + 377.5 * (int)(i % 4), filmListPosition1 + (int)(i / 4) * 500);
+		productBox.setFillColor(sf::Color::White);
+		productBox.setOutlineThickness(2);
+		productBox.setOutlineColor(sf::Color::Black);
+
+		sf::Text productText(films[i].title, font, 24);
+		productText.setFillColor(sf::Color::Black);
+
+		float text_X = 20.f + 377.5 * (int)(i % 4) + productBox.getSize().x / 2 - productText.getLocalBounds().width / 2;
+		float text_Y = filmListPosition1 + (int)(i / 4) * 500 + productBox.getSize().y - 25;
+		productText.setPosition(text_X, text_Y);
+
+		productBoxes.push_back({ productBox , {productText, films[i].image} });
+	}
+
+	double x_0 = 196, y_0 = 345;
+	double delta_x = 93.5, delta_y = 88.5;
+
+	for (int k = 0; k < 3; k++) {
+		for (int i = 0; i < 12; i++) {
+			for (int j = 0; j < 6; j++) {
+				double x = x_0 + i * delta_x, y = y_0 + j * delta_y;
+				box[k][i][j].second = false;
+				box[k][i][j].first.setSize(sf::Vector2f(76, 74.5));
+				box[k][i][j].first.setFillColor(sf::Color(238, 100, 87)); //100, 238, 87
+				box[k][i][j].first.setOutlineThickness(2);
+				box[k][i][j].first.setOutlineColor(sf::Color::Black);
+				box[k][i][j].first.setPosition(x, y);
+			}
+		}
+	}
+
+	//////////////////////////
 
 	//TEXT CLOCK
 	sf::Font fontClock;
