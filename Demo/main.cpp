@@ -39,261 +39,261 @@ bool isMouseOver(sf::RectangleShape& button, sf::Event event)
 //    return bounds.contains(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y));
 //}
 //
-//int createAdminWindow() {
-//	sf::RenderWindow window(sf::VideoMode(1280, 720), "Admin");
-//
-//	// Tải ảnh từ file trên hệ thống
-//	sf::Texture texture;
-//	if (!texture.loadFromFile("image.jfif"))
-//		return EXIT_FAILURE;
-//
-//	// Tạo sprite sử dụng texture đã tải
-//	sf::Sprite sprite(texture);
-//
-//	// Lấy kích thước của cửa sổ
-//	sf::Vector2u windowSize = window.getSize();
-//
-//	// Tính toán tỷ lệ giữa kích thước ảnh và kích thước cửa sổ
-//	float scaleX = static_cast<float>(windowSize.x) / texture.getSize().x;
-//	float scaleY = static_cast<float>(windowSize.y) / texture.getSize().y;
-//
-//	// Đặt tỷ lệ kích thước cho sprite
-//	sprite.setScale(scaleX, scaleY);
-//
-//	// Đặt vị trí của sprite
-//	sprite.setPosition(0, 0);
-//
-//	// Vòng lặp chính
-//	while (window.isOpen())
-//	{
-//		// Xử lý các sự kiện
-//		sf::Event event;
-//		while (window.pollEvent(event))
-//		{
-//			if (event.type == sf::Event::Closed)
-//				window.close();
-//		}
-//
-//		// Xóa cửa sổ
-//		window.clear();
-//
-//		// Vẽ sprite lên cửa sổ
-//		window.draw(sprite);
-//
-//		// Hiển thị cửa sổ
-//		window.display();
-//	}
-//}
-//
-//int createLoginAdminWindow() {
-//
-//	sf::RenderWindow window(sf::VideoMode(800, 600), "Admin");
-//	
-//	bool login = true;
-//	bool homePageAdmin = false;
-//
-//	// Tạo các thành phần giao diện
-//	sf::Font font;
-//	if (!font.loadFromFile("ShortBaby-Mg2w.ttf"))
-//	{
-//		std::cout << "Failed to load font!" << std::endl;
-//		return -1;
-//	}
-//
-//	//login////////////////////////////////////////////////////////
-//	sf::RectangleShape button1(sf::Vector2f(500, 50));
-//	button1.setFillColor(sf::Color::White);
-//	button1.setPosition(100, 100);
-//
-//	sf::Text inputText1;
-//	inputText1.setFont(font);
-//	inputText1.setCharacterSize(24);
-//	inputText1.setFillColor(sf::Color::Black);
-//	//inputText1.setPosition(button1.getPosition().x + button1.getSize().x / 2 - inputText1.getGlobalBounds().width / 2,
-//	//    button1.getPosition().y + button1.getSize().y / 2 - inputText1.getGlobalBounds().height / 2);
-//	inputText1.setPosition(100, 107);
-//
-//	/*sf::Text inputText1;
-//	inputText1.setFont(font);
-//	inputText1.setCharacterSize(24);
-//	inputText1.setPosition(100, 100);
-//	inputText1.setFillColor(sf::Color::White);*/
-//
-//	sf::RectangleShape button2(sf::Vector2f(500, 50));
-//	button2.setFillColor(sf::Color::White);
-//	button2.setPosition(100, 200);
-//
-//	sf::Text inputText2;
-//	inputText2.setFont(font);
-//	inputText2.setCharacterSize(24);
-//	inputText2.setFillColor(sf::Color::Black);
-//	//inputText2.setPosition(button2.getPosition().x + button2.getSize().x / 2 - inputText2.getGlobalBounds().width / 2,
-//	//    button2.getPosition().y + button2.getSize().y / 2 - inputText2.getGlobalBounds().height / 2);
-//	inputText2.setPosition(100, 207);
-//
-//	//sf::Text inputText2;
-//	//inputText2.setFont(font);
-//	//inputText2.setCharacterSize(24);
-//	//inputText2.setPosition(100, 200);
-//	//inputText2.setFillColor(sf::Color::White);
-//
-//	sf::RectangleShape loginbutton(sf::Vector2f(100, 50));
-//	loginbutton.setFillColor(sf::Color::White);
-//	loginbutton.setPosition(250, 300);
-//	loginbutton.setFillColor(sf::Color(238, 100, 87));
-//
-//	sf::Text loginbuttonText;
-//	loginbuttonText.setFont(font);
-//	loginbuttonText.setString("Login");
-//	loginbuttonText.setCharacterSize(24);
-//	loginbuttonText.setPosition(250, 300);
-//	loginbuttonText.setFillColor(sf::Color::Black);
-//
-//	bool isInput1Active = false;
-//	bool isInput2Active = false;
-//	//login////////////////////////////////////////////////////////
-//
-//
-//	while (window.isOpen())
-//	{
-//		sf::Event event;
-//		while (window.pollEvent(event))
-//		{
-//			if (event.type == sf::Event::Closed)
-//			{
-//				window.close();
-//			}
-//			else if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
-//			{
-//				if (loginbutton.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y))
-//				{
-//					std::string currenttext1 = inputText1.getString();
-//					std::string currenttext2 = inputText2.getString();
-//					if (currenttext1 == "admin" && currenttext2 == "password") {
-//						/*createAdminWindow();*/
-//						login = false;
-//						homePageAdmin = true;
-//					}
-//				}
-//				if (isMouseOver(button1, event))
-//				{
-//					button1.setFillColor(sf::Color::Yellow);
-//					isInput1Active = true;
-//					isInput2Active = false;
-//					button2.setFillColor(sf::Color::White);
-//				}
-//				else if (isMouseOver(button2, event))
-//				{
-//					button2.setFillColor(sf::Color::Yellow);
-//					isInput1Active = false;
-//					isInput2Active = true;
-//					button1.setFillColor(sf::Color::White);
-//				}
-//				else {
-//					button1.setFillColor(sf::Color::White);
-//					button2.setFillColor(sf::Color::White);
-//				}
-//			}
-//			else if (event.type == sf::Event::TextEntered)
-//			{
-//				if (isInput1Active)
-//				{
-//					if (event.text.unicode < 128)
-//					{
-//						if (event.text.unicode == '\b' && !inputText1.getString().isEmpty())
-//						{
-//							std::string currentText = inputText1.getString();
-//							currentText.pop_back();
-//							inputText1.setString(currentText);
-//						}
-//						else
-//						{
-//							inputText1.setString(inputText1.getString() + static_cast<char>(event.text.unicode));
-//						}
-//					}
-//				}
-//				else if (isInput2Active)
-//				{
-//					if (event.text.unicode < 128)
-//					{
-//						if (event.text.unicode == '\b' && !inputText2.getString().isEmpty())
-//						{
-//							std::string currentText = inputText2.getString();
-//							currentText.pop_back();
-//							inputText2.setString(currentText);
-//						}
-//						else
-//						{
-//							inputText2.setString(inputText2.getString() + static_cast<char>(event.text.unicode));
-//						}
-//					}
-//				}
-//			}
-//		}
-//
-//		window.clear();
-//		
-//		//login
-//		if (login) {
-//			window.draw(button1);
-//			window.draw(inputText1);
-//			window.draw(button2);
-//			window.draw(inputText2);
-//			window.draw(loginbutton);
-//		}
-//		//login
-//
-//		window.display();
-//	}
-//}
-//
-//int createDashboardWindow() {
-//	sf::RenderWindow window(sf::VideoMode(1280, 720), "Home");
-//
-//	// Tải ảnh từ file trên hệ thống
-//	sf::Texture texture;
-//	if (!texture.loadFromFile("image.jfif"))
-//		return EXIT_FAILURE;
-//
-//	// Tạo sprite sử dụng texture đã tải
-//	sf::Sprite sprite(texture);
-//
-//	// Lấy kích thước của cửa sổ
-//	sf::Vector2u windowSize = window.getSize();
-//
-//	// Tính toán tỷ lệ giữa kích thước ảnh và kích thước cửa sổ
-//	float scaleX = static_cast<float>(windowSize.x) / texture.getSize().x;
-//	float scaleY = static_cast<float>(windowSize.y) / texture.getSize().y;
-//
-//	// Đặt tỷ lệ kích thước cho sprite
-//	sprite.setScale(scaleX, scaleY);
-//
-//	// Đặt vị trí của sprite
-//	sprite.setPosition(0, 0);
-//
-//	// Vòng lặp chính
-//	while (window.isOpen())
-//	{
-//		// Xử lý các sự kiện
-//		sf::Event event;
-//		while (window.pollEvent(event))
-//		{
-//			if (event.type == sf::Event::Closed)
-//				window.close();
-//		}
-//
-//		// Xóa cửa sổ
-//		window.clear();
-//
-//		// Vẽ sprite lên cửa sổ
-//		window.draw(sprite);
-//
-//		// Hiển thị cửa sổ
-//		window.display();
-//	}
-//
-//}
-//
+int createAdminWindow() {
+	sf::RenderWindow window(sf::VideoMode(1280, 720), "Admin");
+
+	// Tải ảnh từ file trên hệ thống
+	sf::Texture texture;
+	if (!texture.loadFromFile("image.jfif"))
+		return EXIT_FAILURE;
+
+	// Tạo sprite sử dụng texture đã tải
+	sf::Sprite sprite(texture);
+
+	// Lấy kích thước của cửa sổ
+	sf::Vector2u windowSize = window.getSize();
+
+	// Tính toán tỷ lệ giữa kích thước ảnh và kích thước cửa sổ
+	float scaleX = static_cast<float>(windowSize.x) / texture.getSize().x;
+	float scaleY = static_cast<float>(windowSize.y) / texture.getSize().y;
+
+	// Đặt tỷ lệ kích thước cho sprite
+	sprite.setScale(scaleX, scaleY);
+
+	// Đặt vị trí của sprite
+	sprite.setPosition(0, 0);
+
+	// Vòng lặp chính
+	while (window.isOpen())
+	{
+		// Xử lý các sự kiện
+		sf::Event event;
+		while (window.pollEvent(event))
+		{
+			if (event.type == sf::Event::Closed)
+				window.close();
+		}
+
+		// Xóa cửa sổ
+		window.clear();
+
+		// Vẽ sprite lên cửa sổ
+		window.draw(sprite);
+
+		// Hiển thị cửa sổ
+		window.display();
+	}
+}
+
+int createLoginAdminWindow() {
+
+	sf::RenderWindow window(sf::VideoMode(800, 600), "Admin");
+
+	bool login = true;
+	bool homePageAdmin = false;
+
+	// Tạo các thành phần giao diện
+	sf::Font font;
+	if (!font.loadFromFile("ShortBaby-Mg2w.ttf"))
+	{
+		std::cout << "Failed to load font!" << std::endl;
+		return -1;
+	}
+
+	//login////////////////////////////////////////////////////////
+	sf::RectangleShape button1(sf::Vector2f(500, 50));
+	button1.setFillColor(sf::Color::White);
+	button1.setPosition(100, 100);
+
+	sf::Text inputText1;
+	inputText1.setFont(font);
+	inputText1.setCharacterSize(24);
+	inputText1.setFillColor(sf::Color::Black);
+	//inputText1.setPosition(button1.getPosition().x + button1.getSize().x / 2 - inputText1.getGlobalBounds().width / 2,
+	//    button1.getPosition().y + button1.getSize().y / 2 - inputText1.getGlobalBounds().height / 2);
+	inputText1.setPosition(100, 107);
+
+	/*sf::Text inputText1;
+	inputText1.setFont(font);
+	inputText1.setCharacterSize(24);
+	inputText1.setPosition(100, 100);
+	inputText1.setFillColor(sf::Color::White);*/
+
+	sf::RectangleShape button2(sf::Vector2f(500, 50));
+	button2.setFillColor(sf::Color::White);
+	button2.setPosition(100, 200);
+
+	sf::Text inputText2;
+	inputText2.setFont(font);
+	inputText2.setCharacterSize(24);
+	inputText2.setFillColor(sf::Color::Black);
+	//inputText2.setPosition(button2.getPosition().x + button2.getSize().x / 2 - inputText2.getGlobalBounds().width / 2,
+	//    button2.getPosition().y + button2.getSize().y / 2 - inputText2.getGlobalBounds().height / 2);
+	inputText2.setPosition(100, 207);
+
+	//sf::Text inputText2;
+	//inputText2.setFont(font);
+	//inputText2.setCharacterSize(24);
+	//inputText2.setPosition(100, 200);
+	//inputText2.setFillColor(sf::Color::White);
+
+	sf::RectangleShape loginbutton(sf::Vector2f(100, 50));
+	loginbutton.setFillColor(sf::Color::White);
+	loginbutton.setPosition(250, 300);
+	loginbutton.setFillColor(sf::Color(238, 100, 87));
+
+	sf::Text loginbuttonText;
+	loginbuttonText.setFont(font);
+	loginbuttonText.setString("Login");
+	loginbuttonText.setCharacterSize(24);
+	loginbuttonText.setPosition(250, 300);
+	loginbuttonText.setFillColor(sf::Color::Black);
+
+	bool isInput1Active = false;
+	bool isInput2Active = false;
+	//login////////////////////////////////////////////////////////
+
+
+	while (window.isOpen())
+	{
+		sf::Event event;
+		while (window.pollEvent(event))
+		{
+			if (event.type == sf::Event::Closed)
+			{
+				window.close();
+			}
+			else if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
+			{
+				if (loginbutton.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y))
+				{
+					std::string currenttext1 = inputText1.getString();
+					std::string currenttext2 = inputText2.getString();
+					if (currenttext1 == "admin" && currenttext2 == "password") {
+						/*createAdminWindow();*/
+						login = false;
+						homePageAdmin = true;
+					}
+				}
+				if (isMouseOver(button1, event))
+				{
+					button1.setFillColor(sf::Color::Yellow);
+					isInput1Active = true;
+					isInput2Active = false;
+					button2.setFillColor(sf::Color::White);
+				}
+				else if (isMouseOver(button2, event))
+				{
+					button2.setFillColor(sf::Color::Yellow);
+					isInput1Active = false;
+					isInput2Active = true;
+					button1.setFillColor(sf::Color::White);
+				}
+				else {
+					button1.setFillColor(sf::Color::White);
+					button2.setFillColor(sf::Color::White);
+				}
+			}
+			else if (event.type == sf::Event::TextEntered)
+			{
+				if (isInput1Active)
+				{
+					if (event.text.unicode < 128)
+					{
+						if (event.text.unicode == '\b' && !inputText1.getString().isEmpty())
+						{
+							std::string currentText = inputText1.getString();
+							currentText.pop_back();
+							inputText1.setString(currentText);
+						}
+						else
+						{
+							inputText1.setString(inputText1.getString() + static_cast<char>(event.text.unicode));
+						}
+					}
+				}
+				else if (isInput2Active)
+				{
+					if (event.text.unicode < 128)
+					{
+						if (event.text.unicode == '\b' && !inputText2.getString().isEmpty())
+						{
+							std::string currentText = inputText2.getString();
+							currentText.pop_back();
+							inputText2.setString(currentText);
+						}
+						else
+						{
+							inputText2.setString(inputText2.getString() + static_cast<char>(event.text.unicode));
+						}
+					}
+				}
+			}
+		}
+
+		window.clear();
+
+		//login
+		if (login) {
+			window.draw(button1);
+			window.draw(inputText1);
+			window.draw(button2);
+			window.draw(inputText2);
+			window.draw(loginbutton);
+		}
+		//login
+
+		window.display();
+	}
+}
+
+int createDashboardWindow() {
+	sf::RenderWindow window(sf::VideoMode(1280, 720), "Home");
+
+	// Tải ảnh từ file trên hệ thống
+	sf::Texture texture;
+	if (!texture.loadFromFile("image.jfif"))
+		return EXIT_FAILURE;
+
+	// Tạo sprite sử dụng texture đã tải
+	sf::Sprite sprite(texture);
+
+	// Lấy kích thước của cửa sổ
+	sf::Vector2u windowSize = window.getSize();
+
+	// Tính toán tỷ lệ giữa kích thước ảnh và kích thước cửa sổ
+	float scaleX = static_cast<float>(windowSize.x) / texture.getSize().x;
+	float scaleY = static_cast<float>(windowSize.y) / texture.getSize().y;
+
+	// Đặt tỷ lệ kích thước cho sprite
+	sprite.setScale(scaleX, scaleY);
+
+	// Đặt vị trí của sprite
+	sprite.setPosition(0, 0);
+
+	// Vòng lặp chính
+	while (window.isOpen())
+	{
+		// Xử lý các sự kiện
+		sf::Event event;
+		while (window.pollEvent(event))
+		{
+			if (event.type == sf::Event::Closed)
+				window.close();
+		}
+
+		// Xóa cửa sổ
+		window.clear();
+
+		// Vẽ sprite lên cửa sổ
+		window.draw(sprite);
+
+		// Hiển thị cửa sổ
+		window.display();
+	}
+
+}
+
 //int main()
 //{
 //	// Tạo cửa sổ kích thước 800x600 pixels
@@ -456,117 +456,6 @@ bool isMouseOver(sf::Text& option, sf::RenderWindow& window)
 	sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
 	return bounds.contains(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y));
 }
-
-//int main()
-//{
-//    // Tạo cửa sổ kích thước 800x600 pixels
-//    sf::RenderWindow window(sf::VideoMode(800, 600), "Dropdown");
-//
-//    // Tạo các thành phần giao diện
-//    sf::Font font;
-//    if (!font.loadFromFile("ShortBaby-Mg2w.ttf"))
-//    {
-//        std::cout << "Failed to load font!" << std::endl;
-//        return -1;
-//    }
-//
-//    sf::RectangleShape dropdownBox(sf::Vector2f(200, 50));
-//    dropdownBox.setFillColor(sf::Color::White);
-//    dropdownBox.setOutlineThickness(2);
-//    dropdownBox.setOutlineColor(sf::Color::Black);
-//    dropdownBox.setPosition(100, 100);
-//
-//    sf::Text dropdownText("Select an option", font, 24);
-//    dropdownText.setFillColor(sf::Color::Black);
-//    dropdownText.setPosition(110, 110);
-//
-//    std::vector< std::pair<sf::Text, sf::RectangleShape> > options;
-//    sf::RectangleShape option1Box(sf::Vector2f(200, 50));
-//    option1Box.setFillColor(sf::Color::White);
-//    option1Box.setOutlineThickness(2);
-//    option1Box.setOutlineColor(sf::Color::Black);
-//    option1Box.setPosition(100, 150);
-//
-//    sf::Text option1("Option 1", font, 24);
-//    option1.setPosition(110, 160);
-//    option1.setFillColor(sf::Color::Black);
-//    options.push_back({ option1 , option1Box });
-//
-//    sf::RectangleShape option2Box(sf::Vector2f(200, 50));
-//    option2Box.setFillColor(sf::Color::White);
-//    option2Box.setOutlineThickness(2);
-//    option2Box.setOutlineColor(sf::Color::Black);
-//    option2Box.setPosition(100, 200);
-//
-//    sf::Text option2("Option 2", font, 24);
-//    option2.setPosition(110, 210);
-//    option2.setFillColor(sf::Color::Black);
-//    options.push_back({ option2 , option2Box });
-//
-//    sf::RectangleShape option3Box(sf::Vector2f(200, 50));
-//    option3Box.setFillColor(sf::Color::White);
-//    option3Box.setOutlineThickness(2);
-//    option3Box.setOutlineColor(sf::Color::Black);
-//    option3Box.setPosition(100, 250);
-//
-//    sf::Text option3("Option 3", font, 24);
-//    option3.setPosition(110, 260);
-//    option3.setFillColor(sf::Color::Black);
-//    options.push_back({ option3 , option3Box });
-//
-//    bool isDropdownActive = false;
-//
-//    while (window.isOpen())
-//    {
-//        sf::Event event;
-//        while (window.pollEvent(event))
-//        {
-//            if (event.type == sf::Event::Closed)
-//            {
-//                window.close();
-//            }
-//            else if (event.type == sf::Event::MouseButtonPressed)
-//            {
-//                if (isMouseOver(dropdownBox, window))
-//                {
-//                    dropdownBox.setFillColor(sf::Color(111, 110, 111));
-//                    isDropdownActive = !isDropdownActive;
-//                }
-//                else if (isDropdownActive)
-//                {
-//                    for (std::pair<sf::Text, sf::RectangleShape> option : options)
-//                    {
-//                        if (isMouseOver(option.second, window))
-//                        {
-//                            dropdownText.setString(option.first.getString());
-//                            dropdownBox.setFillColor(sf::Color::White);
-//                            isDropdownActive = false;
-//                            break;
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//
-//        window.clear(sf::Color::White);
-//
-//        window.draw(dropdownBox);
-//        window.draw(dropdownText);
-//
-//        if (isDropdownActive)
-//        {
-//            for (const std::pair<sf::Text, sf::RectangleShape> option : options)
-//            {
-//                window.draw(option.second);
-//                window.draw(option.first);
-//            }
-//        }
-//
-//        window.display();
-//    }
-//
-//    return 0;
-//}
 
 //int main()
 //{
@@ -2623,968 +2512,16 @@ void updateFilmPosition(float& position, int& first, int& last)
 //	}
 //}
 
-int main()
-{
-	sf::RenderWindow window(sf::VideoMode(1500, 900), "Drawing Line");
-
-	sf::RenderWindow window1(sf::VideoMode(1050, 1000), "Create Window", sf::Style::None);
-	window1.setVisible(false);
-
-	sf::RenderWindow window2(sf::VideoMode(1050, 1000), "Update Window", sf::Style::None);
-	window2.setVisible(false);
-
-	sf::Texture texture;
-	if (!texture.loadFromFile("image-admin.jpg"))
-		return EXIT_FAILURE;
-
-	// tạo sprite sử dụng texture đã tải
-	sf::Sprite sprite(texture);
-	sf::Vector2u windowsize = window.getSize();
-	float scalex = 1500.0 / texture.getSize().x;
-	float scaley = 900.0 / texture.getSize().y;
-	sprite.setScale(scalex, scaley);
-
-	//////////////////////Font///////////////////////////
-	sf::Font font;
-	if (!font.loadFromFile("Roboto-Bold.ttf"))
-	{
-		std::cout << "Failed to load font!" << std::endl;
-		return -1;
-	}
-	//////////////////////Font///////////////////////////
-
-	sf::RectangleShape headerBox(sf::Vector2f(1500, 100));
-	headerBox.setFillColor(sf::Color(3, 19, 39)); //205, 156, 124, 150
-	headerBox.setPosition(0, 0);
-
-	//////////////////////Movie//////////////////
-
-	//std::vector<pair<string, string>> films;
-
-	string title = "My nhan dao chich";
-	string desc = "";
-	string linkImage = "mynhandaochich.jpg";
-	films.push_back({ title, desc, linkImage });
-
-	title = "Am hon do thi";
-	desc = "";
-	linkImage = "amhondothi.jpg";
-	films.push_back({ title, desc, linkImage });
-
-	title = "Nguoi vo cuoi cung";
-	desc = "";
-	linkImage = "nguoivocuoicung.jpg";
-	films.push_back({ title, desc, linkImage });
-
-	title = "Nam dem kinh hoang";
-	desc = "";
-	linkImage = "5demkinhhoang.jpg";
-	films.push_back({ title, desc, linkImage });
-
-	title = "Quy mon quan";
-	desc = "";
-	linkImage = "quymonquan.jpg";
-	films.push_back({ title, desc, linkImage });
-
-	title = "Wolfoo";
-	desc = "";
-	linkImage = "wolfoo.jpg";
-	films.push_back({ title, desc, linkImage });
-
-	title = "Dat rung phuong nam";
-	desc = "";
-	linkImage = "marvel.jpg";
-	films.push_back({ title, desc, linkImage });
-
-	title = "Biet doi Marvel";
-	desc = "";
-	linkImage = "marvel.jpg";
-	films.push_back({ title, desc, linkImage });
-
-	title = "Hai ke doi tra";
-	desc = "";
-	linkImage = "haikedoitra.png";
-	films.push_back({ title, desc, linkImage });
-
-	//std::vector<pair<sf::RectangleShape, pair<sf::Text, string>>> productBoxes;
-
-	//for (int i = 0; i < films.size(); i++)
-	//{
-	//	sf::RectangleShape productBox(sf::Vector2f(300, 500));
-	//	productBox.setFillColor(sf::Color::White);
-	//	productBox.setOutlineThickness(2);
-	//	productBox.setOutlineColor(sf::Color::Black);
-
-	//	sf::Text productText(films[i].title, font, 24);
-	//	productText.setFillColor(sf::Color::Black);
-
-	//	productBoxes.push_back({ productBox , {productText, films[i].image} });
-	//}
-
-	float filmListPosition1 = 120.f;
-
-	for (int i = 0; i < films.size(); i++)
-	{
-		sf::RectangleShape productBox(sf::Vector2f(327.5f, 470.f));
-		productBox.setPosition(20.f + 377.5 * (int)(i % 4), filmListPosition1 + (int)(i / 4) * 500);
-		productBox.setFillColor(sf::Color::White);
-		productBox.setOutlineThickness(2);
-		productBox.setOutlineColor(sf::Color::Black);
-
-		sf::Text productText(films[i].title, font, 24);
-		productText.setFillColor(sf::Color::Black);
-
-		float text_X = 20.f + 377.5 * (int)(i % 4) + productBox.getSize().x / 2 - productText.getLocalBounds().width / 2;
-		float text_Y = filmListPosition1 + (int)(i / 4) * 500 + productBox.getSize().y - 25;
-		productText.setPosition(text_X, text_Y);
-
-		productBoxes.push_back({ productBox , {productText, films[i].image} });
-	}
-
-	//for (int i = 0;i < films.size(); i++) {
-	//	sf::Texture updateTexture;
-	//	if (!updateTexture.loadFromFile("button_update.png"))
-	//		return EXIT_FAILURE;
-
-	//	sf::Sprite uSprite(updateTexture);
-
-	//	sf::Texture deleteTexture;
-	//	if (!deleteTexture.loadFromFile("button_delete.png"))
-	//		return EXIT_FAILURE;
-
-	//	sf::Sprite dSprite(deleteTexture);
-
-	//	float scale_x = 163.50 / updateTexture.getSize().x;
-	//	float scale_y = 30.0 / updateTexture.getSize().y;
-	//	uSprite.setScale(scale_x, scale_y);
-	//	uSprite.setPosition(20.f + 377.5 * (int)(i % 4), filmListPosition1 + (int)(i / 4) * 500 + productBoxes[i].first.getSize().y + 5);
-	//	films[i].updateSprite = uSprite;
-
-	//	dSprite.setScale(scale_x, scale_y);
-	//	dSprite.setPosition(20.f + 377.5 * (int)(i % 4) + productBoxes[i].first.getSize().x / 2 + 0.5, filmListPosition1 + (int)(i / 4) * 500 + productBoxes[i].first.getSize().y + 5);
-	//	films[i].deleteSprite = dSprite;
-
-	//	sf::Font fontUpdate;
-	//	if (!fontUpdate.loadFromFile("SourceSansPro-Bold.ttf"))
-	//	{
-	//		std::cout << "Failed to load font!" << std::endl;
-	//		return -1;
-	//	}
-
-	//	sf::Text textUpdate;
-	//	textUpdate.setFont(fontUpdate);
-	//	textUpdate.setCharacterSize(25);
-	//	textUpdate.setFillColor(sf::Color(255, 255, 255));
-	//	textUpdate.setString("UPDATE");
-	//	float width = productBoxes[i].first.getSize().x / 2 - textUpdate.getLocalBounds().width / 2;
-	//	textUpdate.setPosition(20.f + 377.5 * (int)(i % 4) + width, filmListPosition1 + (int)(i / 4) * 500 + productBoxes[i].first.getSize().y + 7);
-
-	//	films[i].updateText = textUpdate;
-
-	//	sf::Text textDelete;
-	//	textDelete.setFont(fontUpdate);
-	//	textDelete.setCharacterSize(25);
-	//	textDelete.setFillColor(sf::Color(255, 255, 255));
-	//	textDelete.setString("DELETE");
-	//	width = productBoxes[i].first.getSize().x / 2 - textDelete.getLocalBounds().width / 2;
-	//	textDelete.setPosition(20.f + 377.5 * (int)(i % 4) + productBoxes[i].first.getSize().x / 2 + width, filmListPosition1 + (int)(i / 4) * 500 + productBoxes[i].first.getSize().y + 7);
-
-	//	films[i].deleteText = textDelete;
-	//}
-
-	// Thiết lập kích thước và vị trí của danh sách bộ phim
-	//sf::RectangleShape filmList(sf::Vector2f(327.5f, 470.f));
-	//filmList.setPosition(20.f, filmListPosition1);
-	//filmList.setFillColor(sf::Color::White);
-	//filmList.setOutlineThickness(2.f);
-	//filmList.setOutlineColor(sf::Color::Black);
-
-	//sf::RectangleShape filmList1(sf::Vector2f(327.5f, 470.f));
-	//filmList1.setPosition(397.5f, filmListPosition1);
-	//filmList1.setFillColor(sf::Color::White);
-	//filmList1.setOutlineThickness(2.f);
-	//filmList1.setOutlineColor(sf::Color::Black);
-
-	//sf::RectangleShape filmList2(sf::Vector2f(327.5f, 470.f));
-	//filmList2.setPosition(775.f, filmListPosition1);
-	//filmList2.setFillColor(sf::Color::White);
-	//filmList2.setOutlineThickness(2.f);
-	//filmList2.setOutlineColor(sf::Color::Black);
-
-	//sf::RectangleShape filmList3(sf::Vector2f(327.5f, 470.f));
-	//filmList3.setPosition(1152.5f, filmListPosition1);
-	//filmList3.setFillColor(sf::Color::White);
-	//filmList3.setOutlineThickness(2.f);
-	//filmList3.setOutlineColor(sf::Color::Black);
-
-	//////////////////////Movie//////////////////
-
-
-
-	//////////////////////Order//////////////////
-	sf::Texture textureOrder;
-	if (!textureOrder.loadFromFile("order(1500-800).png"))
-		return EXIT_FAILURE;
-
-	// tạo sprite sử dụng texture đã tải
-	sf::Sprite spriteOrder(textureOrder);
-	float scale_x = 1500.0 / textureOrder.getSize().x;
-	float scale_y = 800.0 / textureOrder.getSize().y;
-	spriteOrder.setScale(scale_x, scale_y);
-	spriteOrder.setPosition(0, 100);
-
-	std::pair<sf::RectangleShape, bool> box[3][12][6];
-	//vector< std::pair<sf::RectangleShape, bool>> box[12][6];
-
-	double x_0 = 196, y_0 = 345;
-	double delta_x = 93.5, delta_y = 88.5;
-
-	for (int k = 0; k < 3; k++) {
-		for (int i = 0; i < 12; i++) {
-			for (int j = 0; j < 6; j++) {
-				double x = x_0 + i * delta_x, y = y_0 + j * delta_y;
-				box[k][i][j].second = false;
-				box[k][i][j].first.setSize(sf::Vector2f(76, 74.5));
-				box[k][i][j].first.setFillColor(sf::Color(238, 100, 87)); //100, 238, 87
-				box[k][i][j].first.setOutlineThickness(2);
-				box[k][i][j].first.setOutlineColor(sf::Color::Black);
-				box[k][i][j].first.setPosition(x, y);
-			}
-		}
-	}
-
-
-	//////////////////////Order//////////////////
-
-	///////////////////////////////////
-
-	//bool selectButton[3]; memset(selectButton, false, 3);
-	bool homePageButton = true;
-	bool selectDropDownButton = false;
-	bool selectAndUpdateButton = false; int indexButton = 0;
-	bool createButtonActive = false;
-
-	sf::RectangleShape movieButton(sf::Vector2f(200, 100));
-	movieButton.setFillColor(sf::Color(3, 22, 46));
-	//createButton.setOutlineThickness(2);
-	//createButton.setOutlineColor(sf::Color(205, 156, 124, 255));
-	movieButton.setPosition(600, 0);
-
-	sf::Text movieButtonText("MOVIE", font, 30);
-	movieButtonText.setFillColor(sf::Color::White);
-	movieButtonText.setPosition(655, 35);
-
-	//sf::CircleShape button1(25);
-	//button1.setFillColor(sf::Color(139, 216, 189)); // Màu xám
-	//button1.setOutlineThickness(5);
-	//button1.setOutlineColor(sf::Color(150, 150, 150)); // Màu xám nhạt
-	//button1.setPosition(100, 25);
-
-	//sf::Texture texture1;
-	//if (!texture1.loadFromFile("icon-home-removebg-preview.png"))
-	//{
-	//	std::cout << "Failed to load icon." << std::endl;
-	//	return -1;
-	//}
-	//sf::Sprite iconSprite1(texture1);
-	//iconSprite1.setScale(0.1f, 0.1f);
-	//iconSprite1.setPosition(94, 28);
-	///////////////////////////////////
-
-	//////////////////dropdown/////////////////////////
-
-	sf::RectangleShape dropdownBox(sf::Vector2f(200, 100));
-	dropdownBox.setFillColor(sf::Color(3, 22, 46)); //3, 19, 39, 230
-	dropdownBox.setPosition(800, 0);
-
-	sf::Text dropdownText("ROOM", font, 30);
-	dropdownText.setFillColor(sf::Color::White);
-	dropdownText.setPosition(850, 35);
-
-	std::vector< std::pair<sf::Text, sf::RectangleShape> > options;
-	sf::RectangleShape option1Box(sf::Vector2f(200, 50));
-	option1Box.setFillColor(sf::Color(3, 22, 46));
-	//option1Box.setOutlineThickness(0.5);
-	//option1Box.setOutlineColor(sf::Color::White);
-	option1Box.setPosition(800, 100);
-
-	sf::Text option1("ROOM 1", font, 30);
-	option1.setPosition(848, 105);
-	option1.setFillColor(sf::Color::White);
-	options.push_back({ {option1} , option1Box });
-
-	sf::RectangleShape option2Box(sf::Vector2f(200, 50));
-	option2Box.setFillColor(sf::Color(3, 22, 46));
-	//option2Box.setOutlineThickness(0.5);
-	//option2Box.setOutlineColor(sf::Color::White);
-	option2Box.setPosition(800, 150);
-
-	sf::Text option2("ROOM 2", font, 30);
-	option2.setPosition(848, 155);
-	option2.setFillColor(sf::Color::White);
-	options.push_back({ {option2} , option2Box });
-
-	sf::RectangleShape option3Box(sf::Vector2f(200, 50));
-	option3Box.setFillColor(sf::Color(3, 22, 46));
-	//option3Box.setOutlineThickness(0.5);
-	//option3Box.setOutlineColor(sf::Color::White);
-	option3Box.setPosition(800, 200);
-
-	sf::Text option3("ROOM 3", font, 30);
-	option3.setPosition(848, 205);
-	option3.setFillColor(sf::Color::White);
-	options.push_back({ {option3} , option3Box });
-
-	bool isDropdownActive = false;
-
-	//sf::ConvexShape arrow(3);
-	//arrow.setPoint(0, sf::Vector2f(0, 0));
-	//arrow.setPoint(1, sf::Vector2f(15, 0));
-	//arrow.setPoint(2, sf::Vector2f(7.5, 7.5));
-	//arrow.setFillColor(sf::Color::Black);
-	//arrow.setPosition(405, 47);
-	//bool isArrowDownUp = true;
-
-	//////////////////dropdown/////////////////////////
-
-	/////////////////create & exit////////////////////////////
-
-	sf::RectangleShape createButton(sf::Vector2f(200, 100));
-	createButton.setFillColor(sf::Color(3, 22, 46));
-	//createButton.setOutlineThickness(2);
-	//createButton.setOutlineColor(sf::Color(205, 156, 124, 255));
-	createButton.setPosition(1000, 0);
-
-	sf::Text createButtonText("CREATE", font, 30);
-	createButtonText.setFillColor(sf::Color::White);
-	createButtonText.setPosition(1045, 35);
-
-	sf::RectangleShape exitButton(sf::Vector2f(200, 100));
-	exitButton.setFillColor(sf::Color(3, 22, 46));
-	//createButton.setOutlineThickness(2);
-	//createButton.setOutlineColor(sf::Color(205, 156, 124, 255));
-	exitButton.setPosition(1200, 0);
-
-	sf::Text exitButtonText("EXIT", font, 30);
-	exitButtonText.setFillColor(sf::Color::White);
-	exitButtonText.setPosition(1263, 35);
-
-	/////////////////create & exit////////////////////////////
-
-	//float position = 50.0f;
-	//int first = 0, last = films.size() - 1;
-	//std::thread thread(updateFilmPosition, std::ref(position), std::ref(first), std::ref(last));
-
-	//int cnt = 0;
-
-	// Thiết lập vị trí ban đầu của danh sách bộ phim
-
-	//sf::RectangleShape filmList4(sf::Vector2f(327.5f, 470.f));
-	//filmList4.setPosition(20.f, filmListPosition1 + 500);
-	//filmList4.setFillColor(sf::Color::White);
-	//filmList4.setOutlineThickness(2.f);
-	//filmList4.setOutlineColor(sf::Color::Black);
-
-	//sf::RectangleShape filmList5(sf::Vector2f(327.5f, 470.f));
-	//filmList5.setPosition(397.5f, filmListPosition1 + 500);
-	//filmList5.setFillColor(sf::Color::White);
-	//filmList5.setOutlineThickness(2.f);
-	//filmList5.setOutlineColor(sf::Color::Black);
-
-	//sf::RectangleShape filmList6(sf::Vector2f(327.5f, 470.f));
-	//filmList6.setPosition(775.f, filmListPosition1 + 500);
-	//filmList6.setFillColor(sf::Color::White);
-	//filmList6.setOutlineThickness(2.f);
-	//filmList6.setOutlineColor(sf::Color::Black);
-
-	//sf::RectangleShape filmList7(sf::Vector2f(327.5f, 470.f));
-	//filmList7.setPosition(1152.5f, filmListPosition1 + 500);
-	//filmList7.setFillColor(sf::Color::White);
-	//filmList7.setOutlineThickness(2.f);
-	//filmList7.setOutlineColor(sf::Color::Black);
-
-	//sf::Texture textureImage;
-	//if (!textureImage.loadFromFile("marvel.jpg")) {
-	//	textureImage.loadFromFile("404.jfif");
-	//}
-	//sf::Sprite spriteImage(textureImage);
-	//float scalex = 290.0 / textureImage.getSize().x;
-	//float scaley = 475.0 / textureImage.getSize().y;
-	//sprite.setScale(scalex, scaley);
-	//float x = position + 5;
-	//float y = productBoxes[first].first.getPosition().y + 5;
-	//sprite.setPosition(x, y);
-
-	float delta = 25.f;
-
-	while (window.isOpen())
-	{
-		sf::Event event;
-		while (window.pollEvent(event))
-		{
-			if (event.type == sf::Event::Closed)
-				window.close();
-			//thread.detach();
-			if (homePageButton) {
-				// Xử lý sự kiện cuộn danh sách bộ phim
-	//			if (event.type == sf::Event::MouseWheelScrolled)
-	//			{
-	//				// lăn xuống(-) lăn lên(+)
-	//				//filmListPosition1 -= event.mouseWheelScroll.delta * 10.f;
-
-	//				//if (event.mouseWheelScroll.delta > 0) {
-	//				//	if (filmListPosition1 < 120.f) {
-	//				//		filmListPosition1 += event.mouseWheelScroll.delta * 10.f;
-	//				//	}
-	//				//}
-	//				//else if (event.mouseWheelScroll.delta < 0) {
-	//				//	if (filmList7.getPosition().y >= 380) {
-	//				//		filmListPosition1 += event.mouseWheelScroll.delta * 10.f;
-	//				//	}
-	//				//}
-	//				if (films.size() > 0) {
-	//					if (event.mouseWheelScroll.delta > 0) {
-	//						if (filmListPosition1 < 120.f) {
-	//							filmListPosition1 += event.mouseWheelScroll.delta * 20.f;
-	//						}
-	//					}
-	//					else if (event.mouseWheelScroll.delta < 0) {
-	//						if (productBoxes[films.size() - 1].first.getPosition().y >= 380) {
-	//							filmListPosition1 += event.mouseWheelScroll.delta * 20.f;
-	//						}
-	//					}
-	//				}
-
-	//				for (int i = 0; i < films.size(); i++)
-	//				{
-	//					productBoxes[i].first.setPosition(20.f + 377.5 * (int)(i % 4), filmListPosition1 + (int)(i / 4) * 500);
-	//					float text_X = 20.f + 377.5 * (int)(i % 4) + productBoxes[i].first.getSize().x / 2 - productBoxes[i].second.first.getLocalBounds().width / 2;
-	//					float text_Y = filmListPosition1 + (int)(i / 4) * 500 + productBoxes[i].first.getSize().y - 25;
-	//					productBoxes[i].second.first.setPosition(text_X, text_Y);
-	//				}
-
-	//				//filmList.setPosition(20.f, filmListPosition1);
-	//				//filmList1.setPosition(397.5f, filmListPosition1);
-	//				//filmList2.setPosition(775.f, filmListPosition1);
-	//				//filmList3.setPosition(1152.5f, filmListPosition1);
-	//				//filmList4.setPosition(20.f, filmListPosition1 + 500);
-	//				//filmList5.setPosition(397.5f, filmListPosition1 + 500);
-	//				//filmList6.setPosition(775.f, filmListPosition1 + 500);
-	//				//filmList7.setPosition(1152.5f, filmListPosition1 + 500);
-
-	//				//if (filmListPosition1 <= 150.f) {
-	////	if (event.mouseWheelScroll.delta < 0) {
-	////		filmListPosition1 += event.mouseWheelScroll.delta * 10.f;
-	////	}
-	////	else if (filmList7.getPosition().y <= 380) {
-	////		
-	////	}
-	////}
-	////if (filmListPosition1 < 150.f)
-	////	filmListPosition1 = 150.f;
-	//////else if (filmListPosition > -(films.size() * 30.f - filmList.getSize().y))
-	//////    filmListPosition = -(films.size() * 30.f - filmList.getSize().y);
-	////else if (filmListPosition1 > 500)
-	////	filmListPosition1 = 500;
-	//			}
-				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-					if (productBoxes[films.size() - 1].first.getPosition().y >= 380) {
-						filmListPosition1 += -delta;
-						for (int i = 0; i < films.size(); i++)
-						{
-							productBoxes[i].first.move(0, -delta);
-							productBoxes[i].second.first.move(0, -delta);
-						}
-					}
-				}
-				else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-					if (filmListPosition1 < 120.f) {
-						filmListPosition1 += delta;
-						for (int i = 0; i < films.size(); i++)
-						{
-							productBoxes[i].first.move(0, delta);
-							productBoxes[i].second.first.move(0, delta);
-						}
-					}
-				}
-				if (event.type == sf::Event::MouseMoved)
-				{
-					sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
-					if (movieButton.getGlobalBounds().contains(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y)))
-					{
-						movieButtonText.setFillColor(sf::Color(255, 84, 0));
-					}
-					else {
-						movieButtonText.setFillColor(sf::Color::White);
-					}
-					//if (dropdownBox.getGlobalBounds().contains(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y))) {
-					//	dropdownText.setFillColor(sf::Color(255, 84, 0));
-					//}
-					//else {
-					//	dropdownText.setFillColor(sf::Color::White);
-					//}
-					if (dropdownBox.getGlobalBounds().contains(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y)))
-					{
-						dropdownText.setFillColor(sf::Color(255, 84, 0));
-						//isDropdownActive = !isDropdownActive;
-						isDropdownActive = true;
-					}
-					else if (isDropdownActive)
-					{
-						bool check = true;
-						for (int i = 0; i < 3; i++) {
-							{
-								//option.first.second = false;
-								if (options[i].second.getGlobalBounds().contains(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y)))
-								{
-									options[i].first.setFillColor(sf::Color(255, 84, 0));
-									//homePageButton = false;  selectDropDownButton = true; selectAndUpdateButton = true;
-									//break;
-									check = false;
-								}
-								else {
-									options[i].first.setFillColor(sf::Color::White);
-									//isDropdownActive = false;
-								}
-							}
-						}
-						if (check) {
-							isDropdownActive = false;
-							dropdownText.setFillColor(sf::Color::White);
-						}
-					}
-					//else if (isDropdownActive)
-					//{
-					//	for (int i = 0; i < 3; i++) {
-					//		if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
-					//		{
-					//			if (isMouseOver(options[i].second, window))
-					//			{
-					//				dropdownText.setString(options[i].first.getString());
-					//				indexButton = i + 1;
-					//				dropdownText.setFillColor(sf::Color::White);
-					//				isDropdownActive = false;
-					//				//isArrowDownUp = true;
-					//				homePageButton = false;  selectDropDownButton = true; selectAndUpdateButton = true;
-					//				break;
-					//			}
-					//		}
-					//	}
-					//}
-					if (createButton.getGlobalBounds().contains(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y)))
-					{
-						createButtonText.setFillColor(sf::Color(255, 84, 0));
-					}
-					else {
-						createButtonText.setFillColor(sf::Color::White);
-					}
-					if (exitButton.getGlobalBounds().contains(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y)))
-					{
-						exitButtonText.setFillColor(sf::Color(255, 84, 0));
-					}
-					else {
-						exitButtonText.setFillColor(sf::Color::White);
-					}
-				}
-				if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
-				{
-					//if (isMouseOver(dropdownBox, window))
-					//{
-					//	dropdownBox.setFillColor(sf::Color(111, 110, 111));
-					//	isDropdownActive = !isDropdownActive;
-					//}
-					//else if (isDropdownActive)
-					//{
-					//	for (int i = 0; i < 3; i++) {
-					//		{
-					//			//option.first.second = false;
-					//			if (isMouseOver(options[i].second, window))
-					//			{
-					//				dropdownText.setString(options[i].first.getString());
-					//				indexButton = i + 1;
-					//				dropdownBox.setFillColor(sf::Color::White);
-					//				isDropdownActive = false;
-					//				//isArrowDownUp = true;
-					//				homePageButton = false;  selectDropDownButton = true; selectAndUpdateButton = true;
-					//				break;
-					//			}
-					//		}
-					//	}
-
-					//}
-					if (isDropdownActive)
-					{
-						for (int i = 0; i < 3; i++) {
-							{
-								//option.first.second = false;
-								if (isMouseOver(options[i].second, window))
-								{
-									dropdownText.setString(options[i].first.getString());
-									indexButton = i + 1;
-									dropdownText.setFillColor(sf::Color::White);
-									isDropdownActive = false;
-									//isArrowDownUp = true;
-									homePageButton = false;  selectDropDownButton = true; selectAndUpdateButton = true;
-									break;
-								}
-							}
-						}
-
-					}
-					else if (createButton.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y))
-					{
-						createFilmsWindow(window, window1, font, filmListPosition1);
-					}
-					else {
-						for (int i = 0; i < productBoxes.size(); i++)
-						{
-							if (productBoxes[i].first.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y)) {
-								//cout << films[i].title << " " << films[i].desc << " " << films[i].image << endl;
-								updateFilmsWindow(window, window2, font, i, filmListPosition1);
-							}
-						}
-					}
-				}
-			}
-			else if (selectAndUpdateButton) {
-				if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
-				{
-					if (movieButton.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y))
-					{
-						homePageButton = true;
-						selectDropDownButton = false;
-						dropdownText.setString("ROOM");
-						selectAndUpdateButton = false;
-						indexButton = 0;
-					}
-					//if (isMouseOver(dropdownBox, window))
-					//{
-					//	dropdownText.setFillColor(sf::Color(255, 84, 0));
-					//	//isDropdownActive = !isDropdownActive;
-					//	isDropdownActive = true;
-					//}
-					//else if (isDropdownActive)
-					//{
-					//	for (int i = 0; i < 3; i++) {
-					//		//option.first.second = false;
-					//		if (isMouseOver(options[i].second, window))
-					//		{
-					//			dropdownText.setString(options[i].first.getString());
-					//			indexButton = i + 1;
-					//			dropdownBox.setFillColor(sf::Color::White);
-					//			isDropdownActive = false;
-					//			//isArrowDownUp = true;
-					//			homePageButton = false;  selectDropDownButton = true; selectAndUpdateButton = true;
-					//			break;
-					//		}
-					//	}
-					//}
-					if (isDropdownActive)
-					{
-						for (int i = 0; i < 3; i++) {
-							//option.first.second = false;
-							if (isMouseOver(options[i].second, window))
-							{
-								dropdownText.setString(options[i].first.getString());
-								indexButton = i + 1;
-								dropdownText.setFillColor(sf::Color::White);
-								isDropdownActive = false;
-								//isArrowDownUp = true;
-								homePageButton = false;  selectDropDownButton = true; selectAndUpdateButton = true;
-								break;
-							}
-						}
-
-					}
-
-					if (selectAndUpdateButton) {
-						if (indexButton) {
-							for (int i = 0; i < 12; i++) {
-								for (int j = 0; j < 6; j++) {
-									if (box[indexButton - 1][i][j].first.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y)) {
-										if (box[indexButton - 1][i][j].second) {
-											box[indexButton - 1][i][j].second = false;
-											box[indexButton - 1][i][j].first.setFillColor(sf::Color(238, 100, 87)); //100, 238, 87
-
-										}
-										else {
-											box[indexButton - 1][i][j].second = true;
-											box[indexButton - 1][i][j].first.setFillColor(sf::Color(100, 238, 87)); //100, 238, 87
-										}
-									}
-								}
-							}
-						}
-					}
-					if (createButton.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y))
-					{
-						createFilmsWindow(window, window1, font, filmListPosition1);
-					}
-				}
-				if (event.type == sf::Event::MouseMoved)
-				{
-					sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
-					if (movieButton.getGlobalBounds().contains(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y)))
-					{
-						movieButtonText.setFillColor(sf::Color(255, 84, 0));
-					}
-					else {
-						movieButtonText.setFillColor(sf::Color::White);
-					}
-					//if (dropdownBox.getGlobalBounds().contains(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y))) {
-					//	dropdownText.setFillColor(sf::Color(255, 84, 0));
-					//}
-					//else {
-					//	dropdownText.setFillColor(sf::Color::White);
-					//}
-					if (dropdownBox.getGlobalBounds().contains(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y)))
-					{
-						dropdownText.setFillColor(sf::Color(255, 84, 0));
-						//isDropdownActive = !isDropdownActive;
-						isDropdownActive = true;
-					}
-					else if (isDropdownActive)
-					{
-						bool check = true;
-						for (int i = 0; i < 3; i++) {
-							{
-								//option.first.second = false;
-								if (options[i].second.getGlobalBounds().contains(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y)))
-								{
-									options[i].first.setFillColor(sf::Color(255, 84, 0));
-									//homePageButton = false;  selectDropDownButton = true; selectAndUpdateButton = true;
-									//break;
-									check = false;
-								}
-								else {
-									options[i].first.setFillColor(sf::Color::White);
-								}
-							}
-						}
-						if (check) {
-							isDropdownActive = false;
-							dropdownText.setFillColor(sf::Color::White);
-						}
-					}
-					//else if (isDropdownActive)
-					//{
-					//	for (int i = 0; i < 3; i++) {
-					//		if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
-					//		{
-					//			if (isMouseOver(options[i].second, window))
-					//			{
-					//				dropdownText.setString(options[i].first.getString());
-					//				indexButton = i + 1;
-					//				dropdownText.setFillColor(sf::Color::White);
-					//				isDropdownActive = false;
-					//				//isArrowDownUp = true;
-					//				homePageButton = false;  selectDropDownButton = true; selectAndUpdateButton = true;
-					//				break;
-					//			}
-					//		}
-					//	}
-					//}
-					if (createButton.getGlobalBounds().contains(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y)))
-					{
-						createButtonText.setFillColor(sf::Color(255, 84, 0));
-					}
-					else {
-						createButtonText.setFillColor(sf::Color::White);
-					}
-					if (exitButton.getGlobalBounds().contains(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y)))
-					{
-						exitButtonText.setFillColor(sf::Color(255, 84, 0));
-					}
-					else {
-						exitButtonText.setFillColor(sf::Color::White);
-					}
-				}
-
-			}
-		}
-
-		window.clear(sf::Color::White);
-
-		window.draw(sprite);
-		//window.draw(filmList);
-		//window.draw(filmList1);
-		//window.draw(filmList2);
-		//window.draw(filmList3);
-		//window.draw(filmList4);
-		//window.draw(filmList5);
-		//window.draw(filmList6);
-		//window.draw(filmList7	);
-
-		if (homePageButton) {
-			for (int i = 0; i < films.size(); i++)
-			{
-				sf::Texture texture;
-				if (!texture.loadFromFile(productBoxes[i].second.second)) {
-					texture.loadFromFile("404.jfif");
-				}
-				sf::Sprite sprite(texture);
-				float scalex = 317.5 / texture.getSize().x;
-				float scaley = 445.0 / texture.getSize().y;
-				sprite.setScale(scalex, scaley);
-				float x = 20.f + 377.5 * (int)(i % 4) + 5;
-				float y = filmListPosition1 + (int)(i / 4) * 500 + 5;
-				sprite.setPosition(x, y);
-				window.draw(productBoxes[i].first);
-				window.draw(sprite);
-				window.draw(productBoxes[i].second.first);
-				//window.draw(films[i].updateSprite);
-				//window.draw(films[i].deleteSprite);
-				//window.draw(films[i].updateText);
-				//window.draw(films[i].deleteText);
-				//productBox.setPosition(20.f + 377.5 * (int)(i % 4), filmListPosition1 + (int)(i / 4) * 500);
-			}
-			//productBoxes[first].first.setPosition(position, 125);
-			//float text_X = position + productBoxes[first].first.getSize().x / 2 - productBoxes[first].second.first.getLocalBounds().width / 2;
-			//productBoxes[first].second.first.setPosition(text_X, 600);
-			//sf::Texture texture;
-			//if (!texture.loadFromFile(productBoxes[first].second.second)) {
-			//	texture.loadFromFile("404.jfif");
-			//}
-			//sf::Sprite sprite(texture);
-			//float scalex = 290.0 / texture.getSize().x;
-			//float scaley = 475.0 / texture.getSize().y;
-			//sprite.setScale(scalex, scaley);
-			//float x = position + 5;
-			//float y = productBoxes[first].first.getPosition().y + 5;
-			//sprite.setPosition(x, y);
-			//window.draw(productBoxes[first].first);
-			//window.draw(sprite);
-			//window.draw(productBoxes[first].second.first);
-
-			//int cnt = 0; // co the error
-			//for (int i = first + 1; i < films.size(); i++) {
-			//	float pos = position + ++cnt * 350;
-			//	productBoxes[i].first.setPosition(pos, 125);
-			//	float text_X = pos + productBoxes[i].first.getSize().x / 2 - productBoxes[i].second.first.getLocalBounds().width / 2;
-			//	productBoxes[i].second.first.setPosition(text_X, 600);
-			//	sf::Texture texture;
-			//	if (!texture.loadFromFile(productBoxes[i].second.second)) {
-			//		texture.loadFromFile("404.jfif");
-			//	}
-			//	sf::Sprite sprite(texture);
-			//	float scalex = 290.0 / texture.getSize().x;
-			//	float scaley = 475.0 / texture.getSize().y;
-			//	sprite.setScale(scalex, scaley);
-			//	float x = pos + 5;
-			//	float y = productBoxes[i].first.getPosition().y + 5;
-			//	sprite.setPosition(x, y);
-			//	window.draw(productBoxes[i].first);
-			//	window.draw(sprite);
-			//	window.draw(productBoxes[i].second.first);
-			//}
-
-			//for (int i = 0; i < first; i++) {
-			//	float pos = position + ++cnt * 350;
-			//	productBoxes[i].first.setPosition(pos, 125);
-			//	float text_X = pos + productBoxes[i].first.getSize().x / 2 - productBoxes[i].second.first.getLocalBounds().width / 2;
-			//	productBoxes[i].second.first.setPosition(text_X, 600);
-			//	sf::Texture texture;
-			//	if (!texture.loadFromFile(productBoxes[i].second.second)) {
-			//		texture.loadFromFile("404.jfif");
-			//	}
-			//	sf::Sprite sprite(texture);
-			//	float scalex = 290.0 / texture.getSize().x;
-			//	float scaley = 475.0 / texture.getSize().y;
-			//	sprite.setScale(scalex, scaley);
-			//	float x = pos + 5;
-			//	float y = productBoxes[i].first.getPosition().y + 5;
-			//	sprite.setPosition(x, y);
-			//	window.draw(productBoxes[i].first);
-			//	window.draw(sprite);
-			//	window.draw(productBoxes[i].second.first);
-			//}
-		}
-
-		window.draw(headerBox);
-		window.draw(movieButton);
-		window.draw(movieButtonText);
-		window.draw(createButton);
-		window.draw(createButtonText);
-		window.draw(exitButton);
-		window.draw(exitButtonText);
-
-		//if (homePageAdmin) {
-
-		//}
-
-		if (selectDropDownButton) {
-			window.draw(spriteOrder);
-		}
-
-		if (selectAndUpdateButton) {
-			if (indexButton) {
-				for (int i = 0; i < 12; i++) {
-					for (int j = 0; j < 6; j++) {
-						window.draw(box[indexButton - 1][i][j].first);
-					}
-				}
-			}
-		}
-
-		window.draw(dropdownBox);
-		window.draw(dropdownText);
-		//if (isArrowDownUp) {
-		//	arrow.setPoint(0, sf::Vector2f(0, 0));
-		//	arrow.setPoint(1, sf::Vector2f(15, 0));
-		//	arrow.setPoint(2, sf::Vector2f(7.5, 7.5));
-		//	arrow.setFillColor(sf::Color::Black);
-		//	window.draw(arrow);
-		//}
-
-		if (isDropdownActive)
-		{
-			//isArrowDownUp = false;
-			//arrow.setPoint(0, sf::Vector2f(7.5, 0));
-			//arrow.setPoint(1, sf::Vector2f(0, 7.5));
-			//arrow.setPoint(2, sf::Vector2f(15, 7.5));
-			//arrow.setFillColor(sf::Color::Black);
-			//window.draw(arrow);
-
-			for (const std::pair<sf::Text, sf::RectangleShape> option : options)
-			{
-				window.draw(option.second);
-				window.draw(option.first);
-			}
-		}
-
-
-		// Vẽ danh sách bộ phim
-		//for (int i = 0; i < films.size(); i++)
-		//{
-		//    sf::Text filmText(films[i].title + " (" + films[i].director + ", " + to_string(films[i].year) + ")", font, 20);
-		//    filmText.setPosition(filmList.getPosition().x + 10.f, filmList.getPosition().y + filmListPosition + i * 30.f);
-		//    window.draw(filmText);
-		//}
-
-		window.display();
-	}
-
-	return 0;
-}
-
-///////////////////// Phần code giúp movie mượt hơn (Line 3572 - 4384)
-
 //int main()
 //{
-//	// Khởi tạo cửa sổ window với kích thước 800x600
 //	sf::RenderWindow window(sf::VideoMode(1500, 900), "Drawing Line");
 //
-//	// Khởi tạo 2 bộ đệm để lưu trữ các hình ảnh
-//	sf::RenderTexture buffer1;
-//	sf::RenderTexture buffer2;
+//	sf::RenderWindow window1(sf::VideoMode(1050, 1000), "Create Window", sf::Style::None);
+//	window1.setVisible(false);
 //
-//	buffer1.create(1500, 900);
-//	buffer2.create(1500, 900);
+//	sf::RenderWindow window2(sf::VideoMode(1050, 1000), "Update Window", sf::Style::None);
+//	window2.setVisible(false);
 //
-//	// Khởi tạo con trỏ để trỏ đến buffer hiện tại
-//	sf::RenderTexture* currentBuffer = &buffer1;
-//
-//	// Khởi tạo font và text cho button
 //	sf::Texture texture;
 //	if (!texture.loadFromFile("image-admin.jpg"))
 //		return EXIT_FAILURE;
@@ -3596,12 +2533,22 @@ int main()
 //	float scaley = 900.0 / texture.getSize().y;
 //	sprite.setScale(scalex, scaley);
 //
+//	//////////////////////Font///////////////////////////
 //	sf::Font font;
 //	if (!font.loadFromFile("Roboto-Bold.ttf"))
 //	{
 //		std::cout << "Failed to load font!" << std::endl;
 //		return -1;
 //	}
+//	//////////////////////Font///////////////////////////
+//
+//	sf::RectangleShape headerBox(sf::Vector2f(1500, 100));
+//	headerBox.setFillColor(sf::Color(3, 19, 39)); //205, 156, 124, 150
+//	headerBox.setPosition(0, 0);
+//
+//	//////////////////////Movie//////////////////
+//
+//	//std::vector<pair<string, string>> films;
 //
 //	string title = "My nhan dao chich";
 //	string desc = "";
@@ -3648,6 +2595,21 @@ int main()
 //	linkImage = "haikedoitra.png";
 //	films.push_back({ title, desc, linkImage });
 //
+//	//std::vector<pair<sf::RectangleShape, pair<sf::Text, string>>> productBoxes;
+//
+//	//for (int i = 0; i < films.size(); i++)
+//	//{
+//	//	sf::RectangleShape productBox(sf::Vector2f(300, 500));
+//	//	productBox.setFillColor(sf::Color::White);
+//	//	productBox.setOutlineThickness(2);
+//	//	productBox.setOutlineColor(sf::Color::Black);
+//
+//	//	sf::Text productText(films[i].title, font, 24);
+//	//	productText.setFillColor(sf::Color::Black);
+//
+//	//	productBoxes.push_back({ productBox , {productText, films[i].image} });
+//	//}
+//
 //	float filmListPosition1 = 120.f;
 //
 //	for (int i = 0; i < films.size(); i++)
@@ -3668,187 +2630,196 @@ int main()
 //		productBoxes.push_back({ productBox , {productText, films[i].image} });
 //	}
 //
-//	bool homePageButton = true;
+//	//for (int i = 0;i < films.size(); i++) {
+//	//	sf::Texture updateTexture;
+//	//	if (!updateTexture.loadFromFile("button_update.png"))
+//	//		return EXIT_FAILURE;
 //
-//	// Vòng lặp chính của chương trình
-//	while (window.isOpen())
-//	{
-//		// Xử lý các sự kiện của window
-//		sf::Event event;
-//		while (window.pollEvent(event))
-//		{
-//			if (event.type == sf::Event::Closed)
-//			{
-//				window.close();
-//			}
-//			if (homePageButton) {
-//				// Xử lý sự kiện cuộn danh sách bộ phim
-//				if (event.type == sf::Event::MouseWheelScrolled)
-//				{
-//					if (films.size() > 0) {
-//						if (event.mouseWheelScroll.delta > 0) {
-//							if (filmListPosition1 < 120.f) {
-//								filmListPosition1 += event.mouseWheelScroll.delta * 20.f;
-//							}
-//						}
-//						else if (event.mouseWheelScroll.delta < 0) {
-//							if (productBoxes[films.size() - 1].first.getPosition().y >= 380) {
-//								filmListPosition1 += event.mouseWheelScroll.delta * 20.f;
-//							}
-//						}
-//					}
+//	//	sf::Sprite uSprite(updateTexture);
 //
-//					for (int i = 0; i < films.size(); i++)
-//					{
-//						productBoxes[i].first.setPosition(20.f + 377.5 * (int)(i % 4), filmListPosition1 + (int)(i / 4) * 500);
-//						float text_X = 20.f + 377.5 * (int)(i % 4) + productBoxes[i].first.getSize().x / 2 - productBoxes[i].second.first.getLocalBounds().width / 2;
-//						float text_Y = filmListPosition1 + (int)(i / 4) * 500 + productBoxes[i].first.getSize().y - 25;
-//						productBoxes[i].second.first.setPosition(text_X, text_Y);
-//					}
-//				}
-//			}
-//		}
+//	//	sf::Texture deleteTexture;
+//	//	if (!deleteTexture.loadFromFile("button_delete.png"))
+//	//		return EXIT_FAILURE;
 //
-//		// Vẽ các hình ảnh của bạn lên buffer hiện tại
-//		currentBuffer->clear();
+//	//	sf::Sprite dSprite(deleteTexture);
 //
-//		currentBuffer->draw(sprite);
+//	//	float scale_x = 163.50 / updateTexture.getSize().x;
+//	//	float scale_y = 30.0 / updateTexture.getSize().y;
+//	//	uSprite.setScale(scale_x, scale_y);
+//	//	uSprite.setPosition(20.f + 377.5 * (int)(i % 4), filmListPosition1 + (int)(i / 4) * 500 + productBoxes[i].first.getSize().y + 5);
+//	//	films[i].updateSprite = uSprite;
 //
-//		if (homePageButton) {
-//			for (int i = 0; i < films.size(); i++)
-//			{
-//				cout << "cach #";
-//				sf::Texture texture;
-//				if (!texture.loadFromFile(productBoxes[i].second.second)) {
-//					texture.loadFromFile("404.jfif");
-//				}
-//				sf::Sprite sprite(texture);
-//				float scalex = 317.5 / texture.getSize().x;
-//				float scaley = 445.0 / texture.getSize().y;
-//				sprite.setScale(scalex, scaley);
-//				float x = 20.f + 377.5 * (int)(i % 4) + 5;
-//				float y = filmListPosition1 + (int)(i / 4) * 500 + 5;
-//				sprite.setPosition(x, y);
-//				currentBuffer->draw(productBoxes[i].first);
-//				currentBuffer->draw(sprite);
-//				currentBuffer->draw(productBoxes[i].second.first);
-//			}
-//		}
+//	//	dSprite.setScale(scale_x, scale_y);
+//	//	dSprite.setPosition(20.f + 377.5 * (int)(i % 4) + productBoxes[i].first.getSize().x / 2 + 0.5, filmListPosition1 + (int)(i / 4) * 500 + productBoxes[i].first.getSize().y + 5);
+//	//	films[i].deleteSprite = dSprite;
 //
-//		currentBuffer->display();
+//	//	sf::Font fontUpdate;
+//	//	if (!fontUpdate.loadFromFile("SourceSansPro-Bold.ttf"))
+//	//	{
+//	//		std::cout << "Failed to load font!" << std::endl;
+//	//		return -1;
+//	//	}
 //
-//		// Hiển thị buffer hiện tại lên window
-//		sf::Sprite windowSprite(currentBuffer->getTexture());
-//		window.draw(windowSprite);
+//	//	sf::Text textUpdate;
+//	//	textUpdate.setFont(fontUpdate);
+//	//	textUpdate.setCharacterSize(25);
+//	//	textUpdate.setFillColor(sf::Color(255, 255, 255));
+//	//	textUpdate.setString("UPDATE");
+//	//	float width = productBoxes[i].first.getSize().x / 2 - textUpdate.getLocalBounds().width / 2;
+//	//	textUpdate.setPosition(20.f + 377.5 * (int)(i % 4) + width, filmListPosition1 + (int)(i / 4) * 500 + productBoxes[i].first.getSize().y + 7);
 //
-//		// Hoán đổi con trỏ để trỏ đến buffer khác
-//		if (currentBuffer == &buffer1)
-//		{
-//			currentBuffer = &buffer2;
-//		}
-//		else
-//		{
-//			currentBuffer = &buffer1;
-//		}	
+//	//	films[i].updateText = textUpdate;
 //
-//		// Hiển thị các hình ảnh lên window
-//		window.display();
-//	}
+//	//	sf::Text textDelete;
+//	//	textDelete.setFont(fontUpdate);
+//	//	textDelete.setCharacterSize(25);
+//	//	textDelete.setFillColor(sf::Color(255, 255, 255));
+//	//	textDelete.setString("DELETE");
+//	//	width = productBoxes[i].first.getSize().x / 2 - textDelete.getLocalBounds().width / 2;
+//	//	textDelete.setPosition(20.f + 377.5 * (int)(i % 4) + productBoxes[i].first.getSize().x / 2 + width, filmListPosition1 + (int)(i / 4) * 500 + productBoxes[i].first.getSize().y + 7);
 //
-//	return 0;
-//}
-
-//int main()
-//{
-//	// Khởi tạo cửa sổ window với kích thước 800x600
-//	sf::RenderWindow window(sf::VideoMode(1500, 900), "Drawing Line");
+//	//	films[i].deleteText = textDelete;
+//	//}
 //
-//	sf::Texture texture;
-//	if (!texture.loadFromFile("image-admin.jpg"))
+//	//////////////////////Movie//////////////////
+//
+//
+//
+//	//////////////////////Order//////////////////
+//	sf::Texture textureOrder;
+//	if (!textureOrder.loadFromFile("order(1500-800).png"))
 //		return EXIT_FAILURE;
 //
 //	// tạo sprite sử dụng texture đã tải
-//	sf::Sprite sprite(texture);
-//	sf::Vector2u windowsize = window.getSize();
-//	float scalex = 1500.0 / texture.getSize().x;
-//	float scaley = 900.0 / texture.getSize().y;
-//	sprite.setScale(scalex, scaley);
+//	sf::Sprite spriteOrder(textureOrder);
+//	float scale_x = 1500.0 / textureOrder.getSize().x;
+//	float scale_y = 800.0 / textureOrder.getSize().y;
+//	spriteOrder.setScale(scale_x, scale_y);
+//	spriteOrder.setPosition(0, 100);
 //
-//	sf::Font font;
-//	if (!font.loadFromFile("Roboto-Bold.ttf"))
-//	{
-//		std::cout << "Failed to load font!" << std::endl;
-//		return -1;
+//	std::pair<sf::RectangleShape, bool> box[3][12][6];
+//	//vector< std::pair<sf::RectangleShape, bool>> box[12][6];
+//
+//	double x_0 = 196, y_0 = 345;
+//	double delta_x = 93.5, delta_y = 88.5;
+//
+//	for (int k = 0; k < 3; k++) {
+//		for (int i = 0; i < 12; i++) {
+//			for (int j = 0; j < 6; j++) {
+//				double x = x_0 + i * delta_x, y = y_0 + j * delta_y;
+//				box[k][i][j].second = false;
+//				box[k][i][j].first.setSize(sf::Vector2f(76, 74.5));
+//				box[k][i][j].first.setFillColor(sf::Color(238, 100, 87)); //100, 238, 87
+//				box[k][i][j].first.setOutlineThickness(2);
+//				box[k][i][j].first.setOutlineColor(sf::Color::Black);
+//				box[k][i][j].first.setPosition(x, y);
+//			}
+//		}
 //	}
 //
-//	string title = "My nhan dao chich";
-//	string desc = "";
-//	string linkImage = "mynhandaochich.jpg";
-//	films.push_back({ title, desc, linkImage });
 //
-//	title = "Am hon do thi";
-//	desc = "";
-//	linkImage = "amhondothi.jpg";
-//	films.push_back({ title, desc, linkImage });
+//	//////////////////////Order//////////////////
 //
-//	title = "Nguoi vo cuoi cung";
-//	desc = "";
-//	linkImage = "nguoivocuoicung.jpg";
-//	films.push_back({ title, desc, linkImage });
+//	///////////////////////////////////
 //
-//	title = "Nam dem kinh hoang";
-//	desc = "";
-//	linkImage = "5demkinhhoang.jpg";
-//	films.push_back({ title, desc, linkImage });
-//
-//	title = "Quy mon quan";
-//	desc = "";
-//	linkImage = "quymonquan.jpg";
-//	films.push_back({ title, desc, linkImage });
-//
-//	title = "Wolfoo";
-//	desc = "";
-//	linkImage = "wolfoo.jpg";
-//	films.push_back({ title, desc, linkImage });
-//
-//	title = "Dat rung phuong nam";
-//	desc = "";
-//	linkImage = "marvel.jpg";
-//	films.push_back({ title, desc, linkImage });
-//
-//	title = "Biet doi Marvel";
-//	desc = "";
-//	linkImage = "marvel.jpg";
-//	films.push_back({ title, desc, linkImage });
-//
-//	title = "Hai ke doi tra";
-//	desc = "";
-//	linkImage = "haikedoitra.png";
-//	films.push_back({ title, desc, linkImage });
-//
-//	float filmListPosition1 = 120.f;
-//
-//	for (int i = 0; i < films.size(); i++)
-//	{
-//		sf::RectangleShape productBox(sf::Vector2f(327.5f, 470.f));
-//		productBox.setPosition(20.f + 377.5 * (int)(i % 4), filmListPosition1 + (int)(i / 4) * 500);
-//		productBox.setFillColor(sf::Color::White);
-//		productBox.setOutlineThickness(2);
-//		productBox.setOutlineColor(sf::Color::Black);
-//
-//		sf::Text productText(films[i].title, font, 24);
-//		productText.setFillColor(sf::Color::Black);
-//
-//		float text_X = 20.f + 377.5 * (int)(i % 4) + productBox.getSize().x / 2 - productText.getLocalBounds().width / 2;
-//		float text_Y = filmListPosition1 + (int)(i / 4) * 500 + productBox.getSize().y - 25;
-//		productText.setPosition(text_X, text_Y);
-//
-//		productBoxes.push_back({ productBox , {productText, films[i].image} });
-//	}
-//
+//	//bool selectButton[3]; memset(selectButton, false, 3);
 //	bool homePageButton = true;
+//	bool selectDropDownButton = false;
+//	bool selectAndUpdateButton = false; int indexButton = 0;
+//	bool createButtonActive = false;
 //
-//	// Vòng lặp chính của chương trình
+//	sf::RectangleShape movieButton(sf::Vector2f(200, 100));
+//	movieButton.setFillColor(sf::Color(3, 22, 46));
+//	//createButton.setOutlineThickness(2);
+//	//createButton.setOutlineColor(sf::Color(205, 156, 124, 255));
+//	movieButton.setPosition(600, 0);
+//
+//	sf::Text movieButtonText("MOVIE", font, 30);
+//	movieButtonText.setFillColor(sf::Color::White);
+//	movieButtonText.setPosition(655, 35);
+//
+//	//////////////////dropdown/////////////////////////
+//
+//	sf::RectangleShape dropdownBox(sf::Vector2f(200, 100));
+//	dropdownBox.setFillColor(sf::Color(3, 22, 46)); //3, 19, 39, 230
+//	dropdownBox.setPosition(800, 0);
+//
+//	sf::Text dropdownText("ROOM", font, 30);
+//	dropdownText.setFillColor(sf::Color::White);
+//	dropdownText.setPosition(850, 35);
+//
+//	std::vector< std::pair<sf::Text, sf::RectangleShape> > options;
+//	sf::RectangleShape option1Box(sf::Vector2f(200, 50));
+//	option1Box.setFillColor(sf::Color(3, 22, 46));
+//	//option1Box.setOutlineThickness(0.5);
+//	//option1Box.setOutlineColor(sf::Color::White);
+//	option1Box.setPosition(800, 100);
+//
+//	sf::Text option1("ROOM 1", font, 30);
+//	option1.setPosition(848, 105);
+//	option1.setFillColor(sf::Color::White);
+//	options.push_back({ {option1} , option1Box });
+//
+//	sf::RectangleShape option2Box(sf::Vector2f(200, 50));
+//	option2Box.setFillColor(sf::Color(3, 22, 46));
+//	//option2Box.setOutlineThickness(0.5);
+//	//option2Box.setOutlineColor(sf::Color::White);
+//	option2Box.setPosition(800, 150);
+//
+//	sf::Text option2("ROOM 2", font, 30);
+//	option2.setPosition(848, 155);
+//	option2.setFillColor(sf::Color::White);
+//	options.push_back({ {option2} , option2Box });
+//
+//	sf::RectangleShape option3Box(sf::Vector2f(200, 50));
+//	option3Box.setFillColor(sf::Color(3, 22, 46));
+//	//option3Box.setOutlineThickness(0.5);
+//	//option3Box.setOutlineColor(sf::Color::White);
+//	option3Box.setPosition(800, 200);
+//
+//	sf::Text option3("ROOM 3", font, 30);
+//	option3.setPosition(848, 205);
+//	option3.setFillColor(sf::Color::White);
+//	options.push_back({ {option3} , option3Box });
+//
+//	bool isDropdownActive = false;
+//
+//	//////////////////dropdown/////////////////////////
+//
+//	/////////////////create & exit////////////////////////////
+//
+//	sf::RectangleShape createButton(sf::Vector2f(200, 100));
+//	createButton.setFillColor(sf::Color(3, 22, 46));
+//	//createButton.setOutlineThickness(2);
+//	//createButton.setOutlineColor(sf::Color(205, 156, 124, 255));
+//	createButton.setPosition(1000, 0);
+//
+//	sf::Text createButtonText("CREATE", font, 30);
+//	createButtonText.setFillColor(sf::Color::White);
+//	createButtonText.setPosition(1045, 35);
+//
+//	sf::RectangleShape exitButton(sf::Vector2f(200, 100));
+//	exitButton.setFillColor(sf::Color(3, 22, 46));
+//	//createButton.setOutlineThickness(2);
+//	//createButton.setOutlineColor(sf::Color(205, 156, 124, 255));
+//	exitButton.setPosition(1200, 0);
+//
+//	sf::Text exitButtonText("EXIT", font, 30);
+//	exitButtonText.setFillColor(sf::Color::White);
+//	exitButtonText.setPosition(1263, 35);
+//
+//	/////////////////create & exit////////////////////////////
+//
+//	//float position = 50.0f;
+//	//int first = 0, last = films.size() - 1;
+//	//std::thread thread(updateFilmPosition, std::ref(position), std::ref(first), std::ref(last));
+//
+//	//int cnt = 0;
+//
+//	// Thiết lập vị trí ban đầu của danh sách bộ phim
+//
+//	float delta = 25.f;
+//
 //	while (window.isOpen())
 //	{
 //		sf::Event event;
@@ -3856,31 +2827,357 @@ int main()
 //		{
 //			if (event.type == sf::Event::Closed)
 //				window.close();
+//			//thread.detach();
 //			if (homePageButton) {
 //				// Xử lý sự kiện cuộn danh sách bộ phim
-//				if (event.type == sf::Event::MouseWheelScrolled)
-//				{
-//					if (films.size() > 0) {
-//						if (event.mouseWheelScroll.delta > 0) {
-//							if (filmListPosition1 < 120.f) {
-//								filmListPosition1 += event.mouseWheelScroll.delta * 20.f;
-//							}
-//						}
-//						else if (event.mouseWheelScroll.delta < 0) {
-//							if (productBoxes[films.size() - 1].first.getPosition().y >= 380) {
-//								filmListPosition1 += event.mouseWheelScroll.delta * 20.f;
-//							}
-//						}
-//					}
+//	//			if (event.type == sf::Event::MouseWheelScrolled)
+//	//			{
+//	//				// lăn xuống(-) lăn lên(+)
+//	//				//filmListPosition1 -= event.mouseWheelScroll.delta * 10.f;
 //
-//					for (int i = 0; i < films.size(); i++)
-//					{
-//						productBoxes[i].first.setPosition(20.f + 377.5 * (int)(i % 4), filmListPosition1 + (int)(i / 4) * 500);
-//						float text_X = 20.f + 377.5 * (int)(i % 4) + productBoxes[i].first.getSize().x / 2 - productBoxes[i].second.first.getLocalBounds().width / 2;
-//						float text_Y = filmListPosition1 + (int)(i / 4) * 500 + productBoxes[i].first.getSize().y - 25;
-//						productBoxes[i].second.first.setPosition(text_X, text_Y);
+//	//				//if (event.mouseWheelScroll.delta > 0) {
+//	//				//	if (filmListPosition1 < 120.f) {
+//	//				//		filmListPosition1 += event.mouseWheelScroll.delta * 10.f;
+//	//				//	}
+//	//				//}
+//	//				//else if (event.mouseWheelScroll.delta < 0) {
+//	//				//	if (filmList7.getPosition().y >= 380) {
+//	//				//		filmListPosition1 += event.mouseWheelScroll.delta * 10.f;
+//	//				//	}
+//	//				//}
+//	//				if (films.size() > 0) {
+//	//					if (event.mouseWheelScroll.delta > 0) {
+//	//						if (filmListPosition1 < 120.f) {
+//	//							filmListPosition1 += event.mouseWheelScroll.delta * 20.f;
+//	//						}
+//	//					}
+//	//					else if (event.mouseWheelScroll.delta < 0) {
+//	//						if (productBoxes[films.size() - 1].first.getPosition().y >= 380) {
+//	//							filmListPosition1 += event.mouseWheelScroll.delta * 20.f;
+//	//						}
+//	//					}
+//	//				}
+//
+//	//				for (int i = 0; i < films.size(); i++)
+//	//				{
+//	//					productBoxes[i].first.setPosition(20.f + 377.5 * (int)(i % 4), filmListPosition1 + (int)(i / 4) * 500);
+//	//					float text_X = 20.f + 377.5 * (int)(i % 4) + productBoxes[i].first.getSize().x / 2 - productBoxes[i].second.first.getLocalBounds().width / 2;
+//	//					float text_Y = filmListPosition1 + (int)(i / 4) * 500 + productBoxes[i].first.getSize().y - 25;
+//	//					productBoxes[i].second.first.setPosition(text_X, text_Y);
+//	//				}
+//				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+//					if (productBoxes[films.size() - 1].first.getPosition().y >= 380) {
+//						filmListPosition1 += -delta;
+//						for (int i = 0; i < films.size(); i++)
+//						{
+//							productBoxes[i].first.move(0, -delta);
+//							productBoxes[i].second.first.move(0, -delta);
+//						}
 //					}
 //				}
+//				else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+//					if (filmListPosition1 < 120.f) {
+//						filmListPosition1 += delta;
+//						for (int i = 0; i < films.size(); i++)
+//						{
+//							productBoxes[i].first.move(0, delta);
+//							productBoxes[i].second.first.move(0, delta);
+//						}
+//					}
+//				}
+//				if (event.type == sf::Event::MouseMoved)
+//				{
+//					sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+//					if (movieButton.getGlobalBounds().contains(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y)))
+//					{
+//						movieButtonText.setFillColor(sf::Color(255, 84, 0));
+//					}
+//					else {
+//						movieButtonText.setFillColor(sf::Color::White);
+//					}
+//					//if (dropdownBox.getGlobalBounds().contains(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y))) {
+//					//	dropdownText.setFillColor(sf::Color(255, 84, 0));
+//					//}
+//					//else {
+//					//	dropdownText.setFillColor(sf::Color::White);
+//					//}
+//					if (dropdownBox.getGlobalBounds().contains(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y)))
+//					{
+//						dropdownText.setFillColor(sf::Color(255, 84, 0));
+//						//isDropdownActive = !isDropdownActive;
+//						isDropdownActive = true;
+//					}
+//					else if (isDropdownActive)
+//					{
+//						bool check = true;
+//						for (int i = 0; i < 3; i++) {
+//							{
+//								//option.first.second = false;
+//								if (options[i].second.getGlobalBounds().contains(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y)))
+//								{
+//									options[i].first.setFillColor(sf::Color(255, 84, 0));
+//									//homePageButton = false;  selectDropDownButton = true; selectAndUpdateButton = true;
+//									//break;
+//									check = false;
+//								}
+//								else {
+//									options[i].first.setFillColor(sf::Color::White);
+//									//isDropdownActive = false;
+//								}
+//							}
+//						}
+//						if (check) {
+//							isDropdownActive = false;
+//							dropdownText.setFillColor(sf::Color::White);
+//						}
+//					}
+//					//else if (isDropdownActive)
+//					//{
+//					//	for (int i = 0; i < 3; i++) {
+//					//		if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
+//					//		{
+//					//			if (isMouseOver(options[i].second, window))
+//					//			{
+//					//				dropdownText.setString(options[i].first.getString());
+//					//				indexButton = i + 1;
+//					//				dropdownText.setFillColor(sf::Color::White);
+//					//				isDropdownActive = false;
+//					//				//isArrowDownUp = true;
+//					//				homePageButton = false;  selectDropDownButton = true; selectAndUpdateButton = true;
+//					//				break;
+//					//			}
+//					//		}
+//					//	}
+//					//}
+//					if (createButton.getGlobalBounds().contains(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y)))
+//					{
+//						createButtonText.setFillColor(sf::Color(255, 84, 0));
+//					}
+//					else {
+//						createButtonText.setFillColor(sf::Color::White);
+//					}
+//					if (exitButton.getGlobalBounds().contains(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y)))
+//					{
+//						exitButtonText.setFillColor(sf::Color(255, 84, 0));
+//					}
+//					else {
+//						exitButtonText.setFillColor(sf::Color::White);
+//					}
+//				}
+//				if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
+//				{
+//					//if (isMouseOver(dropdownBox, window))
+//					//{
+//					//	dropdownBox.setFillColor(sf::Color(111, 110, 111));
+//					//	isDropdownActive = !isDropdownActive;
+//					//}
+//					//else if (isDropdownActive)
+//					//{
+//					//	for (int i = 0; i < 3; i++) {
+//					//		{
+//					//			//option.first.second = false;
+//					//			if (isMouseOver(options[i].second, window))
+//					//			{
+//					//				dropdownText.setString(options[i].first.getString());
+//					//				indexButton = i + 1;
+//					//				dropdownBox.setFillColor(sf::Color::White);
+//					//				isDropdownActive = false;
+//					//				//isArrowDownUp = true;
+//					//				homePageButton = false;  selectDropDownButton = true; selectAndUpdateButton = true;
+//					//				break;
+//					//			}
+//					//		}
+//					//	}
+//
+//					//}
+//					if (isDropdownActive)
+//					{
+//						for (int i = 0; i < 3; i++) {
+//							{
+//								//option.first.second = false;
+//								if (isMouseOver(options[i].second, window))
+//								{
+//									dropdownText.setString(options[i].first.getString());
+//									indexButton = i + 1;
+//									dropdownText.setFillColor(sf::Color::White);
+//									isDropdownActive = false;
+//									//isArrowDownUp = true;
+//									homePageButton = false;  selectDropDownButton = true; selectAndUpdateButton = true;
+//									break;
+//								}
+//							}
+//						}
+//
+//					}
+//					else if (createButton.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y))
+//					{
+//						createFilmsWindow(window, window1, font, filmListPosition1);
+//					}
+//					else {
+//						for (int i = 0; i < productBoxes.size(); i++)
+//						{
+//							if (productBoxes[i].first.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y)) {
+//								//cout << films[i].title << " " << films[i].desc << " " << films[i].image << endl;
+//								updateFilmsWindow(window, window2, font, i, filmListPosition1);
+//							}
+//						}
+//					}
+//				}
+//			}
+//			else if (selectAndUpdateButton) {
+//				if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
+//				{
+//					if (movieButton.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y))
+//					{
+//						homePageButton = true;
+//						selectDropDownButton = false;
+//						dropdownText.setString("ROOM");
+//						selectAndUpdateButton = false;
+//						indexButton = 0;
+//					}
+//					//if (isMouseOver(dropdownBox, window))
+//					//{
+//					//	dropdownText.setFillColor(sf::Color(255, 84, 0));
+//					//	//isDropdownActive = !isDropdownActive;
+//					//	isDropdownActive = true;
+//					//}
+//					//else if (isDropdownActive)
+//					//{
+//					//	for (int i = 0; i < 3; i++) {
+//					//		//option.first.second = false;
+//					//		if (isMouseOver(options[i].second, window))
+//					//		{
+//					//			dropdownText.setString(options[i].first.getString());
+//					//			indexButton = i + 1;
+//					//			dropdownBox.setFillColor(sf::Color::White);
+//					//			isDropdownActive = false;
+//					//			//isArrowDownUp = true;
+//					//			homePageButton = false;  selectDropDownButton = true; selectAndUpdateButton = true;
+//					//			break;
+//					//		}
+//					//	}
+//					//}
+//					if (isDropdownActive)
+//					{
+//						for (int i = 0; i < 3; i++) {
+//							//option.first.second = false;
+//							if (isMouseOver(options[i].second, window))
+//							{
+//								dropdownText.setString(options[i].first.getString());
+//								indexButton = i + 1;
+//								dropdownText.setFillColor(sf::Color::White);
+//								isDropdownActive = false;
+//								//isArrowDownUp = true;
+//								homePageButton = false;  selectDropDownButton = true; selectAndUpdateButton = true;
+//								break;
+//							}
+//						}
+//
+//					}
+//
+//					if (selectAndUpdateButton) {
+//						if (indexButton) {
+//							for (int i = 0; i < 12; i++) {
+//								for (int j = 0; j < 6; j++) {
+//									if (box[indexButton - 1][i][j].first.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y)) {
+//										if (box[indexButton - 1][i][j].second) {
+//											box[indexButton - 1][i][j].second = false;
+//											box[indexButton - 1][i][j].first.setFillColor(sf::Color(238, 100, 87)); //100, 238, 87
+//
+//										}
+//										else {
+//											box[indexButton - 1][i][j].second = true;
+//											box[indexButton - 1][i][j].first.setFillColor(sf::Color(100, 238, 87)); //100, 238, 87
+//										}
+//									}
+//								}
+//							}
+//						}
+//					}
+//					if (createButton.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y))
+//					{
+//						createFilmsWindow(window, window1, font, filmListPosition1);
+//					}
+//				}
+//				if (event.type == sf::Event::MouseMoved)
+//				{
+//					sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+//					if (movieButton.getGlobalBounds().contains(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y)))
+//					{
+//						movieButtonText.setFillColor(sf::Color(255, 84, 0));
+//					}
+//					else {
+//						movieButtonText.setFillColor(sf::Color::White);
+//					}
+//					//if (dropdownBox.getGlobalBounds().contains(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y))) {
+//					//	dropdownText.setFillColor(sf::Color(255, 84, 0));
+//					//}
+//					//else {
+//					//	dropdownText.setFillColor(sf::Color::White);
+//					//}
+//					if (dropdownBox.getGlobalBounds().contains(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y)))
+//					{
+//						dropdownText.setFillColor(sf::Color(255, 84, 0));
+//						//isDropdownActive = !isDropdownActive;
+//						isDropdownActive = true;
+//					}
+//					else if (isDropdownActive)
+//					{
+//						bool check = true;
+//						for (int i = 0; i < 3; i++) {
+//							{
+//								//option.first.second = false;
+//								if (options[i].second.getGlobalBounds().contains(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y)))
+//								{
+//									options[i].first.setFillColor(sf::Color(255, 84, 0));
+//									//homePageButton = false;  selectDropDownButton = true; selectAndUpdateButton = true;
+//									//break;
+//									check = false;
+//								}
+//								else {
+//									options[i].first.setFillColor(sf::Color::White);
+//								}
+//							}
+//						}
+//						if (check) {
+//							isDropdownActive = false;
+//							dropdownText.setFillColor(sf::Color::White);
+//						}
+//					}
+//					//else if (isDropdownActive)
+//					//{
+//					//	for (int i = 0; i < 3; i++) {
+//					//		if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
+//					//		{
+//					//			if (isMouseOver(options[i].second, window))
+//					//			{
+//					//				dropdownText.setString(options[i].first.getString());
+//					//				indexButton = i + 1;
+//					//				dropdownText.setFillColor(sf::Color::White);
+//					//				isDropdownActive = false;
+//					//				//isArrowDownUp = true;
+//					//				homePageButton = false;  selectDropDownButton = true; selectAndUpdateButton = true;
+//					//				break;
+//					//			}
+//					//		}
+//					//	}
+//					//}
+//					if (createButton.getGlobalBounds().contains(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y)))
+//					{
+//						createButtonText.setFillColor(sf::Color(255, 84, 0));
+//					}
+//					else {
+//						createButtonText.setFillColor(sf::Color::White);
+//					}
+//					if (exitButton.getGlobalBounds().contains(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y)))
+//					{
+//						exitButtonText.setFillColor(sf::Color(255, 84, 0));
+//					}
+//					else {
+//						exitButtonText.setFillColor(sf::Color::White);
+//					}
+//				}
+//
 //			}
 //		}
 //
@@ -3905,480 +3202,448 @@ int main()
 //				window.draw(productBoxes[i].first);
 //				window.draw(sprite);
 //				window.draw(productBoxes[i].second.first);
+//				//window.draw(films[i].updateSprite);
+//				//window.draw(films[i].deleteSprite);
+//				//window.draw(films[i].updateText);
+//				//window.draw(films[i].deleteText);
+//				//productBox.setPosition(20.f + 377.5 * (int)(i % 4), filmListPosition1 + (int)(i / 4) * 500);
 //			}
+//			//productBoxes[first].first.setPosition(position, 125);
+//			//float text_X = position + productBoxes[first].first.getSize().x / 2 - productBoxes[first].second.first.getLocalBounds().width / 2;
+//			//productBoxes[first].second.first.setPosition(text_X, 600);
+//			//sf::Texture texture;
+//			//if (!texture.loadFromFile(productBoxes[first].second.second)) {
+//			//	texture.loadFromFile("404.jfif");
+//			//}
+//			//sf::Sprite sprite(texture);
+//			//float scalex = 290.0 / texture.getSize().x;
+//			//float scaley = 475.0 / texture.getSize().y;
+//			//sprite.setScale(scalex, scaley);
+//			//float x = position + 5;
+//			//float y = productBoxes[first].first.getPosition().y + 5;
+//			//sprite.setPosition(x, y);
+//			//window.draw(productBoxes[first].first);
+//			//window.draw(sprite);
+//			//window.draw(productBoxes[first].second.first);
+//
+//			//int cnt = 0; // co the error
+//			//for (int i = first + 1; i < films.size(); i++) {
+//			//	float pos = position + ++cnt * 350;
+//			//	productBoxes[i].first.setPosition(pos, 125);
+//			//	float text_X = pos + productBoxes[i].first.getSize().x / 2 - productBoxes[i].second.first.getLocalBounds().width / 2;
+//			//	productBoxes[i].second.first.setPosition(text_X, 600);
+//			//	sf::Texture texture;
+//			//	if (!texture.loadFromFile(productBoxes[i].second.second)) {
+//			//		texture.loadFromFile("404.jfif");
+//			//	}
+//			//	sf::Sprite sprite(texture);
+//			//	float scalex = 290.0 / texture.getSize().x;
+//			//	float scaley = 475.0 / texture.getSize().y;
+//			//	sprite.setScale(scalex, scaley);
+//			//	float x = pos + 5;
+//			//	float y = productBoxes[i].first.getPosition().y + 5;
+//			//	sprite.setPosition(x, y);
+//			//	window.draw(productBoxes[i].first);
+//			//	window.draw(sprite);
+//			//	window.draw(productBoxes[i].second.first);
+//			//}
+//
+//			//for (int i = 0; i < first; i++) {
+//			//	float pos = position + ++cnt * 350;
+//			//	productBoxes[i].first.setPosition(pos, 125);
+//			//	float text_X = pos + productBoxes[i].first.getSize().x / 2 - productBoxes[i].second.first.getLocalBounds().width / 2;
+//			//	productBoxes[i].second.first.setPosition(text_X, 600);
+//			//	sf::Texture texture;
+//			//	if (!texture.loadFromFile(productBoxes[i].second.second)) {
+//			//		texture.loadFromFile("404.jfif");
+//			//	}
+//			//	sf::Sprite sprite(texture);
+//			//	float scalex = 290.0 / texture.getSize().x;
+//			//	float scaley = 475.0 / texture.getSize().y;
+//			//	sprite.setScale(scalex, scaley);
+//			//	float x = pos + 5;
+//			//	float y = productBoxes[i].first.getPosition().y + 5;
+//			//	sprite.setPosition(x, y);
+//			//	window.draw(productBoxes[i].first);
+//			//	window.draw(sprite);
+//			//	window.draw(productBoxes[i].second.first);
+//			//}
 //		}
 //
-//		window.display();
-//	}
+//		window.draw(headerBox);
+//		window.draw(movieButton);
+//		window.draw(movieButtonText);
+//		window.draw(createButton);
+//		window.draw(createButtonText);
+//		window.draw(exitButton);
+//		window.draw(exitButtonText);
 //
-//	return 0;
-//}
-
-
-//std::vector<sf::Sprite> boxes;
-//int main()
-//{
-//	sf::RenderWindow window(sf::VideoMode(1500, 900), "Drawing Line");
+//		//if (homePageAdmin) {
 //
-//	// Tạo một đối tượng view với kích thước ban đầu (800, 600)
-//	sf::View view(sf::FloatRect(0, 0, 1500, 900));
-//
-//	sf::Texture texture;
-//	if (!texture.loadFromFile("image-admin.jpg"))
-//		return EXIT_FAILURE;
-//
-//	// tạo sprite sử dụng texture đã tải
-//	sf::Sprite sprite(texture);
-//	sf::Vector2u windowsize = window.getSize();
-//	float scalex = 1500.0 / texture.getSize().x;
-//	float scaley = 900.0 / texture.getSize().y;
-//	sprite.setScale(scalex, scaley);
-//
-//	sf::Font font;
-//	if (!font.loadFromFile("Roboto-Bold.ttf"))
-//	{
-//		std::cout << "Failed to load font!" << std::endl;
-//		return -1;
-//	}
-//
-//	string title = "My nhan dao chich";
-//	string desc = "";
-//	string linkImage = "mynhandaochich.jpg";
-//	films.push_back({ title, desc, linkImage });
-//
-//	title = "Am hon do thi";
-//	desc = "";
-//	linkImage = "amhondothi.jpg";
-//	films.push_back({ title, desc, linkImage });
-//
-//	title = "Nguoi vo cuoi cung";
-//	desc = "";
-//	linkImage = "nguoivocuoicung.jpg";
-//	films.push_back({ title, desc, linkImage });
-//
-//	title = "Nam dem kinh hoang";
-//	desc = "";
-//	linkImage = "5demkinhhoang.jpg";
-//	films.push_back({ title, desc, linkImage });
-//
-//	title = "Quy mon quan";
-//	desc = "";
-//	linkImage = "quymonquan.jpg";
-//	films.push_back({ title, desc, linkImage });
-//
-//	//title = "Wolfoo";
-//	//desc = "";
-//	//linkImage = "wolfoo.jpg";
-//	//films.push_back({ title, desc, linkImage });
-//
-//	//title = "Dat rung phuong nam";
-//	//desc = "";
-//	//linkImage = "marvel.jpg";
-//	//films.push_back({ title, desc, linkImage });
-//
-//	//title = "Biet doi Marvel";
-//	//desc = "";
-//	//linkImage = "marvel.jpg";
-//	//films.push_back({ title, desc, linkImage });
-//
-//	//title = "Hai ke doi tra";
-//	//desc = "";
-//	//linkImage = "haikedoitra.png";
-//	//films.push_back({ title, desc, linkImage });
-//
-//	float filmListPosition1 = 120.f;
-//	
-//	sf::Texture texture1;
-//	for (int i = 0; i < films.size(); i++)
-//	{
-//		sf::RectangleShape productBox(sf::Vector2f(327.5f, 470.f));
-//		productBox.setPosition(20.f + 377.5 * (int)(i % 4), filmListPosition1 + (int)(i / 4) * 500);
-//		productBox.setFillColor(sf::Color::White);
-//		productBox.setOutlineThickness(2);
-//		productBox.setOutlineColor(sf::Color::Black);
-//
-//		sf::Text productText(films[i].title, font, 24);
-//		productText.setFillColor(sf::Color::Black);
-//
-//		float text_X = 20.f + 377.5 * (int)(i % 4) + productBox.getSize().x / 2 - productText.getLocalBounds().width / 2;
-//		float text_Y = filmListPosition1 + (int)(i / 4) * 500 + productBox.getSize().y - 25;
-//		productText.setPosition(text_X, text_Y);
-//		
-//		//if (!texture1.loadFromFile(films[i].image)) {
-//		//	texture1.loadFromFile("404.jfif");
 //		//}
 //
-//		sf::Image image;
-//		image.loadFromFile(films[i].image);
-//		
-//		texture1.loadFromImage(image);
+//		if (selectDropDownButton) {
+//			window.draw(spriteOrder);
+//		}
 //
-//		sf::Sprite sprite1(texture1);
-//		scalex = 317.5 / texture1.getSize().x;
-//		scaley = 445.0 / texture1.getSize().y;
-//		sprite1.setScale(scalex, scaley);
-//		float x = 20.f + 377.5 * (int)(i % 4) + 5;
-//		float y = filmListPosition1 + (int)(i / 4) * 500 + 5;
-//		sprite1.setPosition(x, y);
+//		if (selectAndUpdateButton) {
+//			if (indexButton) {
+//				for (int i = 0; i < 12; i++) {
+//					for (int j = 0; j < 6; j++) {
+//						window.draw(box[indexButton - 1][i][j].first);
+//					}
+//				}
+//			}
+//		}
 //
-//		productBoxes.push_back({ productBox , {productText, sprite1} });
-//	}
+//		window.draw(dropdownBox);
+//		window.draw(dropdownText);
+//		//if (isArrowDownUp) {
+//		//	arrow.setPoint(0, sf::Vector2f(0, 0));
+//		//	arrow.setPoint(1, sf::Vector2f(15, 0));
+//		//	arrow.setPoint(2, sf::Vector2f(7.5, 7.5));
+//		//	arrow.setFillColor(sf::Color::Black);
+//		//	window.draw(arrow);
+//		//}
 //
-//	bool homePageButton = true;
-//
-//	// Tạo một box
-//	sf::RectangleShape box(sf::Vector2f(50, 50));
-//	box.setFillColor(sf::Color::Red);
-//	box.setPosition(375, 275);
-//
-//	// Tốc độ di chuyển của box
-//	float speed = 5.f;
-//
-//	//sf::Texture texture2;
-//	//if (!texture2.loadFromFile("marvel.jpg")) {
-//	//	texture2.loadFromFile("404.jfif");
-//	//}
-//	//sf::Sprite sprite2(texture2);
-//	//scalex = 317.5 / texture2.getSize().x;
-//	//scaley = 445.0 / texture2.getSize().y;
-//	//sprite2.setScale(scalex, scaley);
-//	//sprite2.setPosition(20, 30);
-//
-//	//boxes.push_back(sprite2);
-//
-//	while (window.isOpen())
-//	{
-//		sf::Event event;
-//		while (window.pollEvent(event))
+//		if (isDropdownActive)
 //		{
-//			if (event.type == sf::Event::Closed)
-//				window.close();
-//			if (homePageButton) {
-//				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-//					for (int i = 0; i < films.size(); i++)
-//					{
-//						productBoxes[i].first.move(0, -speed);
-//						productBoxes[i].second.first.move(0, -speed);
-//						productBoxes[i].second.second.move(0, -speed);
-//					}
-//					//boxes[0].move(0, -speed);
-//				}
-//				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-//					for (int i = 0; i < films.size(); i++)
-//					{
-//						productBoxes[i].first.move(0, speed);
-//						productBoxes[i].second.first.move(0, speed);
-//						productBoxes[i].second.second.move(0, speed);
-//					}
-//					//boxes[0].move(0, speed);
-//				}
-//				// Xử lý sự kiện cuộn danh sách bộ phim
-//				//if (event.type == sf::Event::MouseWheelScrolled)
-//				//{
-//				//	if (films.size() > 0) {
-//				//		if (event.mouseWheelScroll.delta > 0) {
-//				//			if (filmListPosition1 < 120.f) {
-//				//				filmListPosition1 += event.mouseWheelScroll.delta * 20.f;
-//				//			}
-//				//		}
-//				//		else if (event.mouseWheelScroll.delta < 0) {
-//				//			if (productBoxes[films.size() - 1].first.getPosition().y >= 380) {
-//				//				filmListPosition1 += event.mouseWheelScroll.delta * 20.f;
-//				//			}
-//				//		}
-//				//	}
+//			//isArrowDownUp = false;
+//			//arrow.setPoint(0, sf::Vector2f(7.5, 0));
+//			//arrow.setPoint(1, sf::Vector2f(0, 7.5));
+//			//arrow.setPoint(2, sf::Vector2f(15, 7.5));
+//			//arrow.setFillColor(sf::Color::Black);
+//			//window.draw(arrow);
 //
-//				//	for (int i = 0; i < films.size(); i++)
-//				//	{
-//				//		productBoxes[i].first.setPosition(20.f + 377.5 * (int)(i % 4), filmListPosition1 + (int)(i / 4) * 500);
-//				//		float text_X = 20.f + 377.5 * (int)(i % 4) + productBoxes[i].first.getSize().x / 2 - productBoxes[i].second.first.getLocalBounds().width / 2;
-//				//		float text_Y = filmListPosition1 + (int)(i / 4) * 500 + productBoxes[i].first.getSize().y - 25;
-//				//		productBoxes[i].second.first.setPosition(text_X, text_Y);
-//				//	}
-//				//}
-//			}
-//
-//			// Di chuyển box lên xuống
-//			//if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-//
-//			//}
-//			//	//box.move(0, -speed);
-//			//if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-//			//	box.move(0, speed);
-//
-//			// Giới hạn phạm vi hiển thị của game bằng view
-//			//if (box.getPosition().y <= 0)
-//			//	view.setCenter(view.getCenter().x, 0);
-//			//if (box.getPosition().y >= view.getSize().y - box.getSize().y)
-//			//	view.setCenter(view.getCenter().x, view.getSize().y - box.getSize().y);
-//
-//			if (productBoxes[0].first.getPosition().y < view.getCenter().y - view.getSize().y / 2) {
-//				view.setCenter(view.getCenter().x, box.getPosition().y + view.getSize().y / 2);
-//			}
-//			if (productBoxes[films.size() - 1].first.getPosition().y > view.getCenter().y + view.getSize().y / 2 - productBoxes[films.size() - 1].first.getSize().y)
-//				view.setCenter(view.getCenter().x, productBoxes[films.size() - 1].first.getPosition().y + productBoxes[films.size() - 1].first.getSize().y - view.getSize().y / 2);
-//			//if (boxes[0].getPosition().y < view.getCenter().y - view.getSize().y / 2) {
-//			//	view.setCenter(view.getCenter().x, box.getPosition().y + view.getSize().y / 2);
-//			//}
-//			//if (boxes[0].getPosition().y > view.getCenter().y + view.getSize().y / 2)
-//			//	view.setCenter(view.getCenter().x, boxes[0].getPosition().y - view.getSize().y / 2);
-//
-//			// Cập nhật view
-//		}
-//		window.setView(view);
-//
-//
-//		// Vẽ các đối tượng trong view
-//		window.clear(sf::Color::White);
-//		window.draw(sprite);
-//		//window.draw(box);
-//		if (homePageButton) {
-//			for (int i = 0; i < films.size(); i++)
+//			for (const std::pair<sf::Text, sf::RectangleShape> option : options)
 //			{
-//				window.draw(productBoxes[i].first);
-//				window.draw(productBoxes[i].second.first);
-//				//window.draw(productBoxes[i].second.second);
+//				window.draw(option.second);
+//				window.draw(option.first);
 //			}
 //		}
-//		for (const auto& box : productBoxes) {
-//			window.draw(box.second.second);
-//		}
-//		//window.draw(boxes[0]);
+//
+//
+//		// Vẽ danh sách bộ phim
+//		//for (int i = 0; i < films.size(); i++)
+//		//{
+//		//    sf::Text filmText(films[i].title + " (" + films[i].director + ", " + to_string(films[i].year) + ")", font, 20);
+//		//    filmText.setPosition(filmList.getPosition().x + 10.f, filmList.getPosition().y + filmListPosition + i * 30.f);
+//		//    window.draw(filmText);
+//		//}
+//
 //		window.display();
 //	}
 //
 //	return 0;
 //}
 
-//std::vector<sf::Texture> textures;
-//
-//int main()
-//{
-//	// Khởi tạo cửa sổ window với kích thước 800x600
-//	sf::RenderWindow window(sf::VideoMode(1500, 900), "Drawing Line");
-//
-//	sf::Texture texture;
-//	if (!texture.loadFromFile("image-admin.jpg"))
-//		return EXIT_FAILURE;
-//
-//	// tạo sprite sử dụng texture đã tải
-//	sf::Sprite sprite(texture);
-//	sf::Vector2u windowsize = window.getSize();
-//	float scalex = 1500.0 / texture.getSize().x;
-//	float scaley = 900.0 / texture.getSize().y;
-//	sprite.setScale(scalex, scaley);
-//
-//	sf::Font font;
-//	if (!font.loadFromFile("Roboto-Bold.ttf"))
-//	{
-//		std::cout << "Failed to load font!" << std::endl;
-//		return -1;
-//	}
-//
-//	string title = "My nhan dao chich";
-//	string desc = "";
-//	string linkImage = "mynhandaochich.jpg";
-//	films.push_back({ title, desc, linkImage });
-//
-//	title = "Am hon do thi";
-//	desc = "";
-//	linkImage = "amhondothi.jpg";
-//	films.push_back({ title, desc, linkImage });
-//
-//	title = "Nguoi vo cuoi cung";
-//	desc = "";
-//	linkImage = "nguoivocuoicung.jpg";
-//	films.push_back({ title, desc, linkImage });
-//
-//	title = "Nam dem kinh hoang";
-//	desc = "";
-//	linkImage = "5demkinhhoang.jpg";
-//	films.push_back({ title, desc, linkImage });
-//
-//	title = "Quy mon quan";
-//	desc = "";
-//	linkImage = "quymonquan.jpg";
-//	films.push_back({ title, desc, linkImage });
-//
-//	title = "Wolfoo";
-//	desc = "";
-//	linkImage = "wolfoo.jpg";
-//	films.push_back({ title, desc, linkImage });
-//
-//	title = "Dat rung phuong nam";
-//	desc = "";
-//	linkImage = "marvel.jpg";
-//	films.push_back({ title, desc, linkImage });
-//
-//	title = "Biet doi Marvel";
-//	desc = "";
-//	linkImage = "marvel.jpg";
-//	films.push_back({ title, desc, linkImage });
-//
-//	title = "Hai ke doi tra";
-//	desc = "";
-//	linkImage = "haikedoitra.png";
-//	films.push_back({ title, desc, linkImage });
-//
-//	float filmListPosition1 = 120.f;
-//
-//	//for (int i = 0; i < films.size(); i++)
-//	//{
-//	//	sf::RectangleShape productBox(sf::Vector2f(327.5f, 470.f));
-//	//	productBox.setPosition(20.f + 377.5 * (int)(i % 4), filmListPosition1 + (int)(i / 4) * 500);
-//	//	productBox.setFillColor(sf::Color::White);
-//	//	productBox.setOutlineThickness(2);
-//	//	productBox.setOutlineColor(sf::Color::Black);
-//
-//	//	sf::Text productText(films[i].title, font, 24);
-//	//	productText.setFillColor(sf::Color::Black);
-//
-//	//	float text_X = 20.f + 377.5 * (int)(i % 4) + productBox.getSize().x / 2 - productText.getLocalBounds().width / 2;
-//	//	float text_Y = filmListPosition1 + (int)(i / 4) * 500 + productBox.getSize().y - 25;
-//	//	productText.setPosition(text_X, text_Y);
-//
-//	//	productBoxes.push_back({ productBox , {productText, films[i].image} });
-//	//}
-//	
-//	for (int i = 0; i < films.size(); i++)
-//	{
-//		sf::RectangleShape productBox(sf::Vector2f(327.5f, 470.f));
-//		productBox.setPosition(20.f + 377.5 * (int)(i % 4), filmListPosition1 + (int)(i / 4) * 500);
-//		productBox.setFillColor(sf::Color::White);
-//		productBox.setOutlineThickness(2);
-//		productBox.setOutlineColor(sf::Color::Black);
-//
-//		sf::Text productText(films[i].title, font, 24);
-//		productText.setFillColor(sf::Color::Black);
-//
-//		float text_X = 20.f + 377.5 * (int)(i % 4) + productBox.getSize().x / 2 - productText.getLocalBounds().width / 2;
-//		float text_Y = filmListPosition1 + (int)(i / 4) * 500 + productBox.getSize().y - 25;
-//		productText.setPosition(text_X, text_Y);
-//
-//		sf::Texture texture1;
-//		texture1.loadFromFile(films[i].image);
-//		textures.push_back(texture);
-//
-//		sf::Sprite sprite1;
-//		sprite1.setTexture(textures[i]);
-//
-//		//sf::Texture* ptrTexture = new sf::Texture;
-//
-//		//ptrTexture->loadFromFile(films[i].image);
-//
-//		//sf::Texture texture1;
-//
-//		// Tạo một texture mới
-//		//texture1.create(317.5, 445.0);
-//		//texture1.loadFromFile(films[i].image);
-//		//if (!texture1.loadFromFile(films[i].image)) {
-//		//	texture1.loadFromFile("404.jfif");
-//		//}
-//
-//		sf::Sprite sprite1(textures[i]);
-//		scalex = 317.5 / textures[i].getSize().x;
-//		scaley = 445.0 / textures[i].getSize().y;
-//		sprite1.setScale(scalex, scaley);
-//		float x = 20.f + 377.5 * (int)(i % 4) + 5;
-//		float y = filmListPosition1 + (int)(i / 4) * 500 + 5;
-//		sprite1.setPosition(x, y);
-//
-//		productBoxes.push_back({ productBox , {productText, sprite1} });
-//	}
-//
-//	bool homePageButton = true;
-//
-//	float delta = 30.f;
-//
-//	// Vòng lặp chính của chương trình
-//	while (window.isOpen())
-//	{
-//		sf::Event event;
-//		while (window.pollEvent(event))
-//		{
-//			if (event.type == sf::Event::Closed)
-//				window.close();
-//			if (homePageButton) {
-//				// Xử lý sự kiện cuộn danh sách bộ phim
-//				//if (event.type == sf::Event::MouseWheelScrolled)
-//				//{
-//				//	if (films.size() > 0) {
-//				//		if (event.mouseWheelScroll.delta > 0) {
-//				//			if (filmListPosition1 < 120.f) {
-//				//				filmListPosition1 += event.mouseWheelScroll.delta * 20.f;
-//				//				for (int i = 0; i < films.size(); i++)
-//				//				{
-//				//					productBoxes[i].first.move(0, event.mouseWheelScroll.delta * 20.f);
-//				//					productBoxes[i].second.first.move(0, event.mouseWheelScroll.delta * 20.f);
-//				//				}
-//				//			}
-//				//		}
-//				//		else if (event.mouseWheelScroll.delta < 0) {
-//				//			if (productBoxes[films.size() - 1].first.getPosition().y >= 380) {
-//				//				filmListPosition1 += event.mouseWheelScroll.delta * 20.f;
-//				//				for (int i = 0; i < films.size(); i++)
-//				//				{
-//				//					productBoxes[i].first.move(0, event.mouseWheelScroll.delta * 20.f);
-//				//					productBoxes[i].second.first.move(0, event.mouseWheelScroll.delta * 20.f);
-//				//				}
-//				//			}
-//				//		}
-//				//	}
-//				//}
-//				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-//					if (productBoxes[films.size() - 1].first.getPosition().y >= 380) {
-//						filmListPosition1 += -delta;
-//						for (int i = 0; i < films.size(); i++)
-//						{
-//							productBoxes[i].first.move(0, -delta);
-//							productBoxes[i].second.first.move(0, -delta);
-//							productBoxes[i].second.second.move(0, -delta);
-//							cout << productBoxes[i].second.second.getPosition().y << endl;
-//						}
-//					}
-//				}
-//				else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-//					if (filmListPosition1 < 120.f) {
-//						filmListPosition1 += delta;
-//						for (int i = 0; i < films.size(); i++)
-//						{
-//							productBoxes[i].first.move(0, delta);
-//							productBoxes[i].second.first.move(0, delta);
-//							productBoxes[i].second.second.move(0, delta);
-//							cout << productBoxes[i].second.second.getPosition().y << endl;
-//						}
-//					}
-//				}
-//			}
-//		}
-//
-//		window.clear(sf::Color::White);
-//
-//		window.draw(sprite);
-//
-//		if (homePageButton) {
-//			for (int i = 0; i < films.size(); i++)
-//			{
-//				//sf::Texture texture;
-//				//if (!texture.loadFromFile(productBoxes[i].second.second)) {
-//				//	texture.loadFromFile("404.jfif");
-//				//}
-//				//sf::Sprite sprite(texture);
-//				//float scalex = 317.5 / texture.getSize().x;
-//				//float scaley = 445.0 / texture.getSize().y;
-//				//sprite.setScale(scalex, scaley);
-//				//float x = 20.f + 377.5 * (int)(i % 4) + 5;
-//				//float y = filmListPosition1 + (int)(i / 4) * 500 + 5;
-//				sf::Sprite tmpSprite = productBoxes[i].second.second;
-//				//sprite.setPosition(x, y);
-//				window.draw(tmpSprite);
-//				window.draw(productBoxes[i].first);
-//				window.draw(productBoxes[i].second.first);
-//			}
-//		}
-//
-//		window.display();
-//	}
-//
-//	return 0;
-//}
+int main() {
+	sf::RenderWindow window(sf::VideoMode(900, 900), "Login Admin");
+
+	sf::Texture texture;
+	if (!texture.loadFromFile("admin-login.jpg"))
+		return EXIT_FAILURE;
+
+	// tạo sprite sử dụng texture đã tải
+	sf::Sprite sprite(texture);
+	float scalex = 900.0 / texture.getSize().x;
+	float scaley = 900.0 / texture.getSize().y;
+	sprite.setScale(scalex, scaley);
+
+	sf::Font font;
+	if (!font.loadFromFile("SVN-Times New Roman Bold.ttf"))
+	{
+		std::cout << "Failed to load font!" << std::endl;
+		return -1;
+	}
+
+	sf::RectangleShape buttonUserName(sf::Vector2f(600, 55));
+	buttonUserName.setFillColor(sf::Color(3, 36, 86, 180));
+	buttonUserName.setPosition(160, 250);
+
+	sf::RectangleShape lineUserName(sf::Vector2f(10, 55));
+	lineUserName.setFillColor(sf::Color(18, 104, 10));
+	lineUserName.setPosition(160, 250);
+
+	sf::Text inputTextUserName;
+	inputTextUserName.setFont(font);
+	inputTextUserName.setCharacterSize(29);
+	inputTextUserName.setFillColor(sf::Color(255, 255, 255));
+	inputTextUserName.setPosition(173, 256);
+
+	//sf::RectangleShape buttonDesc(sf::Vector2f(600, 500));
+	//buttonDesc.setFillColor(sf::Color(86, 0, 172, 70));
+	//buttonDesc.setPosition(200, 200);
+
+	//sf::RectangleShape lineDesc(sf::Vector2f(5, 500));
+	//lineDesc.setFillColor(sf::Color(18, 104, 10));
+	//lineDesc.setPosition(200, 200);
+
+	//sf::Text inputTextDesc;
+	//inputTextDesc.setFont(font);
+	//inputTextDesc.setCharacterSize(27);
+	//inputTextDesc.setFillColor(sf::Color(255, 255, 255));
+	//inputTextDesc.setPosition(210, 196);
+
+	sf::RectangleShape buttonPassword(sf::Vector2f(600, 55));
+	buttonPassword.setFillColor(sf::Color(3, 36, 86, 180));
+	buttonPassword.setPosition(160, 450);
+
+	sf::RectangleShape linePassword(sf::Vector2f(10, 55));
+	linePassword.setFillColor(sf::Color(18, 104, 10));
+	linePassword.setPosition(160, 450);
+
+	sf::Text inputTextPassword;
+	inputTextPassword.setFont(font);
+	inputTextPassword.setCharacterSize(29);
+	inputTextPassword.setFillColor(sf::Color(255, 255, 255));
+	inputTextPassword.setPosition(173, 456);
+
+	sf::Texture continueTexture;
+	if (!continueTexture.loadFromFile("button-continue.png"))
+		return EXIT_FAILURE;
+
+	sf::Sprite continueSprite(continueTexture);
+	float scalex1 = 300.0 / continueTexture.getSize().x;
+	float scaley1 = 75.0 / continueTexture.getSize().y;
+	continueSprite.setScale(scalex1, scaley1);
+	continueSprite.setPosition(163, 650);
+
+	sf::Texture backTexture;
+	if (!backTexture.loadFromFile("button-back.png"))
+		return EXIT_FAILURE;
+
+	sf::Sprite backSprite(backTexture);
+	scalex1 = 300.0 / backTexture.getSize().x;
+	scaley1 = 79.0 / backTexture.getSize().y;
+	backSprite.setScale(scalex1, scaley1);
+	backSprite.setPosition(456, 650);
+
+
+	//sf::Font fontCreate;
+	//if (!fontCreate.loadFromFile("SourceSansPro-Bold.ttf"))
+	//{
+	//	std::cout << "Failed to load font!" << std::endl;
+	//	return -1;
+	//}
+
+	//sf::Text textCreate;
+	//textCreate.setFont(fontCreate);
+	//textCreate.setCharacterSize(37);
+	//textCreate.setFillColor(sf::Color(255, 255, 255));
+	//textCreate.setPosition(432, 883);
+	//textCreate.setString("CREATE");
+
+	string textDesc = "";
+
+	bool isInputTitleActive = false;
+	bool isInputDescActive = false;
+	bool isInputImageActive = false;
+
+	bool checkwindow1 = false;
+
+	while (window.isOpen())
+	{
+		sf::Event event;
+		while (window.pollEvent(event))
+		{
+			//if (event.type == sf::Event::Closed)
+			//{
+			//	window1.close();
+			//}
+			if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
+			{
+				if (isMouseOver(buttonUserName, event))
+				{
+					lineUserName.setFillColor(sf::Color(128, 241, 118));
+					//lineDesc.setFillColor(sf::Color(18, 104, 10));
+					linePassword.setFillColor(sf::Color(18, 104, 10));
+					isInputTitleActive = true;
+					//isInputDescActive = false;
+					isInputImageActive = false;
+				}
+				//else if (isMouseOver(buttonDesc, event))
+				//{
+				//	lineDesc.setFillColor(sf::Color(128, 241, 118));
+				//	lineUserName.setFillColor(sf::Color(18, 104, 10));
+				//	linePassword.setFillColor(sf::Color(18, 104, 10));
+				//	isInputDescActive = true;
+				//	isInputTitleActive = false;
+				//	isInputImageActive = false;
+				//}
+				else if (isMouseOver(buttonPassword, event)) {
+					linePassword.setFillColor(sf::Color(128, 241, 118));
+					//lineDesc.setFillColor(sf::Color(18, 104, 10));
+					lineUserName.setFillColor(sf::Color(18, 104, 10));
+					//isInputDescActive = false;
+					isInputTitleActive = false;
+					isInputImageActive = true;
+				}
+				else {
+					//lineDesc.setFillColor(sf::Color(18, 104, 10));
+					lineUserName.setFillColor(sf::Color(18, 104, 10));
+					linePassword.setFillColor(sf::Color(18, 104, 10));
+					isInputDescActive = false;
+					isInputTitleActive = false;
+					isInputImageActive = false;
+				}
+
+				if (continueSprite.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y)) {
+					string currentTextUserName = inputTextUserName.getString();
+					string currentTextPassword = inputTextPassword.getString();
+					if (currentTextUserName == "" || currentTextPassword == "") {
+						if(currentTextUserName == "")
+							lineUserName.setFillColor(sf::Color(255, 0, 0));
+						if (currentTextPassword == "")
+							linePassword.setFillColor(sf::Color(255, 0, 0));
+					}
+					else if (currentTextUserName != "admin" || currentTextPassword != "password") {
+						if (currentTextUserName != "admin") {
+							lineUserName.setFillColor(sf::Color(255, 0, 0));
+						}
+						if (currentTextPassword != "password") {
+							linePassword.setFillColor(sf::Color(255, 0, 0));
+						}
+					}
+					else if (currentTextUserName == "admin" && currentTextPassword == "password") {
+						window.close();
+						return 0;
+					}
+				}
+
+				if (backSprite.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y)) {
+					window.close();
+					return 0;
+				}
+			}
+			else if (event.type == sf::Event::TextEntered)
+			{
+				if (isInputTitleActive)
+				{
+					if (event.text.unicode < 128)
+					{
+						if (event.text.unicode == '\b')
+						{
+							if (!inputTextUserName.getString().isEmpty()) {
+								std::string currentText = inputTextUserName.getString();
+								currentText.pop_back();
+								inputTextUserName.setString(currentText);
+							}
+						}
+						else
+						{
+							float textWidth = inputTextUserName.getLocalBounds().width;
+							float buttonWidth = buttonUserName.getLocalBounds().width;
+							if (buttonWidth > textWidth + 20)
+								inputTextUserName.setString(inputTextUserName.getString() + static_cast<char>(event.text.unicode));
+						}
+					}
+				}
+				//else if (isInputDescActive)
+				//{
+				//	if (event.text.unicode < 128)
+				//	{
+				//		if (event.text.unicode == '\b')
+				//		{
+				//			if (!inputTextDesc.getString().isEmpty()) {
+				//				std::string currentText = inputTextDesc.getString();
+				//				currentText.pop_back();
+				//				textDesc.pop_back();
+				//				inputTextDesc.setString(currentText);
+				//			}
+				//		}
+				//		else if (event.text.unicode == '\r' || event.text.unicode == '\n')
+				//		{
+				//			inputTextDesc.setString(inputTextDesc.getString() + "\n");
+				//			textDesc += "\n";
+				//		}
+				//		else
+				//		{
+				//			string lastString;
+				//			stringstream ss(inputTextDesc.getString());
+				//			while (getline(ss, lastString, '\n')) {
+				//			}
+
+				//			sf::Text tempText;
+				//			tempText.setFont(font);
+				//			tempText.setCharacterSize(27);
+				//			tempText.setString(lastString);
+				//			float lineDescWidth = tempText.getLocalBounds().width;
+				//			float buttonDescWidth = buttonDesc.getLocalBounds().width;
+				//			if (lineDescWidth > buttonDescWidth - 20)
+				//			{
+				//				// Thêm ký tự xuống dòng
+				//				inputTextDesc.setString(inputTextDesc.getString() + "\n");
+				//			}
+				//			inputTextDesc.setString(inputTextDesc.getString() + static_cast<char>(event.text.unicode));
+				//			textDesc += static_cast<char>(event.text.unicode);
+				//		}
+
+				//	}
+				//}
+				else if (isInputImageActive)
+				{
+					if (event.text.unicode < 128)
+					{
+						if (event.text.unicode == '\b')
+						{
+							if (!inputTextPassword.getString().isEmpty()) {
+								std::string currentText = inputTextPassword.getString();
+								currentText.pop_back();
+								inputTextPassword.setString(currentText);
+							}
+						}
+						else
+						{
+							float textWidth = inputTextPassword.getLocalBounds().width;
+							float buttonWidth = buttonPassword.getLocalBounds().width;
+							if (buttonWidth > textWidth + 20)
+								inputTextPassword.setString(inputTextPassword.getString() + static_cast<char>(event.text.unicode));
+						}
+					}
+				}
+			}
+			//if (event.type == sf::Event::MouseMoved)
+			//{
+			//	sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+			//	if (createSprite.getGlobalBounds().contains(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y)))
+			//	{
+			//		if (!createTexture.loadFromFile("2023-11-13_173035.png"))
+			//			return EXIT_FAILURE;
+			//		float scalex1 = 300.0 / createTexture.getSize().x;
+			//		float scaley1 = 75.0 / createTexture.getSize().y;
+			//		createSprite.setScale(scalex1, scaley1);
+			//	}
+			//	else
+			//	{
+			//		if (!createTexture.loadFromFile("2023-11-13_171327.png"))
+			//			return EXIT_FAILURE;
+			//		float scalex1 = 300.0 / createTexture.getSize().x;
+			//		float scaley1 = 75.0 / createTexture.getSize().y;
+			//		createSprite.setScale(scalex1, scaley1);
+			//	}
+			//}
+		}
+
+		window.clear();
+		window.draw(sprite);
+
+		window.draw(buttonUserName);
+		window.draw(inputTextUserName);
+		window.draw(lineUserName);
+
+		//window.draw(buttonDesc);
+		//window.draw(inputTextDesc);
+		//window.draw(lineDesc);
+
+		window.draw(buttonPassword);
+		window.draw(inputTextPassword);
+		window.draw(linePassword);
+
+		window.draw(continueSprite);
+		window.draw(backSprite);
+		//window.draw(textCreate);
+
+		window.display();
+	}
+}
