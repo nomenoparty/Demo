@@ -24,19 +24,19 @@ bool isMouseOver(sf::RectangleShape& button, sf::Event event)
 {
 	return button.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y);
 }
- 
- bool isMouseOver(sf::RectangleShape& rect, sf::RenderWindow& window)
+
+bool isMouseOver(sf::RectangleShape& rect, sf::RenderWindow& window)
 {
-    sf::FloatRect bounds = rect.getGlobalBounds();
-    sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
-    return bounds.contains(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y));
+	sf::FloatRect bounds = rect.getGlobalBounds();
+	sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+	return bounds.contains(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y));
 }
 
 bool isMouseOver(sf::Text& option, sf::RenderWindow& window)
 {
-    sf::FloatRect bounds = option.getGlobalBounds();
-    sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
-    return bounds.contains(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y));
+	sf::FloatRect bounds = option.getGlobalBounds();
+	sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+	return bounds.contains(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y));
 }
 
 struct film {
@@ -1776,7 +1776,7 @@ int loginAdminWindow(sf::RenderWindow& mainWindow, sf::RenderWindow& window) {
 int main()
 {
 	// Tạo cửa sổ kích thước 800x600 pixels
-	sf::RenderWindow window(sf::VideoMode(1280, 720), "Cinema");
+	sf::RenderWindow window(sf::VideoMode(1500, 844), "Cinema");
 
 	sf::RenderWindow windowLoginAdmin(sf::VideoMode(900, 900), "Login Admin", sf::Style::None);
 	windowLoginAdmin.setActive(false);
@@ -1896,86 +1896,77 @@ int main()
 
 	//////////////////////////
 
+
+	sf::Texture texture;
+	if (!texture.loadFromFile("moviee.png"))
+		return EXIT_FAILURE;
+
+	sf::Sprite sprite(texture);
+	float scalex = 1500.0 / texture.getSize().x;
+	float scaley = 844.0 / texture.getSize().y;
+	sprite.setScale(scalex, scaley);
+	sprite.setPosition(0, 0);
+
+	////////////////////// Header
+
+	sf::RectangleShape headerBox(sf::Vector2f(1500, 100));
+	headerBox.setFillColor(sf::Color(3, 19, 39)); //205, 156, 124, 150
+	headerBox.setPosition(0, 0);
+
+	/////////////////////////
+
+
 	//TEXT CLOCK
 	sf::Font fontClock;
 	if (!fontClock.loadFromFile("Wallpoet-Regular.ttf"))
 		return EXIT_FAILURE;
 
+	sf::Texture clockTexture;
+	clockTexture.loadFromFile("clock.png");
+
+	sf::Sprite clockSprite(clockTexture);
+	clockSprite.setPosition(0, 5);
+	 scalex = 158.0 / clockTexture.getSize().x;
+	 scaley = 100.0 / clockTexture.getSize().y;
+	 clockSprite.setScale(scalex, scaley);
+
 	// Tạo văn bản sử dụng font đã tải
-	sf::Text textClock("", fontClock, 24);
-	textClock.setPosition(0, 10);
+	//sf::Text textClockDay("", fontClock, 24);
+	//textClockDay.setPosition(0, 100);
+
+	sf::Text textClockTime("", fontClock, 13);
+	textClockTime.setPosition(44, 49);
 	//TEXT CLOCK
 
-	// tải ảnh từ file trên hệ thống
-	sf::Texture texture;
-	if (!texture.loadFromFile("movie.jpg"))
-		return EXIT_FAILURE;
+	bool homePageButton = true;
+	bool selectDropDownButton = false;
+	bool selectAndUpdateButton = false; int indexButton = 0;
+	bool orderButtonActive = false;
 
-	// tạo sprite sử dụng texture đã tải
-	sf::Sprite sprite(texture);
+	sf::RectangleShape movieButton(sf::Vector2f(250, 100));
+	movieButton.setFillColor(sf::Color(3, 22, 46));
+	movieButton.setPosition(650, 0);
 
-	// lấy kích thước của cửa sổ
-	sf::Vector2u windowsize = window.getSize();
+	sf::Text movieButtonText("MOVIE", font, 30);
+	movieButtonText.setFillColor(sf::Color::White);
+	movieButtonText.setPosition(725, 35);
 
-	// tính toán tỷ lệ giữa kích thước ảnh và kích thước cửa sổ
-	float scalex = static_cast<float>(windowsize.x) / texture.getSize().x;
-	float scaley = static_cast<float>(windowsize.y) / texture.getSize().y;
+	sf::RectangleShape orderButton(sf::Vector2f(250, 100));
+	orderButton.setFillColor(sf::Color(3, 22, 46));
+	orderButton.setPosition(900, 0);
 
-	// đặt tỷ lệ kích thước cho sprite
-	sprite.setScale(scalex, scaley);
+	sf::Text orderButtonText("ORDER", font, 30);
+	orderButtonText.setFillColor(sf::Color::White);
+	orderButtonText.setPosition(975, 35);
 
-	// đặt vị trí của sprite
-	sprite.setPosition(0, 0);
+	sf::RectangleShape adminButton(sf::Vector2f(250, 100));
+	adminButton.setFillColor(sf::Color(3, 22, 46));
+	adminButton.setPosition(1150, 0);
 
+	sf::Text adminButtonText("ADMIN", font, 30);
+	adminButtonText.setFillColor(sf::Color::White);
+	adminButtonText.setPosition(1225, 35);
 
-	// Tạo nút để chuyển sang trang khác
-		//sf::RectangleShape button(sf::Vector2f(200, 50));
-		////sf::CircleShape button(50, 100);
-		//button.setFillColor(sf::Color(139, 216, 189));
-		//button.setPosition(300, 250);
-
-	sf::CircleShape button1(25);
-	button1.setFillColor(sf::Color(139, 216, 189)); // Màu xám
-	button1.setOutlineThickness(5);
-	button1.setOutlineColor(sf::Color(150, 150, 150)); // Màu xám nhạt
-	button1.setPosition(1100, 10);
-
-	sf::CircleShape button2(25);
-	button2.setFillColor(sf::Color(139, 216, 189)); // Màu xám
-	button2.setOutlineThickness(5);
-	button2.setOutlineColor(sf::Color(150, 150, 150)); // Màu xám nhạt
-	button2.setPosition(1000, 10);
-
-	sf::Texture texture1;
-	if (!texture1.loadFromFile("admin-icon-png-4.jpg"))
-	{
-		std::cout << "Failed to load icon." << std::endl;
-		return -1;
-	}
-	sf::Sprite iconSprite1(texture1);
-	iconSprite1.setScale(0.2f, 0.2f);
-	iconSprite1.setPosition(1105, 12);
-
-	sf::Texture texture2;
-	if (!texture2.loadFromFile("icon-home-removebg-preview.png"))
-	{
-		std::cout << "Failed to load icon." << std::endl;
-		return -1;
-	}
-	sf::Sprite iconSprite2(texture2);
-	iconSprite2.setScale(0.1f, 0.1f);
-	iconSprite2.setPosition(994, 12);
-
-	/*sf::Font font;
-	if (!font.loadFromFile("ShortBaby-Mg2w.ttf"))
-		return EXIT_FAILURE;
-
-	sf::Text text("Click táo!", font, 24);
-	text.setFillColor(sf::Color::Red);
-	text.setPosition(button.getPosition().x + button.getSize().x / 2 - text.getGlobalBounds().width / 2,
-		button.getPosition().y + button.getSize().y / 2 - text.getGlobalBounds().height / 2);*/
-
-		// Vòng lặp chính
 	while (window.isOpen())
 	{
 		// Xử lý các sự kiện
@@ -1985,19 +1976,46 @@ int main()
 			if (event.type == sf::Event::Closed)
 				window.close();
 
-			if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
-			{
-				// Kiểm tra xem người dùng đã ấn vào nút hay chưa
-				if (button1.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y))
+			if (homePageButton) {
+				if (event.type == sf::Event::MouseMoved)
 				{
-					window.setActive(false);
-					window.setVisible(false);
-					loginAdminWindow(window, windowLoginAdmin);
-					window.setActive(true);
-					window.setVisible(true);
+					sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+					if (movieButton.getGlobalBounds().contains(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y)))
+					{
+						movieButtonText.setFillColor(sf::Color(255, 84, 0));
+					}
+					else {
+						movieButtonText.setFillColor(sf::Color::White);
+					}
+					if (orderButton.getGlobalBounds().contains(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y)))
+					{
+						orderButtonText.setFillColor(sf::Color(255, 84, 0));
+					}
+					else {
+						orderButtonText.setFillColor(sf::Color::White);
+					}
+					if (adminButton.getGlobalBounds().contains(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y)))
+					{
+						adminButtonText.setFillColor(sf::Color(255, 84, 0));
+					}
+					else {
+						adminButtonText.setFillColor(sf::Color::White);
+					}
 				}
-				if (button2.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y))
-				{
+				if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
+					if (movieButton.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y)) {
+
+					}
+					if (orderButton.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y)) {
+
+					}
+					if (adminButton.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y)) {
+						window.setActive(false);
+						window.setVisible(false);
+						loginAdminWindow(window, windowLoginAdmin);
+						window.setActive(true);
+						window.setVisible(true);
+					}
 				}
 			}
 		}
@@ -2011,22 +2029,31 @@ int main()
 
 		// Chuyển đổi std::tm sang chuỗi có thể đọc được
 		char buf[100];
-		std::strftime(buf, sizeof(buf), "%Y-%m-%d | %H:%M:%S", &time_info);
+		//std::strftime(buf, sizeof(buf), "%Y-%m-%d", &time_info);
+		//textClockDay.setString(buf);
 
-		// Cập nhật văn bản hiển thị trên đồng hồ
-		textClock.setString(buf);
+		std::strftime(buf, sizeof(buf), "%H:%M:%S", &time_info);
+		textClockTime.setString(buf);
 
 		// Xóa cửa sổ
 		window.clear();
 
 		// Vẽ các đối tượng lên cửa sổ
 		window.draw(sprite);
-		window.draw(textClock);
-		window.draw(button1);
-		window.draw(button2);
-		window.draw(iconSprite1);
-		window.draw(iconSprite2);
-		//window.draw(text);
+		window.draw(headerBox);
+		window.draw(movieButton);
+		window.draw(movieButtonText);
+		window.draw(orderButton);
+		window.draw(orderButtonText);
+		window.draw(adminButton);
+		window.draw(adminButtonText);
+
+		window.draw(clockSprite);
+		//window.draw(textClockDay);
+		window.draw(textClockTime);
+
+
+
 
 		// Hiển thị cửa sổ
 		window.display();
