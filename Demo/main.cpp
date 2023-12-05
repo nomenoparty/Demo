@@ -7,6 +7,7 @@
 #include <ctime>
 #include <thread>
 #include<sstream>
+#include <regex>
 //#include <unistd.h>
 using namespace std;
 
@@ -776,6 +777,20 @@ int updateFilmsWindow(sf::RenderWindow& window, sf::RenderWindow& window1, sf::F
 
 		window1.display();
 	}
+}
+
+string normalizeString(const string& str) {
+	string normalized = str;
+	string res = "";
+	string tmp;
+	stringstream ss(normalized);
+	while (ss >> tmp) {
+		res += tmp;
+	}
+	normalized = res;
+
+	transform(normalized.begin(), normalized.end(), normalized.begin(), ::tolower);
+	return normalized;
 }
 
 #include <mutex>
@@ -1926,16 +1941,16 @@ int main()
 
 	sf::Sprite clockSprite(clockTexture);
 	clockSprite.setPosition(0, 5);
-	 scalex = 158.0 / clockTexture.getSize().x;
-	 scaley = 100.0 / clockTexture.getSize().y;
-	 clockSprite.setScale(scalex, scaley);
+	scalex = 158.0 / clockTexture.getSize().x;
+	scaley = 100.0 / clockTexture.getSize().y;
+	clockSprite.setScale(scalex, scaley);
 
 	// Tạo văn bản sử dụng font đã tải
 	//sf::Text textClockDay("", fontClock, 24);
 	//textClockDay.setPosition(0, 100);
 
 	sf::Text textClockTime("", fontClock, 13);
-	textClockTime.setPosition(44, 49);
+	textClockTime.setPosition(43, 49);
 	//TEXT CLOCK
 
 	bool homePageButton = true;
@@ -1943,29 +1958,165 @@ int main()
 	bool selectAndUpdateButton = false; int indexButton = 0;
 	bool orderButtonActive = false;
 
-	sf::RectangleShape movieButton(sf::Vector2f(250, 100));
+	//sf::RectangleShape movieButton(sf::Vector2f(250, 100));
+	//movieButton.setFillColor(sf::Color(3, 22, 46));
+	//movieButton.setPosition(650, 0);
+
+	//sf::Text movieButtonText("MOVIE", font, 30);
+	//movieButtonText.setFillColor(sf::Color::White);
+	//movieButtonText.setPosition(725, 35);
+
+	//sf::RectangleShape orderButton(sf::Vector2f(250, 100));
+	//orderButton.setFillColor(sf::Color(3, 22, 46));
+	//orderButton.setPosition(900, 0);
+
+	//sf::Text orderButtonText("ORDER", font, 30);
+	//orderButtonText.setFillColor(sf::Color::White);
+	//orderButtonText.setPosition(975, 35);
+
+	//sf::RectangleShape adminButton(sf::Vector2f(250, 100));
+	//adminButton.setFillColor(sf::Color(3, 22, 46));
+	//adminButton.setPosition(1150, 0);
+
+	//sf::Text adminButtonText("ADMIN", font, 30);
+	//adminButtonText.setFillColor(sf::Color::White);
+	//adminButtonText.setPosition(1225, 35);
+
+	sf::RectangleShape movieButton(sf::Vector2f(200, 100));
 	movieButton.setFillColor(sf::Color(3, 22, 46));
-	movieButton.setPosition(650, 0);
+	movieButton.setPosition(800, 0);
 
 	sf::Text movieButtonText("MOVIE", font, 30);
 	movieButtonText.setFillColor(sf::Color::White);
-	movieButtonText.setPosition(725, 35);
+	movieButtonText.setPosition(853, 35);
 
-	sf::RectangleShape orderButton(sf::Vector2f(250, 100));
+	sf::RectangleShape orderButton(sf::Vector2f(200, 100));
 	orderButton.setFillColor(sf::Color(3, 22, 46));
-	orderButton.setPosition(900, 0);
+	orderButton.setPosition(1000, 0);
 
 	sf::Text orderButtonText("ORDER", font, 30);
 	orderButtonText.setFillColor(sf::Color::White);
-	orderButtonText.setPosition(975, 35);
+	orderButtonText.setPosition(1053, 35);
 
-	sf::RectangleShape adminButton(sf::Vector2f(250, 100));
+	sf::RectangleShape adminButton(sf::Vector2f(200, 100));
 	adminButton.setFillColor(sf::Color(3, 22, 46));
-	adminButton.setPosition(1150, 0);
+	adminButton.setPosition(1200, 0);
 
 	sf::Text adminButtonText("ADMIN", font, 30);
 	adminButtonText.setFillColor(sf::Color::White);
-	adminButtonText.setPosition(1225, 35);
+	adminButtonText.setPosition(1253, 35);
+
+	sf::RectangleShape searchBox(sf::Vector2f(500, 60));
+	searchBox.setFillColor(sf::Color::White);
+	searchBox.setPosition(180, 20);
+
+	sf::Text searchBoxText;
+	//searchBoxText.setFillColor(sf::Color::Black);
+	searchBoxText.setFillColor(sf::Color(104, 104, 104));
+	searchBoxText.setFont(font);
+	searchBoxText.setCharacterSize(25);
+	searchBoxText.setPosition(185, 35);
+	searchBoxText.setString("Search...");
+
+
+	sf::Texture lookupTexture;
+	lookupTexture.loadFromFile("lookup.png");
+	sf::Sprite lookupSprite(lookupTexture);
+	lookupSprite.setPosition(680, 20);
+	scalex = 60.0 / lookupTexture.getSize().x;
+	scaley = 60.0 / lookupTexture.getSize().y;
+	lookupSprite.setScale(scalex, scaley);
+
+	vector< pair<sf::Text, sf::RectangleShape>> search;
+
+	sf::RectangleShape box1(sf::Vector2f(560, 60));
+	box1.setFillColor(sf::Color(239, 200, 152));
+	box1.setPosition(180, 80);
+
+	sf::Text text1;
+	//searchBoxText.setFillColor(sf::Color::Black);
+	text1.setFillColor(sf::Color(104, 104, 104));
+	text1.setFont(font);
+	text1.setCharacterSize(25);
+	text1.setPosition(185, 95);
+	text1.setString("");
+	search.push_back({ text1, box1 });
+
+	sf::RectangleShape box2(sf::Vector2f(560, 60));
+	box2.setFillColor(sf::Color(239, 200, 152));
+	box2.setPosition(180, 140);
+
+	sf::Text text2;
+	//searchBoxText.setFillColor(sf::Color::Black);
+	text2.setFillColor(sf::Color(104, 104, 104));
+	text2.setFont(font);
+	text2.setCharacterSize(25);
+	text2.setPosition(185, 155);
+	text2.setString("");
+	search.push_back({ text2, box2 });
+
+	sf::RectangleShape box3(sf::Vector2f(560, 60));
+	box3.setFillColor(sf::Color(239, 200, 152));
+	box3.setPosition(180, 200);
+
+	sf::Text text3;
+	//searchBoxText.setFillColor(sf::Color::Black);
+	text3.setFillColor(sf::Color(104, 104, 104));
+	text3.setFont(font);
+	text3.setCharacterSize(25);
+	text3.setPosition(185, 215);
+	text3.setString("");
+	search.push_back({ text3, box3 });
+
+	bool isSearchActive = false;
+	bool isSearchResultActive = false;
+
+	sf::RectangleShape boxDetail(sf::Vector2f(1300, 700));
+	boxDetail.setFillColor(sf::Color::White);
+	boxDetail.setPosition(100, 144);
+
+	sf::Texture detailTexture;
+	detailTexture.loadFromFile("amhondothi.jpg");
+	sf::Sprite detailSprite(detailTexture);
+	detailSprite.setPosition(200, 150);
+	scalex = 150.0 / detailTexture.getSize().x;
+	scaley = 200.0 / detailTexture.getSize().y;
+	detailSprite.setScale(scalex, scaley);
+
+	sf::Text detailText;
+	detailText.setFont(font);
+	detailText.setCharacterSize(27);
+	detailText.setFillColor(sf::Color::Black);
+	detailText.setPosition(500, 230);
+	detailText.setString("AM HON DO THI");
+
+	sf::Text textDescription;
+	textDescription.setFont(font);
+	textDescription.setCharacterSize(20);
+	textDescription.setFillColor(sf::Color(27, 156, 16));
+	textDescription.setPosition(200, 375);
+	textDescription.setString("Description: ");
+
+	sf::Text detailDescripton("Am hon di thi caonoignwgnwbgwoebsgnlkgnoweingowingowegoweogwnheogwneogwheghwighwoeghowngwoegoqwebngoqwebnogwneglnsvmlbsjvwnrkj\nlvrsjlvgnwrkjlngwlj\nfoiqwnognowjngowbgowbeojgqwbeogbqweogbqweogbobgebgoebgoqwebgoqweb", font, 24);
+	detailDescripton.setFillColor(sf::Color::Black);
+	detailDescripton.setPosition(170, 400);
+	sf::Text tmpText("", font, 24);
+	tmpText.setFillColor(sf::Color::Black);
+	tmpText.setPosition(170, 400);
+	string tmpString = detailDescripton.getString().toAnsiString();
+	detailDescripton.setString("");
+	for (char c : tmpString) {
+		if (tmpText.getLocalBounds().width <= 1160) {
+			tmpText.setString(tmpText.getString().toAnsiString() + c);
+		}
+		else {
+			detailDescripton.setString(tmpText.getString() + "\n" + c);
+			tmpText.setString("");
+		}
+	}
+
+	detailDescripton.setString(detailDescripton.getString().toAnsiString() + tmpText.getString().toAnsiString());
+	cout << detailDescripton.getString().toAnsiString() << endl;
 
 	while (window.isOpen())
 	{
@@ -1975,6 +2126,85 @@ int main()
 		{
 			if (event.type == sf::Event::Closed)
 				window.close();
+
+			if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
+			{
+				if (searchBox.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y))
+				{
+					//isDropdownActive = !isDropdownActive;
+					isSearchActive = true;
+				}
+				//else {
+				//	isSearchActive = false;
+				//}
+				else if (isSearchActive)
+				{
+					bool checkClickSearchButton = true;
+					for (int i = 0; i < search.size(); i++)
+					{
+						if (search[i].first.getString().toAnsiString() != "" && search[i].first.getString().toAnsiString() != "Not found") {
+							if (search[i].second.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y)) {
+								cout << i << ' ' << search[i].first.getString().toAnsiString() << endl;
+								checkClickSearchButton = false;
+							}
+						}
+					}
+					if (checkClickSearchButton) {
+						isSearchActive = false;
+					}
+				}
+			}
+			if (event.type == sf::Event::TextEntered)
+			{
+				if (isSearchActive)
+				{
+					if (event.text.unicode < 128)
+					{
+						if (event.text.unicode == '\b')
+						{
+							if (searchBoxText.getString() != "Search...") {
+								std::string currentText = searchBoxText.getString();
+								currentText.pop_back();
+								if (currentText == "") searchBoxText.setString("Search...");
+								else searchBoxText.setString(currentText);
+
+							}
+						}
+						else
+						{
+							float textWidth = searchBoxText.getLocalBounds().width;
+							float buttonWidth = searchBox.getLocalBounds().width;
+							if (buttonWidth > textWidth + 20) {
+								if (searchBoxText.getString() == "Search...") searchBoxText.setString("");
+								searchBoxText.setString(searchBoxText.getString() + static_cast<char>(event.text.unicode));
+							}
+						}
+
+						regex pattern(normalizeString(searchBoxText.getString().toAnsiString()));
+
+						for (std::pair<sf::Text, sf::RectangleShape>& option : search)
+						{
+							option.first.setString("");
+						}
+
+						int cnt = 0;
+
+						for (int i = 0; i < films.size(); i++) {
+							if (regex_search(normalizeString(films[i].title), pattern)) {
+								search[cnt].first.setString(films[i].title);
+								++cnt;
+								cout << films[i].title << " matches the pattern" << std::endl;
+								if (cnt >= 3) {
+									break;
+								}
+							}
+						}
+						if (cnt == 0) {
+							search[cnt].first.setString("Not found");
+						}
+					}
+				}
+			}
 
 			if (homePageButton) {
 				if (event.type == sf::Event::MouseMoved)
@@ -2040,7 +2270,18 @@ int main()
 
 		// Vẽ các đối tượng lên cửa sổ
 		window.draw(sprite);
+
 		window.draw(headerBox);
+
+		window.draw(clockSprite);
+		window.draw(textClockTime);
+
+		window.draw(boxDetail);
+		window.draw(detailSprite);
+		window.draw(detailText);
+		window.draw(textDescription);
+		window.draw(detailDescripton);
+
 		window.draw(movieButton);
 		window.draw(movieButtonText);
 		window.draw(orderButton);
@@ -2048,11 +2289,19 @@ int main()
 		window.draw(adminButton);
 		window.draw(adminButtonText);
 
-		window.draw(clockSprite);
-		//window.draw(textClockDay);
-		window.draw(textClockTime);
+		window.draw(searchBox);
+		window.draw(searchBoxText);
+		window.draw(lookupSprite);
 
-
+		if (isSearchActive) {
+			for (std::pair<sf::Text, sf::RectangleShape> option : search)
+			{
+				if (option.first.getString() != "") {
+					window.draw(option.second);
+					window.draw(option.first);
+				}
+			}
+		}
 
 
 		// Hiển thị cửa sổ
@@ -4481,4 +4730,125 @@ int main()
 //
 //		window.display();
 //	}
+//}
+
+//int main() {
+//
+//	string title = "My nhan dao chich";
+//	string desc = "";
+//	string linkImage = "mynhandaochich.jpg";
+//	films.push_back({ title, desc, linkImage });
+//
+//	title = "Am hon do thi";
+//	desc = "";
+//	linkImage = "amhondothi.jpg";
+//	films.push_back({ title, desc, linkImage });
+//
+//	title = "Nguoi vo cuoi cung";
+//	desc = "";
+//	linkImage = "nguoivocuoicung.jpg";
+//	films.push_back({ title, desc, linkImage });
+//
+//	title = "Nam dem kinh hoang";
+//	desc = "";
+//	linkImage = "5demkinhhoang.jpg";
+//	films.push_back({ title, desc, linkImage });
+//
+//	title = "Quy mon quan";
+//	desc = "";
+//	linkImage = "quymonquan.jpg";
+//	films.push_back({ title, desc, linkImage });
+//
+//	title = "Wolfoo";
+//	desc = "";
+//	linkImage = "wolfoo.jpg";
+//	films.push_back({ title, desc, linkImage });
+//
+//	title = "Dat rung phuong nam";
+//	desc = "";
+//	linkImage = "marvel.jpg";
+//	films.push_back({ title, desc, linkImage });
+//
+//	title = "Biet doi Marvel";
+//	desc = "";
+//	linkImage = "marvel.jpg";
+//	films.push_back({ title, desc, linkImage });
+//
+//	title = "Hai ke doi tra";
+//	desc = "";
+//	linkImage = "haikedoitra.png";
+//	films.push_back({ title, desc, linkImage });
+//
+//	sf::RenderWindow window(sf::VideoMode(1500, 844), "Cinema");
+//
+//	sf::Font font;
+//	if (!font.loadFromFile("Roboto-Bold.ttf"))
+//	{
+//		std::cout << "Failed to load font!" << std::endl;
+//		return -1;
+//	}
+//
+//	sf::RectangleShape headerBox(sf::Vector2f(1500, 100));
+//	headerBox.setFillColor(sf::Color(3, 19, 39)); //205, 156, 124, 150
+//	headerBox.setPosition(0, 0);
+//
+//	sf::Font fontClock;
+//	if (!fontClock.loadFromFile("Wallpoet-Regular.ttf"))
+//		return EXIT_FAILURE;
+//
+//	sf::Texture clockTexture;
+//	clockTexture.loadFromFile("clock.png");
+//
+//	sf::Sprite clockSprite(clockTexture);
+//	clockSprite.setPosition(0, 5);
+//	float scalex = 158.0 / clockTexture.getSize().x;
+//	float scaley = 100.0 / clockTexture.getSize().y;
+//	clockSprite.setScale(scalex, scaley);
+//
+//	// Tạo văn bản sử dụng font đã tải
+//	//sf::Text textClockDay("", fontClock, 24);
+//	//textClockDay.setPosition(0, 100);
+//
+//	sf::Text textClockTime("", fontClock, 13);
+//	textClockTime.setPosition(44, 49);
+//
+//	bool homePageButton = true;
+//	bool orderButtonActive = false;
+//
+//
+//
+//
+//
+//	while (window.isOpen()) {
+//		sf::Event event;
+//		while (window.pollEvent(event))
+//		{
+//			if (event.type == sf::Event::Closed)
+//				window.close();
+//
+//
+//
+//		}
+//
+//		window.clear();
+//
+//		window.draw(headerBox);
+//
+//		window.draw(clockSprite);
+//		window.draw(textClockTime);
+//
+//
+//
+//		window.draw(movieButton);
+//		window.draw(movieButtonText);
+//		window.draw(orderButton);
+//		window.draw(orderButtonText);
+//		window.draw(adminButton);
+//		window.draw(adminButtonText);
+//
+//
+//		window.display();
+//	}
+//
+//	return 0;
 //}
