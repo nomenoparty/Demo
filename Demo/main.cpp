@@ -1889,22 +1889,15 @@ int main()
 	//	productBoxes.push_back({ productBox , {productText, films[i].image} });
 	//}
 
-	float filmListPosition1 = 120.f;
-
 	for (int i = 0; i < films.size(); i++)
 	{
-		sf::RectangleShape productBox(sf::Vector2f(327.5f, 470.f));
-		productBox.setPosition(20.f + 377.5 * (int)(i % 4), filmListPosition1 + (int)(i / 4) * 500);
+		sf::RectangleShape productBox(sf::Vector2f(300, 500));
 		productBox.setFillColor(sf::Color::White);
 		productBox.setOutlineThickness(2);
 		productBox.setOutlineColor(sf::Color::Black);
 
 		sf::Text productText(films[i].title, font, 24);
 		productText.setFillColor(sf::Color::Black);
-
-		float text_X = 20.f + 377.5 * (int)(i % 4) + productBox.getSize().x / 2 - productText.getLocalBounds().width / 2;
-		float text_Y = filmListPosition1 + (int)(i / 4) * 500 + productBox.getSize().y - 25;
-		productText.setPosition(text_X, text_Y);
 
 		productBoxes.push_back({ productBox , {productText, films[i].image} });
 	}
@@ -2136,14 +2129,20 @@ int main()
 	//detailDescripton.setString(detailDescripton.getString().toAnsiString() + tmpText.getString().toAnsiString());
 	//cout << detailDescripton.getString().toAnsiString() << endl;
 
+	float position = 50.0f;
+	int first = 0, last = films.size() - 1;
+	std::thread thread(updateFilmPosition, std::ref(position), std::ref(first), std::ref(last));
+
 	while (window.isOpen())
 	{
 		// Xử lý các sự kiện
 		sf::Event event;
 		while (window.pollEvent(event))
 		{
-			if (event.type == sf::Event::Closed)
+			if (event.type == sf::Event::Closed) {
 				window.close();
+				thread.detach();
+			}
 
 			if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
 			{
@@ -2295,7 +2294,7 @@ int main()
 					adminButtonText.setFillColor(sf::Color::White);
 				}
 			}
-			//if (homePageButton) {
+			
 			if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
 				if (movieButton.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y)) {
 					homePageButton = true;
@@ -2313,7 +2312,43 @@ int main()
 					window.setVisible(true);
 				}
 			}
-			//}
+			
+			if (homePageButton) {
+				if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
+				{
+					for (int i = 0; i < productBoxes.size(); i++)
+					{
+						if (productBoxes[i].first.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y)) {
+							cout << productBoxes[i].second.first.getString().toAnsiString() << endl;
+							isSearchActive = false;
+							homePageButton = false;
+							isSearchResultActive = true;
+
+							detailText.setString(films[i].title);
+							detailTexture.loadFromFile(films[i].image);
+
+							detailDescripton.setString(films[i].desc);
+
+							sf::Text tmpText("", font, 24);
+							tmpText.setFillColor(sf::Color::Black);
+							tmpText.setPosition(170, 400);
+							string tmpString = detailDescripton.getString().toAnsiString();
+							detailDescripton.setString("");
+							for (char c : tmpString) {
+								if (tmpText.getLocalBounds().width <= 1160) {
+									tmpText.setString(tmpText.getString().toAnsiString() + c);
+								}
+								else {
+									detailDescripton.setString(tmpText.getString() + "\n" + c);
+									tmpText.setString("");
+								}
+							}
+
+							detailDescripton.setString(detailDescripton.getString().toAnsiString() + tmpText.getString().toAnsiString());
+						}
+					}
+				}
+			}
 		}
 
 		auto now = std::chrono::system_clock::now();
@@ -2353,6 +2388,69 @@ int main()
 		window.draw(searchBoxText);
 		window.draw(lookupSprite);
 
+		if (homePageButton) {
+			productBoxes[first].first.setPosition(position, 125);
+			float text_X = position + productBoxes[first].first.getSize().x / 2 - productBoxes[first].second.first.getLocalBounds().width / 2;
+			productBoxes[first].second.first.setPosition(text_X, 600);
+			sf::Texture texture;
+			if (!texture.loadFromFile(productBoxes[first].second.second)) {
+				texture.loadFromFile("404.jfif");
+			}
+			sf::Sprite sprite(texture);
+			float scalex = 290.0 / texture.getSize().x;
+			float scaley = 475.0 / texture.getSize().y;
+			sprite.setScale(scalex, scaley);
+			float x = position + 5;
+			float y = productBoxes[first].first.getPosition().y + 5;
+			sprite.setPosition(x, y);
+			window.draw(productBoxes[first].first);
+			window.draw(sprite);
+			window.draw(productBoxes[first].second.first);
+
+			int cnt = 0; // co the error
+			for (int i = first + 1; i < films.size(); i++) {
+				float pos = position + ++cnt * 350;
+				productBoxes[i].first.setPosition(pos, 125);
+				float text_X = pos + productBoxes[i].first.getSize().x / 2 - productBoxes[i].second.first.getLocalBounds().width / 2;
+				productBoxes[i].second.first.setPosition(text_X, 600);
+				sf::Texture texture;
+				if (!texture.loadFromFile(productBoxes[i].second.second)) {
+					texture.loadFromFile("404.jfif");
+				}
+				sf::Sprite sprite(texture);
+				float scalex = 290.0 / texture.getSize().x;
+				float scaley = 475.0 / texture.getSize().y;
+				sprite.setScale(scalex, scaley);
+				float x = pos + 5;
+				float y = productBoxes[i].first.getPosition().y + 5;
+				sprite.setPosition(x, y);
+				window.draw(productBoxes[i].first);
+				window.draw(sprite);
+				window.draw(productBoxes[i].second.first);
+			}
+
+			for (int i = 0; i < first; i++) {
+				float pos = position + ++cnt * 350;
+				productBoxes[i].first.setPosition(pos, 125);
+				float text_X = pos + productBoxes[i].first.getSize().x / 2 - productBoxes[i].second.first.getLocalBounds().width / 2;
+				productBoxes[i].second.first.setPosition(text_X, 600);
+				sf::Texture texture;
+				if (!texture.loadFromFile(productBoxes[i].second.second)) {
+					texture.loadFromFile("404.jfif");
+				}
+				sf::Sprite sprite(texture);
+				float scalex = 290.0 / texture.getSize().x;
+				float scaley = 475.0 / texture.getSize().y;
+				sprite.setScale(scalex, scaley);
+				float x = pos + 5;
+				float y = productBoxes[i].first.getPosition().y + 5;
+				sprite.setPosition(x, y);
+				window.draw(productBoxes[i].first);
+				window.draw(sprite);
+				window.draw(productBoxes[i].second.first);
+			}
+		}
+
 		if (isSearchResultActive) {
 			window.draw(boxDetail);
 			window.draw(detailSprite);
@@ -2370,8 +2468,6 @@ int main()
 				}
 			}
 		}
-
-
 
 		// Hiển thị cửa sổ
 		window.display();
