@@ -8,6 +8,7 @@
 #include <thread>
 #include<sstream>
 #include <regex>
+#include <SFML/Network.hpp>
 //#include <unistd.h>
 using namespace std;
 
@@ -284,10 +285,10 @@ int createFilmsWindow(sf::RenderWindow& window, sf::RenderWindow& window1, sf::F
 								inputTextTitle.setString(currentText);
 							}
 						}
-						else if (event.text.unicode == '\r' || event.text.unicode == '\n')
-						{
-							inputTextTitle.setString(inputTextTitle.getString() + "\n");
-						}
+						//else if (event.text.unicode == '\r' || event.text.unicode == '\n')
+						//{
+						//	inputTextTitle.setString(inputTextTitle.getString() + "\n");
+						//}
 						else
 						{
 							inputTextTitle.setString(inputTextTitle.getString() + static_cast<char>(event.text.unicode));
@@ -348,10 +349,10 @@ int createFilmsWindow(sf::RenderWindow& window, sf::RenderWindow& window1, sf::F
 								inputTextImage.setString(currentText);
 							}
 						}
-						else if (event.text.unicode == '\r' || event.text.unicode == '\n')
-						{
-							inputTextImage.setString(inputTextImage.getString() + "\n");
-						}
+						//else if (event.text.unicode == '\r' || event.text.unicode == '\n')
+						//{
+						//	inputTextImage.setString(inputTextImage.getString() + "\n");
+						//}
 						else
 						{
 							inputTextImage.setString(inputTextImage.getString() + static_cast<char>(event.text.unicode));
@@ -447,6 +448,22 @@ int updateFilmsWindow(sf::RenderWindow& window, sf::RenderWindow& window1, sf::F
 	inputTextDesc.setCharacterSize(27);
 	inputTextDesc.setFillColor(sf::Color(255, 255, 255));
 	inputTextDesc.setPosition(210, 196);
+
+	sf::Text tmpText("", font, 24);
+	string tmpString = inputTextDesc.getString().toAnsiString();
+	inputTextDesc.setString("");
+	for (char c : tmpString) {
+		if (tmpText.getLocalBounds().width <= 520) {
+			tmpText.setString(tmpText.getString().toAnsiString() + c);
+		}
+		else {
+			inputTextDesc.setString(tmpText.getString() + "\n" + c);
+			tmpText.setString("");
+		}
+	}
+
+	inputTextDesc.setString(inputTextDesc.getString().toAnsiString() + tmpText.getString().toAnsiString());
+	//cout << detailDescripton.getString().toAnsiString() << endl;
 
 	sf::RectangleShape buttonImage(sf::Vector2f(600, 45));
 	buttonImage.setFillColor(sf::Color(86, 0, 172, 70));
@@ -641,10 +658,10 @@ int updateFilmsWindow(sf::RenderWindow& window, sf::RenderWindow& window1, sf::F
 								inputTextTitle.setString(currentText);
 							}
 						}
-						else if (event.text.unicode == '\r' || event.text.unicode == '\n')
-						{
-							inputTextTitle.setString(inputTextTitle.getString() + "\n");
-						}
+						//else if (event.text.unicode == '\r' || event.text.unicode == '\n')
+						//{
+						//	inputTextTitle.setString(inputTextTitle.getString() + "\n");
+						//}
 						else
 						{
 							inputTextTitle.setString(inputTextTitle.getString() + static_cast<char>(event.text.unicode));
@@ -705,10 +722,10 @@ int updateFilmsWindow(sf::RenderWindow& window, sf::RenderWindow& window1, sf::F
 								inputTextImage.setString(currentText);
 							}
 						}
-						else if (event.text.unicode == '\r' || event.text.unicode == '\n')
-						{
-							inputTextImage.setString(inputTextImage.getString() + "\n");
-						}
+						//else if (event.text.unicode == '\r' || event.text.unicode == '\n')
+						//{
+						//	inputTextImage.setString(inputTextImage.getString() + "\n");
+						//}
 						else
 						{
 							inputTextImage.setString(inputTextImage.getString() + static_cast<char>(event.text.unicode));
@@ -2043,7 +2060,7 @@ int main()
 	search.push_back({ text1, box1 });
 
 	sf::RectangleShape box2(sf::Vector2f(560, 60));
-	box2.setFillColor(sf::Color(239, 200, 152));
+	box2.setFillColor(sf::Color(222, 143, 48));
 	box2.setPosition(180, 140);
 
 	sf::Text text2;
@@ -2070,6 +2087,7 @@ int main()
 
 	bool isSearchActive = false;
 	bool isSearchResultActive = false;
+	int indexChoose = -1;
 
 	sf::RectangleShape boxDetail(sf::Vector2f(1300, 700));
 	boxDetail.setFillColor(sf::Color::White);
@@ -2088,7 +2106,7 @@ int main()
 	detailText.setCharacterSize(27);
 	detailText.setFillColor(sf::Color::Black);
 	detailText.setPosition(500, 230);
-	detailText.setString("AM HON DO THI");
+	//detailText.setString("AM HON DO THI");
 
 	sf::Text textDescription;
 	textDescription.setFont(font);
@@ -2097,26 +2115,26 @@ int main()
 	textDescription.setPosition(200, 375);
 	textDescription.setString("Description: ");
 
-	sf::Text detailDescripton("Am hon di thi caonoignwgnwbgwoebsgnlkgnoweingowingowegoweogwnheogwneogwheghwighwoeghowngwoegoqwebngoqwebnogwneglnsvmlbsjvwnrkj\nlvrsjlvgnwrkjlngwlj\nfoiqwnognowjngowbgowbeojgqwbeogbqweogbqweogbobgebgoebgoqwebgoqweb", font, 24);
+	sf::Text detailDescripton("", font, 24);
 	detailDescripton.setFillColor(sf::Color::Black);
 	detailDescripton.setPosition(170, 400);
-	sf::Text tmpText("", font, 24);
-	tmpText.setFillColor(sf::Color::Black);
-	tmpText.setPosition(170, 400);
-	string tmpString = detailDescripton.getString().toAnsiString();
-	detailDescripton.setString("");
-	for (char c : tmpString) {
-		if (tmpText.getLocalBounds().width <= 1160) {
-			tmpText.setString(tmpText.getString().toAnsiString() + c);
-		}
-		else {
-			detailDescripton.setString(tmpText.getString() + "\n" + c);
-			tmpText.setString("");
-		}
-	}
+	//sf::Text tmpText("", font, 24);
+	//tmpText.setFillColor(sf::Color::Black);
+	//tmpText.setPosition(170, 400);
+	//string tmpString = detailDescripton.getString().toAnsiString();
+	//detailDescripton.setString("");
+	//for (char c : tmpString) {
+	//	if (tmpText.getLocalBounds().width <= 1160) {
+	//		tmpText.setString(tmpText.getString().toAnsiString() + c);
+	//	}
+	//	else {
+	//		detailDescripton.setString(tmpText.getString() + "\n" + c);
+	//		tmpText.setString("");
+	//	}
+	//}
 
-	detailDescripton.setString(detailDescripton.getString().toAnsiString() + tmpText.getString().toAnsiString());
-	cout << detailDescripton.getString().toAnsiString() << endl;
+	//detailDescripton.setString(detailDescripton.getString().toAnsiString() + tmpText.getString().toAnsiString());
+	//cout << detailDescripton.getString().toAnsiString() << endl;
 
 	while (window.isOpen())
 	{
@@ -2145,7 +2163,39 @@ int main()
 						if (search[i].first.getString().toAnsiString() != "" && search[i].first.getString().toAnsiString() != "Not found") {
 							if (search[i].second.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y)) {
 								cout << i << ' ' << search[i].first.getString().toAnsiString() << endl;
+								isSearchActive = false;
+								homePageButton = false;
+								isSearchResultActive = true;
 								checkClickSearchButton = false;
+
+								for (int j = 0; j < films.size(); j++) {
+									if (search[i].first.getString().toAnsiString() == films[j].title) {
+										indexChoose = j;
+									}
+								}
+
+								detailText.setString(films[indexChoose].title);
+								detailTexture.loadFromFile(films[indexChoose].image);
+
+								detailDescripton.setString(films[indexChoose].desc);
+
+								sf::Text tmpText("", font, 24);
+								tmpText.setFillColor(sf::Color::Black);
+								tmpText.setPosition(170, 400);
+								string tmpString = detailDescripton.getString().toAnsiString();
+								detailDescripton.setString("");
+								for (char c : tmpString) {
+									if (tmpText.getLocalBounds().width <= 1160) {
+										tmpText.setString(tmpText.getString().toAnsiString() + c);
+									}
+									else {
+										detailDescripton.setString(tmpText.getString() + "\n" + c);
+										tmpText.setString("");
+									}
+								}
+
+								detailDescripton.setString(detailDescripton.getString().toAnsiString() + tmpText.getString().toAnsiString());
+
 							}
 						}
 					}
@@ -2153,6 +2203,20 @@ int main()
 						isSearchActive = false;
 					}
 				}
+				//if (isSearchActive)
+				//{
+				//	for (int i = 0; i < 3; i++) {
+				//		if (isMouseOver(search[i].second, window))
+				//		{
+				//			isSearchActive = false;
+				//			homePageButton = false;
+				//			isSearchResultActive = true;
+				//			indexChoose = i;
+				//			break;
+				//		}
+				//	}
+
+				//}
 			}
 			if (event.type == sf::Event::TextEntered)
 			{
@@ -2206,48 +2270,50 @@ int main()
 				}
 			}
 
-			if (homePageButton) {
-				if (event.type == sf::Event::MouseMoved)
+			if (event.type == sf::Event::MouseMoved)
+			{
+				sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+				if (movieButton.getGlobalBounds().contains(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y)))
 				{
-					sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
-					if (movieButton.getGlobalBounds().contains(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y)))
-					{
-						movieButtonText.setFillColor(sf::Color(255, 84, 0));
-					}
-					else {
-						movieButtonText.setFillColor(sf::Color::White);
-					}
-					if (orderButton.getGlobalBounds().contains(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y)))
-					{
-						orderButtonText.setFillColor(sf::Color(255, 84, 0));
-					}
-					else {
-						orderButtonText.setFillColor(sf::Color::White);
-					}
-					if (adminButton.getGlobalBounds().contains(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y)))
-					{
-						adminButtonText.setFillColor(sf::Color(255, 84, 0));
-					}
-					else {
-						adminButtonText.setFillColor(sf::Color::White);
-					}
+					movieButtonText.setFillColor(sf::Color(255, 84, 0));
 				}
-				if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
-					if (movieButton.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y)) {
-
-					}
-					if (orderButton.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y)) {
-
-					}
-					if (adminButton.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y)) {
-						window.setActive(false);
-						window.setVisible(false);
-						loginAdminWindow(window, windowLoginAdmin);
-						window.setActive(true);
-						window.setVisible(true);
-					}
+				else {
+					movieButtonText.setFillColor(sf::Color::White);
+				}
+				if (orderButton.getGlobalBounds().contains(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y)))
+				{
+					orderButtonText.setFillColor(sf::Color(255, 84, 0));
+				}
+				else {
+					orderButtonText.setFillColor(sf::Color::White);
+				}
+				if (adminButton.getGlobalBounds().contains(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y)))
+				{
+					adminButtonText.setFillColor(sf::Color(255, 84, 0));
+				}
+				else {
+					adminButtonText.setFillColor(sf::Color::White);
 				}
 			}
+			//if (homePageButton) {
+			if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
+				if (movieButton.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y)) {
+					homePageButton = true;
+					isSearchActive = false;
+					isSearchResultActive = false;
+				}
+				if (orderButton.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y)) {
+
+				}
+				if (adminButton.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y)) {
+					window.setActive(false);
+					window.setVisible(false);
+					loginAdminWindow(window, windowLoginAdmin);
+					window.setActive(true);
+					window.setVisible(true);
+				}
+			}
+			//}
 		}
 
 		auto now = std::chrono::system_clock::now();
@@ -2276,12 +2342,6 @@ int main()
 		window.draw(clockSprite);
 		window.draw(textClockTime);
 
-		window.draw(boxDetail);
-		window.draw(detailSprite);
-		window.draw(detailText);
-		window.draw(textDescription);
-		window.draw(detailDescripton);
-
 		window.draw(movieButton);
 		window.draw(movieButtonText);
 		window.draw(orderButton);
@@ -2293,6 +2353,14 @@ int main()
 		window.draw(searchBoxText);
 		window.draw(lookupSprite);
 
+		if (isSearchResultActive) {
+			window.draw(boxDetail);
+			window.draw(detailSprite);
+			window.draw(detailText);
+			window.draw(textDescription);
+			window.draw(detailDescripton);
+		}
+
 		if (isSearchActive) {
 			for (std::pair<sf::Text, sf::RectangleShape> option : search)
 			{
@@ -2302,6 +2370,7 @@ int main()
 				}
 			}
 		}
+
 
 
 		// Hiển thị cửa sổ
