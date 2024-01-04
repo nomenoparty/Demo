@@ -134,6 +134,26 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="source\admin.cpp" />
+    <ClCompile Include="source\maychu.cpp" />
+    <ClCompile Include="source\now.cpp" />
+    <ClCompile Include="source\phim.cpp" />
+    <ClCompile Include="source\phong.cpp" />
+    <ClCompile Include="source\rap.cpp" />
+    <ClCompile Include="source\suatchieu.cpp" />
+    <ClCompile Include="source\Time.cpp" />
+    <ClCompile Include="source\ve.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="header\admin.h" />
+    <ClInclude Include="header\maychu.h" />
+    <ClInclude Include="header\now.h" />
+    <ClInclude Include="header\phim.h" />
+    <ClInclude Include="header\phong.h" />
+    <ClInclude Include="header\rap.h" />
+    <ClInclude Include="header\suatchieu.h" />
+    <ClInclude Include="header\Time.h" />
+    <ClInclude Include="header\ve.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
