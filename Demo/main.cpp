@@ -773,6 +773,13 @@ int createFilmsWindow(sf::RenderWindow& window, sf::RenderWindow& window1, sf::F
 						films.push_back(x);
 						std::thread writeThread(writeToFile);
 						writeThread.join();
+
+						admin adminTmp;
+						adminTmp.themphim("DanhSachPhim.txt");
+						adminTmp.nhaprap();
+						adminTmp.quanlychieuphim2();
+						adminTmp.writesuatchieu("DanhSachSuatChieu.txt");
+
 						//cout << "phim size = " << films.size() << ' ';
 						//cout << "productBoxes size = " << productBoxes.size() << ' ';
 						sf::RectangleShape productBox(sf::Vector2f(327.5f, 470.f));
@@ -1204,31 +1211,77 @@ int updateFilmsWindow(sf::RenderWindow& window, sf::RenderWindow& window1, sf::F
 	float scaley = 1000.0 / texture.getSize().y;
 	sprite.setScale(scalex, scaley);
 
+	sf::Text nameTitle;
+	nameTitle.setFont(font);
+	nameTitle.setCharacterSize(25);
+	nameTitle.setFillColor(sf::Color(255, 130, 4));
+	nameTitle.setPosition(145, 18);
+	nameTitle.setString("Title");
+
 	sf::RectangleShape buttonTitle(sf::Vector2f(600, 45));
 	buttonTitle.setFillColor(sf::Color(86, 0, 172, 70));
-	buttonTitle.setPosition(200, 70);
+	buttonTitle.setPosition(200, 15);
 
 	sf::RectangleShape lineTitle(sf::Vector2f(5, 45));
 	lineTitle.setFillColor(sf::Color(18, 104, 10));
-	lineTitle.setPosition(200, 70);
+	lineTitle.setPosition(200, 15);
 
 	sf::Text inputTextTitle(films[index].title, font, 24);
 	inputTextTitle.setCharacterSize(27);
 	inputTextTitle.setFillColor(sf::Color(255, 255, 255));
-	inputTextTitle.setPosition(210, 73);
+	inputTextTitle.setPosition(210, 18);
+
+	//sf::Text inputTextTitle;
+	//inputTextTitle.setFont(font);
+	//inputTextTitle.setCharacterSize(27);
+	//inputTextTitle.setFillColor(sf::Color(255, 255, 255));
+	//inputTextTitle.setPosition(210, 18);
+
+	sf::Text nameType;
+	nameType.setFont(font);
+	nameType.setCharacterSize(25);
+	nameType.setFillColor(sf::Color(255, 130, 4));
+	nameType.setPosition(138, 83);
+	nameType.setString("Type");
+
+	sf::RectangleShape buttonType(sf::Vector2f(600, 45));
+	buttonType.setFillColor(sf::Color(86, 0, 172, 70));
+	buttonType.setPosition(200, 80);
+
+	sf::RectangleShape lineType(sf::Vector2f(5, 45));
+	lineType.setFillColor(sf::Color(18, 104, 10));
+	lineType.setPosition(200, 80);
+
+	sf::Text inputTextType(films[index].chu_de, font, 24);
+	inputTextType.setCharacterSize(27);
+	inputTextType.setFillColor(sf::Color(255, 255, 255));
+	inputTextType.setPosition(210, 83);
+
+	//sf::Text inputTextType;
+	//inputTextType.setFont(font);
+	//inputTextType.setCharacterSize(27);
+	//inputTextType.setFillColor(sf::Color(255, 255, 255));
+	//inputTextType.setPosition(210, 83);
+
+	sf::Text nameDesc;
+	nameDesc.setFont(font);
+	nameDesc.setCharacterSize(25);
+	nameDesc.setFillColor(sf::Color(255, 130, 4));
+	nameDesc.setPosition(67, 145);
+	nameDesc.setString("Description");
 
 	sf::RectangleShape buttonDesc(sf::Vector2f(600, 500));
 	buttonDesc.setFillColor(sf::Color(86, 0, 172, 70));
-	buttonDesc.setPosition(200, 200);
+	buttonDesc.setPosition(200, 145);
 
 	sf::RectangleShape lineDesc(sf::Vector2f(5, 500));
 	lineDesc.setFillColor(sf::Color(18, 104, 10));
-	lineDesc.setPosition(200, 200);
+	lineDesc.setPosition(200, 145);
 
 	sf::Text inputTextDesc(films[index].desc, font, 24);
 	inputTextDesc.setCharacterSize(27);
 	inputTextDesc.setFillColor(sf::Color(255, 255, 255));
-	inputTextDesc.setPosition(210, 196);
+	inputTextDesc.setPosition(210, 141);
 
 	sf::Text tmpText("", font, 24);
 	string tmpString = inputTextDesc.getString().toAnsiString();
@@ -1244,20 +1297,174 @@ int updateFilmsWindow(sf::RenderWindow& window, sf::RenderWindow& window1, sf::F
 	}
 
 	inputTextDesc.setString(inputTextDesc.getString().toAnsiString() + tmpText.getString().toAnsiString());
-	//cout << detailDescripton.getString().toAnsiString() << endl;
+
+	//sf::Text inputTextDesc;
+	//inputTextDesc.setFont(font);
+	//inputTextDesc.setCharacterSize(27);
+	//inputTextDesc.setFillColor(sf::Color(255, 255, 255));
+	//inputTextDesc.setPosition(210, 141);
+
+	sf::Text nameImage;
+	nameImage.setFont(font);
+	nameImage.setCharacterSize(25);
+	nameImage.setFillColor(sf::Color(255, 130, 4));
+	nameImage.setPosition(122, 668);
+	nameImage.setString("Image");
 
 	sf::RectangleShape buttonImage(sf::Vector2f(600, 45));
 	buttonImage.setFillColor(sf::Color(86, 0, 172, 70));
-	buttonImage.setPosition(200, 785);
+	buttonImage.setPosition(200, 665);
 
 	sf::RectangleShape lineImage(sf::Vector2f(5, 45));
 	lineImage.setFillColor(sf::Color(18, 104, 10));
-	lineImage.setPosition(200, 785);
+	lineImage.setPosition(200, 665);
 
 	sf::Text inputTextImage(films[index].image, font, 24);
 	inputTextImage.setCharacterSize(27);
 	inputTextImage.setFillColor(sf::Color(255, 255, 255));
-	inputTextImage.setPosition(210, 788);
+	inputTextImage.setPosition(210, 668);
+
+	//sf::Text inputTextImage;
+	//inputTextImage.setFont(font);
+	//inputTextImage.setCharacterSize(27);
+	//inputTextImage.setFillColor(sf::Color(255, 255, 255));
+	//inputTextImage.setPosition(210, 668);
+
+	sf::Text nameTime;
+	nameTime.setFont(font);
+	nameTime.setCharacterSize(25);
+	nameTime.setFillColor(sf::Color(255, 130, 4));
+	nameTime.setPosition(40, 733);
+	nameTime.setString("DD-MM-YYYY");
+
+	sf::RectangleShape buttonDay(sf::Vector2f(50, 45));
+	buttonDay.setFillColor(sf::Color(86, 0, 172, 70));
+	buttonDay.setPosition(200, 730);
+
+	sf::RectangleShape lineDay(sf::Vector2f(5, 45));
+	lineDay.setFillColor(sf::Color(18, 104, 10));
+	lineDay.setPosition(200, 730);
+
+	sf::Text inputTextDay(films[index].day, font, 24);
+	inputTextDay.setCharacterSize(27);
+	inputTextDay.setFillColor(sf::Color(255, 255, 255));
+	inputTextDay.setPosition(210, 733);
+
+	//sf::Text inputTextDay;
+	//inputTextDay.setFont(font);
+	//inputTextDay.setCharacterSize(27);
+	//inputTextDay.setFillColor(sf::Color(255, 255, 255));
+	//inputTextDay.setPosition(210, 733);
+
+	sf::RectangleShape buttonMonth(sf::Vector2f(50, 45));
+	buttonMonth.setFillColor(sf::Color(86, 0, 172, 70));
+	buttonMonth.setPosition(280, 730);
+
+	sf::RectangleShape lineMonth(sf::Vector2f(5, 45));
+	lineMonth.setFillColor(sf::Color(18, 104, 10));
+	lineMonth.setPosition(280, 730);
+
+	sf::Text inputTextMonth(films[index].month, font, 24);
+	inputTextMonth.setCharacterSize(27);
+	inputTextMonth.setFillColor(sf::Color(255, 255, 255));
+	inputTextMonth.setPosition(290, 733);
+
+	//sf::Text inputTextMonth;
+	//inputTextMonth.setFont(font);
+	//inputTextMonth.setCharacterSize(27);
+	//inputTextMonth.setFillColor(sf::Color(255, 255, 255));
+	//inputTextMonth.setPosition(290, 733);
+
+	sf::RectangleShape buttonYear(sf::Vector2f(100, 45));
+	buttonYear.setFillColor(sf::Color(86, 0, 172, 70));
+	buttonYear.setPosition(360, 730);
+
+	sf::RectangleShape lineYear(sf::Vector2f(5, 45));
+	lineYear.setFillColor(sf::Color(18, 104, 10));
+	lineYear.setPosition(360, 730);
+
+	sf::Text inputTextYear(films[index].year, font, 24);
+	inputTextYear.setCharacterSize(27);
+	inputTextYear.setFillColor(sf::Color(255, 255, 255));
+	inputTextYear.setPosition(370, 733);
+
+	//sf::Text inputTextYear;
+	//inputTextYear.setFont(font);
+	//inputTextYear.setCharacterSize(27);
+	//inputTextYear.setFillColor(sf::Color(255, 255, 255));
+	//inputTextYear.setPosition(370, 733);
+
+	sf::Text nameHour;
+	nameHour.setFont(font);
+	nameHour.setCharacterSize(25);
+	nameHour.setFillColor(sf::Color(255, 130, 4));
+	nameHour.setPosition(530, 733);
+	nameHour.setString("HH-MM");
+
+	sf::RectangleShape buttonHour(sf::Vector2f(50, 45));
+	buttonHour.setFillColor(sf::Color(86, 0, 172, 70));
+	buttonHour.setPosition(660, 730);
+
+	sf::RectangleShape lineHour(sf::Vector2f(5, 45));
+	lineHour.setFillColor(sf::Color(18, 104, 10));
+	lineHour.setPosition(660, 730);
+
+	sf::Text inputTextHour(films[index].hour, font, 24);
+	inputTextHour.setCharacterSize(27);
+	inputTextHour.setFillColor(sf::Color(255, 255, 255));
+	inputTextHour.setPosition(670, 733);
+
+	//sf::Text inputTextHour;
+	//inputTextHour.setFont(font);
+	//inputTextHour.setCharacterSize(27);
+	//inputTextHour.setFillColor(sf::Color(255, 255, 255));
+	//inputTextHour.setPosition(670, 733);
+
+	sf::RectangleShape buttonMinute(sf::Vector2f(50, 45));
+	buttonMinute.setFillColor(sf::Color(86, 0, 172, 70));
+	buttonMinute.setPosition(740, 730);
+
+	sf::RectangleShape lineMinute(sf::Vector2f(5, 45));
+	lineMinute.setFillColor(sf::Color(18, 104, 10));
+	lineMinute.setPosition(740, 730);
+
+	sf::Text inputTextMinute(films[index].minute, font, 24);
+	inputTextMinute.setCharacterSize(27);
+	inputTextMinute.setFillColor(sf::Color(255, 255, 255));
+	inputTextMinute.setPosition(750, 733);
+
+	//sf::Text inputTextMinute;
+	//inputTextMinute.setFont(font);
+	//inputTextMinute.setCharacterSize(27);
+	//inputTextMinute.setFillColor(sf::Color(255, 255, 255));
+	//inputTextMinute.setPosition(750, 733);
+
+	sf::Text nameDuration;
+	nameDuration.setFont(font);
+	nameDuration.setCharacterSize(25);
+	nameDuration.setFillColor(sf::Color(255, 130, 4));
+	nameDuration.setPosition(95, 813);
+	nameDuration.setString("Duration");
+
+	sf::RectangleShape buttonDuration(sf::Vector2f(100, 45));
+	buttonDuration.setFillColor(sf::Color(86, 0, 172, 70));
+	buttonDuration.setPosition(200, 810);
+
+	sf::RectangleShape lineDuration(sf::Vector2f(5, 45));
+	lineDuration.setFillColor(sf::Color(18, 104, 10));
+	lineDuration.setPosition(200, 810);
+
+	sf::Text inputTextDuration(films[index].so_luong, font, 24);
+	inputTextDuration.setCharacterSize(27);
+	inputTextDuration.setFillColor(sf::Color(255, 255, 255));
+	inputTextDuration.setPosition(210, 813);
+
+	//sf::Text inputTextDuration;
+	//inputTextDuration.setFont(font);
+	//inputTextDuration.setCharacterSize(27);
+	//inputTextDuration.setFillColor(sf::Color(255, 255, 255));
+	//inputTextDuration.setPosition(210, 813);
+
 
 	sf::Texture updateTexture;
 	if (!updateTexture.loadFromFile("2023-11-13_171327.png"))
@@ -1303,8 +1510,15 @@ int updateFilmsWindow(sf::RenderWindow& window, sf::RenderWindow& window1, sf::F
 	string textDesc = films[index].desc;
 
 	bool isInputTitleActive = false;
+	bool isInputTypeActive = false;
 	bool isInputDescActive = false;
 	bool isInputImageActive = false;
+	bool isInputDayActive = false;
+	bool isInputMonthActive = false;
+	bool isInputYearActive = false;
+	bool isInputHourActive = false;
+	bool isInputMinuteActive = false;
+	bool isInputDurationActive = false;
 
 	bool checkwindow1 = false;
 
@@ -1324,45 +1538,303 @@ int updateFilmsWindow(sf::RenderWindow& window, sf::RenderWindow& window1, sf::F
 				if (isMouseOver(buttonTitle, event))
 				{
 					lineTitle.setFillColor(sf::Color(128, 241, 118));
+					lineType.setFillColor(sf::Color(18, 104, 10));
 					lineDesc.setFillColor(sf::Color(18, 104, 10));
 					lineImage.setFillColor(sf::Color(18, 104, 10));
+					lineDay.setFillColor(sf::Color(18, 104, 10));
+					lineMonth.setFillColor(sf::Color(18, 104, 10));
+					lineYear.setFillColor(sf::Color(18, 104, 10));
+					lineHour.setFillColor(sf::Color(18, 104, 10));
+					lineMinute.setFillColor(sf::Color(18, 104, 10));
+					lineDuration.setFillColor(sf::Color(18, 104, 10));
+
 					isInputTitleActive = true;
+					isInputTypeActive = false;
 					isInputDescActive = false;
 					isInputImageActive = false;
+					isInputDayActive = false;
+					isInputMonthActive = false;
+					isInputYearActive = false;
+					isInputHourActive = false;
+					isInputMinuteActive = false;
+					isInputDurationActive = false;
+				}
+				else if (isMouseOver(buttonType, event))
+				{
+					lineTitle.setFillColor(sf::Color(18, 104, 10));
+					lineType.setFillColor(sf::Color(128, 241, 118));
+					lineDesc.setFillColor(sf::Color(18, 104, 10));
+					lineImage.setFillColor(sf::Color(18, 104, 10));
+					lineDay.setFillColor(sf::Color(18, 104, 10));
+					lineMonth.setFillColor(sf::Color(18, 104, 10));
+					lineYear.setFillColor(sf::Color(18, 104, 10));
+					lineHour.setFillColor(sf::Color(18, 104, 10));
+					lineMinute.setFillColor(sf::Color(18, 104, 10));
+					lineDuration.setFillColor(sf::Color(18, 104, 10));
+
+					isInputTitleActive = false;
+					isInputTypeActive = true;
+					isInputDescActive = false;
+					isInputImageActive = false;
+					isInputDayActive = false;
+					isInputMonthActive = false;
+					isInputYearActive = false;
+					isInputHourActive = false;
+					isInputMinuteActive = false;
+					isInputDurationActive = false;
 				}
 				else if (isMouseOver(buttonDesc, event))
 				{
-					lineDesc.setFillColor(sf::Color(128, 241, 118));
 					lineTitle.setFillColor(sf::Color(18, 104, 10));
+					lineType.setFillColor(sf::Color(18, 104, 10));
+					lineDesc.setFillColor(sf::Color(128, 241, 118));
 					lineImage.setFillColor(sf::Color(18, 104, 10));
-					isInputDescActive = true;
+					lineDay.setFillColor(sf::Color(18, 104, 10));
+					lineMonth.setFillColor(sf::Color(18, 104, 10));
+					lineYear.setFillColor(sf::Color(18, 104, 10));
+					lineHour.setFillColor(sf::Color(18, 104, 10));
+					lineMinute.setFillColor(sf::Color(18, 104, 10));
+					lineDuration.setFillColor(sf::Color(18, 104, 10));
+
 					isInputTitleActive = false;
+					isInputTypeActive = false;
+					isInputDescActive = true;
 					isInputImageActive = false;
+					isInputDayActive = false;
+					isInputMonthActive = false;
+					isInputYearActive = false;
+					isInputHourActive = false;
+					isInputMinuteActive = false;
+					isInputDurationActive = false;
 				}
 				else if (isMouseOver(buttonImage, event)) {
-					lineImage.setFillColor(sf::Color(128, 241, 118));
-					lineDesc.setFillColor(sf::Color(18, 104, 10));
 					lineTitle.setFillColor(sf::Color(18, 104, 10));
-					isInputDescActive = false;
+					lineType.setFillColor(sf::Color(18, 104, 10));
+					lineDesc.setFillColor(sf::Color(18, 104, 10));
+					lineImage.setFillColor(sf::Color(128, 241, 118));
+					lineDay.setFillColor(sf::Color(18, 104, 10));
+					lineMonth.setFillColor(sf::Color(18, 104, 10));
+					lineYear.setFillColor(sf::Color(18, 104, 10));
+					lineHour.setFillColor(sf::Color(18, 104, 10));
+					lineMinute.setFillColor(sf::Color(18, 104, 10));
+					lineDuration.setFillColor(sf::Color(18, 104, 10));
+
 					isInputTitleActive = false;
+					isInputTypeActive = false;
+					isInputDescActive = false;
 					isInputImageActive = true;
+					isInputDayActive = false;
+					isInputMonthActive = false;
+					isInputYearActive = false;
+					isInputHourActive = false;
+					isInputMinuteActive = false;
+					isInputDurationActive = false;
+				}
+				else if (isMouseOver(buttonDay, event))
+				{
+					lineTitle.setFillColor(sf::Color(18, 104, 10));
+					lineType.setFillColor(sf::Color(18, 104, 10));
+					lineDesc.setFillColor(sf::Color(18, 104, 10));
+					lineImage.setFillColor(sf::Color(18, 104, 10));
+					lineDay.setFillColor(sf::Color(128, 241, 118));
+					lineMonth.setFillColor(sf::Color(18, 104, 10));
+					lineYear.setFillColor(sf::Color(18, 104, 10));
+					lineHour.setFillColor(sf::Color(18, 104, 10));
+					lineMinute.setFillColor(sf::Color(18, 104, 10));
+					lineDuration.setFillColor(sf::Color(18, 104, 10));
+
+					isInputTitleActive = false;
+					isInputTypeActive = false;
+					isInputDescActive = false;
+					isInputImageActive = false;
+					isInputDayActive = true;
+					isInputMonthActive = false;
+					isInputYearActive = false;
+					isInputHourActive = false;
+					isInputMinuteActive = false;
+					isInputDurationActive = false;
+				}
+				else if (isMouseOver(buttonMonth, event))
+				{
+					lineTitle.setFillColor(sf::Color(18, 104, 10));
+					lineType.setFillColor(sf::Color(18, 104, 10));
+					lineDesc.setFillColor(sf::Color(18, 104, 10));
+					lineImage.setFillColor(sf::Color(18, 104, 10));
+					lineDay.setFillColor(sf::Color(18, 104, 10));
+					lineMonth.setFillColor(sf::Color(128, 241, 118));
+					lineYear.setFillColor(sf::Color(18, 104, 10));
+					lineHour.setFillColor(sf::Color(18, 104, 10));
+					lineMinute.setFillColor(sf::Color(18, 104, 10));
+					lineDuration.setFillColor(sf::Color(18, 104, 10));
+
+					isInputTitleActive = false;
+					isInputTypeActive = false;
+					isInputDescActive = false;
+					isInputImageActive = false;
+					isInputDayActive = false;
+					isInputMonthActive = true;
+					isInputYearActive = false;
+					isInputHourActive = false;
+					isInputMinuteActive = false;
+					isInputDurationActive = false;
+				}
+				else if (isMouseOver(buttonYear, event))
+				{
+					lineTitle.setFillColor(sf::Color(18, 104, 10));
+					lineType.setFillColor(sf::Color(18, 104, 10));
+					lineDesc.setFillColor(sf::Color(18, 104, 10));
+					lineImage.setFillColor(sf::Color(18, 104, 10));
+					lineDay.setFillColor(sf::Color(18, 104, 10));
+					lineMonth.setFillColor(sf::Color(18, 104, 10));
+					lineYear.setFillColor(sf::Color(128, 241, 118));
+					lineHour.setFillColor(sf::Color(18, 104, 10));
+					lineMinute.setFillColor(sf::Color(18, 104, 10));
+					lineDuration.setFillColor(sf::Color(18, 104, 10));
+
+					isInputTitleActive = false;
+					isInputTypeActive = false;
+					isInputDescActive = false;
+					isInputImageActive = false;
+					isInputDayActive = false;
+					isInputMonthActive = false;
+					isInputYearActive = true;
+					isInputHourActive = false;
+					isInputMinuteActive = false;
+					isInputDurationActive = false;
+				}
+				else if (isMouseOver(buttonHour, event))
+				{
+					lineTitle.setFillColor(sf::Color(18, 104, 10));
+					lineType.setFillColor(sf::Color(18, 104, 10));
+					lineDesc.setFillColor(sf::Color(18, 104, 10));
+					lineImage.setFillColor(sf::Color(18, 104, 10));
+					lineDay.setFillColor(sf::Color(18, 104, 10));
+					lineMonth.setFillColor(sf::Color(18, 104, 10));
+					lineYear.setFillColor(sf::Color(18, 104, 10));
+					lineHour.setFillColor(sf::Color(128, 241, 118));
+					lineMinute.setFillColor(sf::Color(18, 104, 10));
+					lineDuration.setFillColor(sf::Color(18, 104, 10));
+
+					isInputTitleActive = false;
+					isInputTypeActive = false;
+					isInputDescActive = false;
+					isInputImageActive = false;
+					isInputDayActive = false;
+					isInputMonthActive = false;
+					isInputYearActive = false;
+					isInputHourActive = true;
+					isInputMinuteActive = false;
+					isInputDurationActive = false;
+				}
+				else if (isMouseOver(buttonMinute, event))
+				{
+					lineTitle.setFillColor(sf::Color(18, 104, 10));
+					lineType.setFillColor(sf::Color(18, 104, 10));
+					lineDesc.setFillColor(sf::Color(18, 104, 10));
+					lineImage.setFillColor(sf::Color(18, 104, 10));
+					lineDay.setFillColor(sf::Color(18, 104, 10));
+					lineMonth.setFillColor(sf::Color(18, 104, 10));
+					lineYear.setFillColor(sf::Color(18, 104, 10));
+					lineHour.setFillColor(sf::Color(18, 104, 10));
+					lineMinute.setFillColor(sf::Color(128, 241, 118));
+					lineDuration.setFillColor(sf::Color(18, 104, 10));
+
+					isInputTitleActive = false;
+					isInputTypeActive = false;
+					isInputDescActive = false;
+					isInputImageActive = false;
+					isInputDayActive = false;
+					isInputMonthActive = false;
+					isInputYearActive = false;
+					isInputHourActive = false;
+					isInputMinuteActive = true;
+					isInputDurationActive = false;
+				}
+				else if (isMouseOver(buttonDuration, event))
+				{
+					lineTitle.setFillColor(sf::Color(18, 104, 10));
+					lineType.setFillColor(sf::Color(18, 104, 10));
+					lineDesc.setFillColor(sf::Color(18, 104, 10));
+					lineImage.setFillColor(sf::Color(18, 104, 10));
+					lineDay.setFillColor(sf::Color(18, 104, 10));
+					lineMonth.setFillColor(sf::Color(18, 104, 10));
+					lineYear.setFillColor(sf::Color(18, 104, 10));
+					lineHour.setFillColor(sf::Color(18, 104, 10));
+					lineMinute.setFillColor(sf::Color(18, 104, 10));
+					lineDuration.setFillColor(sf::Color(128, 241, 118));
+
+					isInputTitleActive = false;
+					isInputTypeActive = false;
+					isInputDescActive = false;
+					isInputImageActive = false;
+					isInputDayActive = false;
+					isInputMonthActive = false;
+					isInputYearActive = false;
+					isInputHourActive = false;
+					isInputMinuteActive = false;
+					isInputDurationActive = true;
 				}
 				else {
-					lineDesc.setFillColor(sf::Color(18, 104, 10));
 					lineTitle.setFillColor(sf::Color(18, 104, 10));
+					lineType.setFillColor(sf::Color(18, 104, 10));
+					lineDesc.setFillColor(sf::Color(18, 104, 10));
 					lineImage.setFillColor(sf::Color(18, 104, 10));
-					isInputDescActive = false;
+					lineDay.setFillColor(sf::Color(18, 104, 10));
+					lineMonth.setFillColor(sf::Color(18, 104, 10));
+					lineYear.setFillColor(sf::Color(18, 104, 10));
+					lineHour.setFillColor(sf::Color(18, 104, 10));
+					lineMinute.setFillColor(sf::Color(18, 104, 10));
+					lineDuration.setFillColor(sf::Color(18, 104, 10));
+
 					isInputTitleActive = false;
+					isInputTypeActive = false;
+					isInputDescActive = false;
 					isInputImageActive = false;
+					isInputDayActive = false;
+					isInputMonthActive = false;
+					isInputYearActive = false;
+					isInputHourActive = false;
+					isInputMinuteActive = false;
+					isInputDurationActive = false;
 				}
 
 				if (updateSprite.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y)) {
 					string currentTextTitle = inputTextTitle.getString();
+					string currentTextType = inputTextType.getString();
+					int currentTextDay = stringTointeger(inputTextDay.getString().toAnsiString());
+					int currentTextMonth = stringTointeger(inputTextMonth.getString().toAnsiString());
+					int currentTextYear = stringTointeger(inputTextYear.getString().toAnsiString());
+					int currentTextHour = stringTointeger(inputTextHour.getString().toAnsiString());
+					int currentTextMinute = stringTointeger(inputTextMinute.getString().toAnsiString());
+					int currentTextDuration = stringTointeger(inputTextDuration.getString().toAnsiString());
 					string currentTextDesc = textDesc;
 					string currentTextImage = inputTextImage.getString();
+
+
 					sf::Texture texTureTest;
 					if (currentTextTitle == "") {
 						lineTitle.setFillColor(sf::Color(126, 0, 33));
+					}
+					if (currentTextType == "") {
+						lineType.setFillColor(sf::Color(126, 0, 33));
+					}
+					if (currentTextDay < 1 || currentTextDay > 31) {
+						lineDay.setFillColor(sf::Color(126, 0, 33));
+					}
+					if (currentTextMonth < 1 || currentTextMonth > 12) {
+						lineMonth.setFillColor(sf::Color(126, 0, 33));
+					}
+					if (currentTextYear != 2024) {
+						lineYear.setFillColor(sf::Color(126, 0, 33));
+					}
+					if (currentTextHour < 0 || currentTextHour > 23) {
+						lineHour.setFillColor(sf::Color(126, 0, 33));
+					}
+					if (currentTextMinute < 0 || currentTextMinute > 59) {
+						lineMinute.setFillColor(sf::Color(126, 0, 33));
+					}
+					if (currentTextDuration < 1 || currentTextMinute > 500) {
+						lineDuration.setFillColor(sf::Color(126, 0, 33));
 					}
 					if (currentTextDesc == "") {
 						lineDesc.setFillColor(sf::Color(126, 0, 33));
@@ -1370,12 +1842,32 @@ int updateFilmsWindow(sf::RenderWindow& window, sf::RenderWindow& window1, sf::F
 					if (currentTextImage == "" || !texTureTest.loadFromFile(currentTextImage)) {
 						lineImage.setFillColor(sf::Color(126, 0, 33));
 					}
-					if (currentTextTitle != "" && currentTextDesc != "" && currentTextImage != "" && texTureTest.loadFromFile(currentTextImage)) {
+					if (currentTextTitle != "" && currentTextType != "" && (currentTextDay >= 1 && currentTextDay <= 31) && (currentTextMonth >= 1 && currentTextMonth <= 12) &&
+						currentTextYear == 2024 && (currentTextHour >= 0 && currentTextHour <= 23) && (currentTextMinute >= 0 && currentTextMinute <= 59) &&
+						(currentTextDuration >= 1 && currentTextDuration <= 500) &&
+						currentTextDesc != "" &&
+						currentTextImage != "" && texTureTest.loadFromFile(currentTextImage)) {
 
 						cout << "update";
 						films[index].title = currentTextTitle;
+						films[index].chu_de = currentTextType;
+						films[index].day = to_string(currentTextDay);
+						films[index].month = to_string(currentTextMonth);
+						films[index].year = to_string(currentTextYear);
+						films[index].hour = to_string(currentTextHour);
+						films[index].minute = to_string(currentTextMinute);
+						films[index].so_luong = to_string(currentTextDuration);
 						films[index].desc = currentTextDesc;
 						films[index].image = currentTextImage;
+
+						std::thread writeThread(writeToFile);
+						writeThread.join();
+
+						admin adminTmp;
+						adminTmp.themphim("DanhSachPhim.txt");
+						adminTmp.nhaprap();
+						adminTmp.quanlychieuphim2();
+						adminTmp.writesuatchieu("DanhSachSuatChieu.txt");
 
 						cout << "update1";
 
@@ -1423,6 +1915,16 @@ int updateFilmsWindow(sf::RenderWindow& window, sf::RenderWindow& window1, sf::F
 					//	cout << "cook films" << endl;
 					//}
 					films.erase(it1);
+
+					std::thread writeThread(writeToFile);
+					writeThread.join();
+
+					admin adminTmp;
+					adminTmp.themphim("DanhSachPhim.txt");
+					adminTmp.nhaprap();
+					adminTmp.quanlychieuphim2();
+					adminTmp.writesuatchieu("DanhSachSuatChieu.txt");
+
 					//productBoxes.erase(it2);
 					autoproductBoxes.erase(it3);
 					adminproductBoxes.erase(it4);
@@ -1480,10 +1982,178 @@ int updateFilmsWindow(sf::RenderWindow& window, sf::RenderWindow& window1, sf::F
 						}
 					}
 				}
+				else if (isInputTypeActive)
+				{
+					if (event.text.unicode < 128)
+					{
+						if (event.text.unicode == '\b')
+						{
+							if (!inputTextType.getString().isEmpty()) {
+								std::string currentText = inputTextType.getString();
+								currentText.pop_back();
+								inputTextType.setString(currentText);
+							}
+						}
+						//else if (event.text.unicode == '\r' || event.text.unicode == '\n')
+						//{
+						//	inputTextImage.setString(inputTextImage.getString() + "\n");
+						//}
+						else
+						{
+							inputTextType.setString(inputTextType.getString() + static_cast<char>(event.text.unicode));
+						}
+					}
+				}
+				else if (isInputHourActive)
+				{
+					if ((event.text.unicode >= 48 && event.text.unicode <= 57) || event.text.unicode == '\b')
+					{
+						if (event.text.unicode == '\b')
+						{
+							if (!inputTextHour.getString().isEmpty()) {
+								std::string currentText = inputTextHour.getString();
+								currentText.pop_back();
+								inputTextHour.setString(currentText);
+							}
+						}
+						//else if (event.text.unicode == '\r' || event.text.unicode == '\n')
+						//{
+						//	inputTextImage.setString(inputTextImage.getString() + "\n");
+						//}
+						else
+						{
+							std::string currentText = inputTextHour.getString();
+							cout << currentText.size() << endl;
+							if (currentText.size() < 2)
+								inputTextHour.setString(inputTextHour.getString() + static_cast<char>(event.text.unicode));
+						}
+					}
+				}
+				else if (isInputMinuteActive)
+				{
+					if (event.text.unicode >= 48 && event.text.unicode <= 57 || event.text.unicode == '\b')
+					{
+						if (event.text.unicode == '\b')
+						{
+							if (!inputTextMinute.getString().isEmpty()) {
+								std::string currentText = inputTextMinute.getString();
+								currentText.pop_back();
+								inputTextMinute.setString(currentText);
+							}
+						}
+						//else if (event.text.unicode == '\r' || event.text.unicode == '\n')
+						//{
+						//	inputTextImage.setString(inputTextImage.getString() + "\n");
+						//}
+						else
+						{
+							std::string currentText = inputTextMinute.getString();
+							if (currentText.size() < 2)
+								inputTextMinute.setString(inputTextMinute.getString() + static_cast<char>(event.text.unicode));
+						}
+					}
+				}
+				else if (isInputDayActive)
+				{
+					if (event.text.unicode >= 48 && event.text.unicode <= 57 || event.text.unicode == '\b')
+					{
+						if (event.text.unicode == '\b')
+						{
+							if (!inputTextDay.getString().isEmpty()) {
+								std::string currentText = inputTextDay.getString();
+								currentText.pop_back();
+								inputTextDay.setString(currentText);
+							}
+						}
+						//else if (event.text.unicode == '\r' || event.text.unicode == '\n')
+						//{
+						//	inputTextImage.setString(inputTextImage.getString() + "\n");
+						//}
+						else
+						{
+							std::string currentText = inputTextDay.getString();
+							if (currentText.size() < 2)
+								inputTextDay.setString(inputTextDay.getString() + static_cast<char>(event.text.unicode));
+						}
+					}
+				}
+				else if (isInputMonthActive)
+				{
+					if (event.text.unicode >= 48 && event.text.unicode <= 57 || event.text.unicode == '\b')
+					{
+						if (event.text.unicode == '\b')
+						{
+							if (!inputTextMonth.getString().isEmpty()) {
+								std::string currentText = inputTextMonth.getString();
+								currentText.pop_back();
+								inputTextMonth.setString(currentText);
+							}
+						}
+						//else if (event.text.unicode == '\r' || event.text.unicode == '\n')
+						//{
+						//	inputTextImage.setString(inputTextImage.getString() + "\n");
+						//}
+						else
+						{
+							std::string currentText = inputTextMonth.getString();
+							if (currentText.size() < 2)
+								inputTextMonth.setString(inputTextMonth.getString() + static_cast<char>(event.text.unicode));
+						}
+					}
+				}
+				else if (isInputYearActive)
+				{
+					if (event.text.unicode >= 48 && event.text.unicode <= 57 || event.text.unicode == '\b')
+					{
+						if (event.text.unicode == '\b')
+						{
+							if (!inputTextYear.getString().isEmpty()) {
+								std::string currentText = inputTextYear.getString();
+								currentText.pop_back();
+								inputTextYear.setString(currentText);
+							}
+						}
+						//else if (event.text.unicode == '\r' || event.text.unicode == '\n')
+						//{
+						//	inputTextImage.setString(inputTextImage.getString() + "\n");
+						//}
+						else
+						{
+							std::string currentText = inputTextYear.getString();
+							if (currentText.size() < 4)
+								inputTextYear.setString(inputTextYear.getString() + static_cast<char>(event.text.unicode));
+						}
+					}
+				}
+				else if (isInputDurationActive)
+				{
+					if (event.text.unicode >= 48 && event.text.unicode <= 57 || event.text.unicode == '\b')
+					{
+						if (event.text.unicode == '\b')
+						{
+							if (!inputTextDuration.getString().isEmpty()) {
+								std::string currentText = inputTextDuration.getString();
+								currentText.pop_back();
+								inputTextDuration.setString(currentText);
+							}
+						}
+						//else if (event.text.unicode == '\r' || event.text.unicode == '\n')
+						//{
+						//	inputTextImage.setString(inputTextImage.getString() + "\n");
+						//}
+						else
+						{
+							std::string currentText = inputTextDuration.getString();
+							if (currentText.size() < 3)
+								inputTextDuration.setString(inputTextDuration.getString() + static_cast<char>(event.text.unicode));
+						}
+					}
+				}
 				else if (isInputDescActive)
 				{
 					if (event.text.unicode < 128)
 					{
+						cout << (event.text.unicode) << " " << static_cast<char>(event.text.unicode) << endl;
 						if (event.text.unicode == '\b')
 						{
 							if (!inputTextDesc.getString().isEmpty()) {
@@ -1586,17 +2256,49 @@ int updateFilmsWindow(sf::RenderWindow& window, sf::RenderWindow& window1, sf::F
 		window1.clear();
 		window1.draw(sprite);
 
+		window1.draw(nameTitle);
 		window1.draw(buttonTitle);
 		window1.draw(inputTextTitle);
 		window1.draw(lineTitle);
 
+		window1.draw(nameType);
+		window1.draw(buttonType);
+		window1.draw(inputTextType);
+		window1.draw(lineType);
+
+		window1.draw(nameDesc);
 		window1.draw(buttonDesc);
 		window1.draw(inputTextDesc);
 		window1.draw(lineDesc);
 
+		window1.draw(nameImage);
 		window1.draw(buttonImage);
 		window1.draw(inputTextImage);
 		window1.draw(lineImage);
+
+		window1.draw(nameTime);
+		window1.draw(buttonDay);
+		window1.draw(inputTextDay);
+		window1.draw(lineDay);
+		window1.draw(buttonMonth);
+		window1.draw(inputTextMonth);
+		window1.draw(lineMonth);
+		window1.draw(buttonYear);
+		window1.draw(inputTextYear);
+		window1.draw(lineYear);
+
+		window1.draw(nameHour);
+		window1.draw(buttonHour);
+		window1.draw(inputTextHour);
+		window1.draw(lineHour);
+		window1.draw(buttonMinute);
+		window1.draw(inputTextMinute);
+		window1.draw(lineMinute);
+
+		window1.draw(nameDuration);
+		window1.draw(buttonDuration);
+		window1.draw(inputTextDuration);
+		window1.draw(lineDuration);
 
 		window1.draw(updateSprite);
 		window1.draw(textUpdate);
