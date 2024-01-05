@@ -28,7 +28,9 @@ phim phim::operator=(phim p)
     this->sosuatchieu = p.sosuatchieu;
     return (*this);
 }
-
+string phim::getlinkanh() {
+    return linkAnh;
+}
 suatchieu phim::suatchieuluc(int i, int j)
 {
     for (int o = 0; o < sosuatchieu; o++)

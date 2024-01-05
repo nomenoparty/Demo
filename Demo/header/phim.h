@@ -12,10 +12,13 @@ private:
     string gioithieuphim;
     suatchieu* danhsachsuatchieu;
     int sosuatchieu;
+    string linkAnh;
 public:
     phim();
     phim operator=(phim);
     ~phim();
+
+    string getlinkanh();
     string getid();
     string gettenphim();
     string gettheloai();
@@ -36,3 +39,6 @@ public:
     friend class maychu;
     friend class ve;
 };
+
+
+

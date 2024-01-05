@@ -9,6 +9,7 @@ private:
 public:
     admin();
     ~admin();
+    void quanlychieuphim2();
     rap getrapquanly();
     void setusername(string);
     void setpassword(string);
@@ -25,7 +26,9 @@ public:
     void sethankhoichieu(phim&);
     void setsosuatchieu(int, phim&);
     void setkhoichieu(Time, phim&);
+    void setlinkanh(string, phim&);
     int getphimtuid(string);
+
     void themsuatchieu(suatchieu&, phim&);
     void themsuatchieu(suatchieu&, string);
     void nhapphongchieu(string);
@@ -34,12 +37,10 @@ public:
     string getusername();
     string getpassword();
     static string increaseString(string);
-    void swap(Time&, Time&);
     phim* getdanhsachphim();
     friend bool compareStrings(const string& str1, const string& str2);
     friend int ConvertToInt(string);
     void xacnhandatve(int, int, int, int, bool[], string);
-    bool ktrafull(phong);
     void setphong(int, int, int, phong);
     void setmaychu(maychu);
     void setngaychieuphim(Time);
@@ -50,15 +51,13 @@ public:
     void themphim(string);
     void xoaphim(phim);
     phim getphim(string);
-    void xuatphim();
-    void xuatve();
     void writeve(string, ve);
     void writesuatchieu(const string);
     void nhapsuatchieu(const string);
     void updatedanhsachphong(string);
     void writephim(phim, const string);
-    string chinhSuaText(string, int[], int, bool);
     suatchieu getsuat(int i, int j, int k);
     phong getphong(string);
+    void xoaSuatChieu();
 
 };
